@@ -47,7 +47,13 @@
       const [posts, pedidos, eventos] = await Promise.all(['posts', 'pedidos', 'eventos'].map(api.listar));
       S.posts = posts; S.pedidos = pedidos; S.eventos = eventos; S.carregado = true;
       if (!S.editando) rota();
-    } catch (e) { if (!silencioso && e.message !== 'Faça login') $('#view').innerHTML = `<div class="vazio">Não consegui carregar os dados: ${esc(e.message)}</div>`; }
+      S.erro = null;
+    } catch (e) {
+      if (e.message === 'Faça login' || silencioso) return;
+      // mesmo sem dados, as páginas continuam abrindo; o aviso mostra o motivo
+      S.erro = e.message; S.carregado = true;
+      if (!S.editando) rota();
+    }
   }
 
   async function salvarItem(col, item, msg) {
@@ -68,6 +74,7 @@
     $$('#abas a').forEach((a) => a.classList.toggle('on', a.dataset.v === v));
     if (!S.carregado) { $('#view').innerHTML = '<div class="carregando">Carregando…</div>'; return; }
     ({ feed: telaFeed, pedido: telaPedido, calendario: telaCalendario, pedidos: telaPedidos }[v] || telaFeed)();
+    if (S.erro) $('#view').insertAdjacentHTML('afterbegin', `<div class="aviso-erro"><b>O site não conseguiu falar com o GitHub.</b> ${esc(S.erro)}<br><span class="dica">Abra <a href="/api/status" target="_blank">/api/status</a> para ver o diagnóstico.</span></div>`);
     ajustarEscalas();
   }
   window.addEventListener('hashchange', () => { if (!S.editando) rota(); });

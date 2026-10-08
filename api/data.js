@@ -1,5 +1,6 @@
 // Lista, salva e apaga itens de data/<colecao>/<id>.json
 import { exigeLogin, listarColecao, commit, falha } from './_lib/github.js';
+import { avisarClaude } from './_lib/claude.js';
 
 const COLECOES = ['posts', 'pedidos', 'eventos'];
 const idValido = (id) => typeof id === 'string' && /^[a-z0-9][a-z0-9-]{2,80}$/.test(id);
@@ -25,6 +26,12 @@ export default async function handler(req, res) {
       }
       const msg = req.body.mensagem || `${col}: ${itens.map((i) => i.id).join(', ')}`;
       await commit(itens.map((i) => ({ path: `data/${col}/${i.id}.json`, text: JSON.stringify(i, null, 2) + '\n' })), `[site] ${msg}`);
+      // pedido novo, evento para gerar posts ou ajuste pendente: chama o Claude na hora
+      const paraClaude = itens.filter((i) =>
+        (col === 'pedidos' && i.status === 'novo') ||
+        (col === 'eventos' && i.gerarPosts && i.status === 'novo') ||
+        (col === 'posts' && (i.ajustes || []).some((a) => !a.feito && Date.now() - Date.parse(a.quando) < 5 * 60 * 1000)));
+      if (paraClaude.length) await avisarClaude(`Novidade na Central de Posts (${col}): ${paraClaude.map((i) => `"${i.titulo}" (${i.id})`).join(', ')}. Confira a fila agora.`);
       return res.json({ ok: true, itens });
     }
 

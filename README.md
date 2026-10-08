@@ -25,6 +25,10 @@ O Claude confere a fila a cada hora. Se quiser antes, é só avisar no chat do p
    Clique em **Deploy**.
 4. Abra o link que a Vercel mostrar e entre com a senha.
 
+5. **Para o Claude receber na hora** o que você enviar: abra [claude.ai/code/routines](https://claude.ai/code/routines), entre na rotina **"Central de Posts CPOR/SP: conferir fila"**, clique em **Add another trigger → API**, salve e gere o token. Na Vercel, crie a variável `CLAUDE_ROUTINE_TOKEN` com esse token e faça **Redeploy**. Sem ele, o Claude confere a fila de hora em hora.
+
+Para conferir se está tudo certo, abra `/api/status` no seu link da Vercel.
+
 Se o token expirar, gere outro igual e troque o `GITHUB_TOKEN` em Vercel → Project → Settings → Environment Variables (depois clique em Redeploy).
 
 ## Onde ficam as coisas
