@@ -46,7 +46,8 @@
       "ideia": "O caminho em etapas: alistamento aos 18 anos, seleção, incorporação em fevereiro, adaptação, Período Básico, Período de Qualificação na arma e o Aspirantado no fim do ano.",
       "porque": "Explica de forma simples como chegar ao CPOR/SP, aproveitando o clima da formatura.",
       "confirmar": "Nomes e duração das fases e se há mudança na seleção para 2027.",
-      "status": "sugerida"
+      "status": "quero",
+      "pedidoId": "do-alistamento-ao-aspirantado-mv075ls8"
     },
     {
       "id": "39-voltaram",
@@ -59,5 +60,6 @@
       "confirmar": "Foto da placa ou do acervo da FEB no quartel.",
       "status": "sugerida"
     }
-  ]
+  ],
+  "atualizadoEm": "2026-10-08T23:58:05.499Z"
 }
