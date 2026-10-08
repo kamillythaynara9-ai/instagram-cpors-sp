@@ -2,7 +2,7 @@
   "id": "agora-foi",
   "titulo": "Agora foi?",
   "tipo": "poster",
-  "status": "rascunho",
+  "status": "ajuste",
   "ordem": 4,
   "data": null,
   "origem": {
@@ -27,5 +27,5 @@
   ],
   "ajustes": [],
   "criadoEm": "2026-10-08T21:36:06.000Z",
-  "atualizadoEm": "2026-10-08T21:36:06.000Z"
+  "atualizadoEm": "2026-10-08T21:44:07.927Z"
 }
