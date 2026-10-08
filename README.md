@@ -7,7 +7,7 @@ Sistema para pedir, revisar, editar e baixar os posts do Instagram do CPOR/SP (@
 - **Calendário**: marque o que vai acontecer em cada dia. Com "Criar posts automaticamente" marcado, o Claude cria as artes daquele dia (aviso antes, post do dia, cobertura, informativo…).
 - **Pedidos**: a fila de produção e o que já ficou pronto.
 
-O Claude confere a fila a cada hora. Se quiser antes, é só avisar no chat do projeto.
+O Claude é avisado na hora quando você envia algo (e confere a fila de hora em hora como reserva). O site se atualiza sozinho, ao vivo.
 
 ## Como colocar no ar (uma vez só)
 

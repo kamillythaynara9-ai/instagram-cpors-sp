@@ -198,7 +198,7 @@
       p.ajustes = p.ajustes || [];
       p.ajustes.push({ quando: new Date().toISOString(), texto: txt, slide: $('#cSlide').checked ? S.idx + 1 : null, feito: false });
       p.status = 'ajuste';
-      await salvarAberto('pedido de ajuste', 'Pedido enviado. O Claude confere a fila a cada hora.');
+      await salvarAberto('pedido de ajuste', 'Ajuste enviado. O Claude já foi avisado.');
       corpoVer();
     };
     $('#bDuplicar').onclick = async () => {
@@ -410,7 +410,7 @@
   // ---------------- NOVO PEDIDO ----------------
   function telaPedido() {
     $('#view').innerHTML = `
-      <div class="cabeca"><span class="rot">Novo pedido</span><h1>O que vamos postar?</h1><p>Conte o assunto e o que você quer. Fotos, vídeos e legenda são opcionais: se faltar algo, eu crio. O Claude confere a fila a cada hora e os posts aparecem no feed para você revisar.</p></div>
+      <div class="cabeca"><span class="rot">Novo pedido</span><h1>O que vamos postar?</h1><p>Conte o assunto e o que você quer. Fotos, vídeos e legenda são opcionais: se faltar algo, eu crio. O Claude é avisado na hora e o site mostra ao vivo quando ele começa e quando os posts ficam prontos no feed.</p></div>
       <form class="form" id="fPed">
         <label class="campo"><span>Assunto</span><input type="text" name="titulo" required placeholder="Ex.: Inscrições para o CPOR 2027"></label>
         <label class="campo"><span>O que você quer no post</span><textarea name="descricao" rows="6" required placeholder="Explique a ideia, as informações que precisam aparecer, o tom e para quem é. Ex.: avisar que as inscrições abrem dia 3/11, quem pode se inscrever, documentos e o link."></textarea></label>
@@ -445,7 +445,7 @@
           links: fd.get('links').trim(), legenda: fd.get('legenda').trim(), obs: fd.get('obs').trim(),
           maisIdeias: !!fd.get('ideias'), status: 'novo',
         }, `novo pedido: ${fd.get('titulo')}`);
-        toast('Pedido enviado! O Claude confere a fila a cada hora.', 5000);
+        toast('Pedido enviado! O Claude já foi avisado; acompanhe aqui.', 5000);
         location.hash = '#pedidos';
       } catch (e) { msg.textContent = 'Erro: ' + e.message; b.disabled = false; }
     };
@@ -572,8 +572,49 @@
     if (e.key === 'Escape' && !S.editando) return fecharModal();
     if (!S.editando && S.aberto.slides.length > 1 && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { const t = S.aberto.slides.length; S.idx = (S.idx + (e.key === 'ArrowRight' ? 1 : -1) + t) % t; desenharModal(); }
   });
-  // atualiza sozinho para mostrar o que o Claude produziu
-  setInterval(() => { const v = (location.hash || '#feed').slice(1); if (document.visibilityState === 'visible' && !S.aberto && (v === 'feed' || v === 'pedidos')) carregar(true); }, 90000);
+  // ---------------- ao vivo ----------------
+  // A cada poucos segundos confere se algo mudou no GitHub; se mudou, recarrega e avisa o que o Claude fez.
+  function marcarAoVivo(ok) { const el = $('#aovivo'); if (!el) return; el.classList.toggle('off', !ok); el.title = ok ? 'Atualizando sozinho' : 'Sem conexão; tentando de novo'; $('span', el).textContent = ok ? 'ao vivo' : 'reconectando'; }
+  function novidades(antes) {
+    const msgs = [];
+    const ped = new Map([...antes.pedidos, ...antes.eventos].map((x) => [x.id, x.status]));
+    for (const x of [...S.pedidos, ...S.eventos]) {
+      const st = ped.get(x.id); if (st === x.status) continue;
+      if (x.status === 'producao') msgs.push(`O Claude começou: ${x.titulo}`);
+      else if (x.status === 'feito' && st) msgs.push(`Pronto: ${x.titulo}`);
+    }
+    const posts = new Map(antes.posts.map((x) => [x.id, x]));
+    for (const p of S.posts) {
+      const a = posts.get(p.id);
+      if (!a) { if (p.origem && p.origem.tipo !== 'manual') msgs.push(`Novo post no feed: ${p.titulo}`); continue; }
+      const feitos = (l) => (l.ajustes || []).filter((j) => j.feito).length;
+      if (feitos(p) > feitos(a)) msgs.push(`Ajuste feito: ${p.titulo}`);
+    }
+    return msgs;
+  }
+  async function aoVivo() {
+    if (document.visibilityState !== 'visible' || !S.carregado) return;
+    let v; try { v = (await chamar('/api/versao')).v; marcarAoVivo(true); } catch { marcarAoVivo(false); return; }
+    if (!S.versao) { S.versao = v; return; }
+    if (v === S.versao) return;
+    S.versao = v;
+    const antes = { posts: S.posts, pedidos: S.pedidos, eventos: S.eventos };
+    try {
+      const [posts, pedidos, eventos] = await Promise.all(['posts', 'pedidos', 'eventos'].map(api.listar));
+      S.posts = posts; S.pedidos = pedidos; S.eventos = eventos; S.erro = null;
+    } catch { return; }
+    const msgs = novidades(antes);
+    if (msgs.length) toast(msgs.slice(0, 3).join(' · '), 6000);
+    const tela = (location.hash || '#feed').slice(1);
+    // não redesenha formulários que podem estar sendo preenchidos
+    if (!S.editando && ['feed', 'pedidos', ''].includes(tela)) rota();
+    if (S.aberto && !S.editando) {
+      const p = S.posts.find((x) => x.id === S.aberto.id);
+      if (p && p.atualizadoEm !== S.aberto.atualizadoEm) { S.aberto = clone(p); desenharModal(); }
+    }
+  }
+  setInterval(aoVivo, 8000);
+  document.addEventListener('visibilitychange', aoVivo);
 
   rota();
   carregar();
