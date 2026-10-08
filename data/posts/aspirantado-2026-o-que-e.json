@@ -1,0 +1,66 @@
+{
+  "id": "aspirantado-2026-o-que-e",
+  "titulo": "Aspirantado 2026: o que é",
+  "tipo": "carrossel",
+  "status": "rascunho",
+  "ordem": 3,
+  "data": "2026-10-10",
+  "legenda": "🎖️ É hoje: Aspirantado 2026\n\nHoje, às 18h, o CPOR/SP declara os novos Aspirantes a Oficial da Reserva da turma de 2026.\nNo carrossel, o que é o Aspirantado e o que acontece na cerimônia.\n\nParabéns, Aspirantes!\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #Aspirantado2026 #OficialDaReserva #R2",
+  "slides": [
+    {
+      "modelo": "info",
+      "selo": "Aspirantado 2026",
+      "sobretitulo": "Entenda",
+      "titulo": "O que é o",
+      "destaque": "Aspirantado",
+      "itens": [
+        "Formatura que encerra o curso de formação de oficiais da reserva",
+        "Os alunos passam a ser Aspirantes a Oficial da Reserva, os R2",
+        "Hoje, sábado, 10/10, às 18h, no CPOR/SP"
+      ]
+    },
+    {
+      "modelo": "numero",
+      "selo": "Aspirantado 2026",
+      "sobretitulo": "A formação",
+      "destaque": "10",
+      "titulo": "meses de curso",
+      "texto": "De fevereiro ao fim do ano, os alunos conciliam a instrução militar com a faculdade.",
+      "foto": "media/pci-infantaria/hd2-campo.jpg",
+      "posicao": "70% 50%"
+    },
+    {
+      "modelo": "info",
+      "selo": "Aspirantado 2026",
+      "sobretitulo": "A cerimônia",
+      "titulo": "O que",
+      "destaque": "acontece",
+      "itens": [
+        "Declaração dos novos Aspirantes",
+        "Entrega das espadas",
+        "Canção do Exército",
+        "Medalha Correia Lima aos primeiros colocados"
+      ]
+    },
+    {
+      "modelo": "numero",
+      "selo": "Aspirantado 2026",
+      "sobretitulo": "Tradição",
+      "destaque": "1931",
+      "titulo": "a primeira formatura",
+      "texto": "77 oficiais formados na primeira turma do CPOR/SP. Desde então, quase 20 mil."
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Parabéns,\nAspirantes!",
+      "texto": "Hoje, às 18h, no CPOR/SP."
+    }
+  ],
+  "origem": {
+    "tipo": "evento",
+    "id": "aspirantado-2026-mv03qsgu"
+  },
+  "ajustes": [],
+  "criadoEm": "2026-10-08T22:23:46.000Z",
+  "atualizadoEm": "2026-10-08T22:23:46.000Z"
+}

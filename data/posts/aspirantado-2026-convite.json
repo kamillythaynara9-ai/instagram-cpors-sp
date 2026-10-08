@@ -1,0 +1,30 @@
+{
+  "id": "aspirantado-2026-convite",
+  "titulo": "Aspirantado 2026: convite",
+  "tipo": "poster",
+  "status": "rascunho",
+  "ordem": 2,
+  "data": "2026-10-09",
+  "legenda": "🎖️ Aspirantado 2026\n\nNeste sábado, 10 de outubro, às 18h, o CPOR/SP realiza a formatura da turma de 2026, que declara os novos Aspirantes a Oficial da Reserva.\nA cerimônia reúne familiares, convidados e autoridades militares para celebrar o fim de um ano de formação.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #Aspirantado2026 #OficialDaReserva #R2",
+  "slides": [
+    {
+      "modelo": "aviso",
+      "selo": "Aspirantado 2026",
+      "sobretitulo": "Formatura da turma de 2026",
+      "titulo": "Aspirantado",
+      "destaque": "2026",
+      "itens": [
+        "Data: Sábado, 10/10 · 18h",
+        "Local: CPOR/SP"
+      ],
+      "texto": "Declaração dos novos Aspirantes a Oficial da Reserva, com a presença de familiares e autoridades militares."
+    }
+  ],
+  "origem": {
+    "tipo": "evento",
+    "id": "aspirantado-2026-mv03qsgu"
+  },
+  "ajustes": [],
+  "criadoEm": "2026-10-08T22:23:46.000Z",
+  "atualizadoEm": "2026-10-08T22:23:46.000Z"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "aspirantado-2026-cobertura",
+  "titulo": "Aspirantado 2026: cobertura",
+  "tipo": "carrossel",
+  "status": "ideia",
+  "ordem": 4,
+  "data": "2026-10-11",
+  "legenda": "🎖️ Aspirantado 2026\n\nNo sábado, 10 de outubro, o CPOR/SP declarou os novos Aspirantes a Oficial da Reserva da turma de 2026, diante de familiares, convidados e autoridades militares.\nUm ano de formação encerrado com espadas, Canção do Exército e o orgulho de ser R2.\n\nParabéns, Aspirantes!\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #Aspirantado2026 #OficialDaReserva #R2",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Aspirantado 2026",
+      "sobretitulo": "CPOR/SP · 10 de outubro",
+      "titulo": "Turma de",
+      "destaque": "2026",
+      "texto": "Aguardando as fotos da cerimônia"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Aspirantado 2026",
+      "texto": "A tropa em forma (foto da cerimônia)"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Aspirantado 2026",
+      "texto": "Entrega das espadas (foto da cerimônia)"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Aspirantado 2026",
+      "texto": "Familiares e convidados (foto da cerimônia)"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Parabéns,\nAspirantes!",
+      "texto": "Obrigado às famílias e a todos que fizeram parte desta formação."
+    }
+  ],
+  "origem": {
+    "tipo": "evento",
+    "id": "aspirantado-2026-mv03qsgu"
+  },
+  "ajustes": [],
+  "criadoEm": "2026-10-08T22:23:46.000Z",
+  "atualizadoEm": "2026-10-08T22:23:46.000Z"
+}
