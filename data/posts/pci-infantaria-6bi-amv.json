@@ -8,14 +8,46 @@
   "origem": null,
   "legenda": "🔰⚔️ PCI da Infantaria\n\nOs Alunos da Infantaria do CPOR/SP viveram cinco dias de instrução no 6º Batalhão de Infantaria Aeromóvel. Marcha, patrulha de dia e de noite, ataque, defesa e técnicas aeromóveis no rapel da torre: o que foi visto em sala, aplicado no terreno.\n\nNosso agradecimento ao 6º BI Amv pelo apoio na formação dos futuros Oficiais da Reserva.\n\nInfa!!!\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #Infantaria #PCI #6BIAmv",
   "slides": [
-    { "modelo": "capa", "selo": "PCI · Infantaria", "sobretitulo": "6º Batalhão de Infantaria Aeromóvel", "titulo": "5 dias na", "destaque": "Infantaria\nAeromóvel", "foto": "media/pci-infantaria/capa-rapel.jpg" },
-    { "modelo": "foto", "selo": "PCI · Infantaria", "texto": "Cinco dias de instrução no 6º Batalhão de Infantaria Aeromóvel", "foto": "media/pci-infantaria/cantil.jpg" },
-    { "modelo": "foto", "selo": "PCI · Infantaria", "texto": "Marcha e patrulha, de dia e de noite", "foto": "media/pci-infantaria/marcha.jpg" },
-    { "modelo": "foto", "selo": "PCI · Infantaria", "texto": "Ataque e defesa: o que foi visto em sala, aplicado no terreno", "foto": "media/pci-infantaria/campo.jpg" },
-    { "modelo": "foto", "selo": "PCI · Infantaria", "texto": "Técnicas aeromóveis: rapel na torre de instrução", "foto": "media/pci-infantaria/torre.jpg" },
-    { "modelo": "fechamento", "titulo": "Infa!!!", "texto": "Nosso agradecimento ao 6º Batalhão de Infantaria Aeromóvel pelo apoio na formação dos futuros Oficiais da Reserva.", "foto": "media/pci-infantaria/marcha.jpg" }
+    {
+      "modelo": "capa",
+      "selo": "PCI · Infantaria",
+      "sobretitulo": "6º Batalhão de Infantaria Aeromóvel",
+      "titulo": "5 dias na",
+      "destaque": "Infantaria\nAeromóvel",
+      "foto": "media/pci-infantaria/hd2-capa-rapel.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Infantaria",
+      "texto": "Cinco dias de instrução no 6º Batalhão de Infantaria Aeromóvel",
+      "foto": "media/pci-infantaria/hd2-cantil.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Infantaria",
+      "texto": "Marcha e patrulha, de dia e de noite",
+      "foto": "media/pci-infantaria/hd2-marcha.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Infantaria",
+      "texto": "Ataque e defesa: o que foi visto em sala, aplicado no terreno",
+      "foto": "media/pci-infantaria/hd2-campo.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Infantaria",
+      "texto": "Técnicas aeromóveis: rapel na torre de instrução",
+      "foto": "media/pci-infantaria/hd2-torre.jpg"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Infa!!!",
+      "texto": "Nosso agradecimento ao 6º Batalhão de Infantaria Aeromóvel pelo apoio na formação dos futuros Oficiais da Reserva.",
+      "foto": "media/pci-infantaria/hd2-marcha.jpg"
+    }
   ],
   "ajustes": [],
   "criadoEm": "2026-10-08T16:40:00.000Z",
-  "atualizadoEm": "2026-10-08T16:40:00.000Z"
+  "atualizadoEm": "2026-10-08T22:15:53.000Z"
 }
