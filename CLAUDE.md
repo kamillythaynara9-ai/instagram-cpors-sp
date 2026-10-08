@@ -21,6 +21,7 @@ O site lê tudo direto do GitHub: basta fazer commit e push em `main`.
 - Fotos: caminhos em `fotos` (ex.: `uploads/pedidos/<id>/01-nome.jpg`), já comprimidas em JPEG até 2600 px.
 - Vídeos grandes chegam em partes: `video.mp4.part000`, `.part001`… mais `video.mp4.partes.json`. Junte com `cat video.mp4.part* > video.mp4`.
 - **Toda imagem tirada de vídeo deve ter a qualidade melhorada sem alterar o conteúdo** (super-resolução, ex.: OpenCV `dnn_superres` EDSR x2). Salve o resultado em `media/<id-do-pedido>/`.
+  Use `python3 ferramentas/frame_hq.py <video> <segundo> <y0 do recorte 720x900> <saida.jpg> <EDSR_x2.pb>`: escolhe o quadro mais nítido (até 2 quadros do momento), tira ruído com os vizinhos, EDSR x2, clareia só se escuro.
 - Imagens que você cria/trata vão em `media/`. Use nomes novos em vez de sobrescrever (o site faz cache por 1 dia).
 
 ## Formato de um post (`data/posts/<id>.json`)
