@@ -1,0 +1,63 @@
+{
+  "id": "semana-2026-10-12",
+  "semana": "2026-10-12",
+  "titulo": "Semana de 12 a 17/10",
+  "resumo": "Primeira pauta: conteúdo para quem quer entrar no CPOR/SP e para as famílias.",
+  "criadoEm": "2026-10-08T23:23:45.000Z",
+  "ideias": [
+    {
+      "id": "as-armas",
+      "titulo": "As 7 armas, quadro e serviço do CPOR/SP",
+      "formato": "carrossel",
+      "tema": "Formação",
+      "dia": "2026-10-13",
+      "ideia": "Um slide para cada uma: Infantaria, Cavalaria, Artilharia, Engenharia, Comunicações, Intendência e Material Bélico, com o que cada uma faz em uma frase e uma foto real. Fecha com \"Qual é a sua?\".",
+      "porque": "É a dúvida número 1 de quem vai entrar e conversa com os ex-alunos de cada arma.",
+      "confirmar": "Fotos de instrução de cada arma (se tiver).",
+      "status": "sugerida"
+    },
+    {
+      "id": "um-dia-de-aluno",
+      "titulo": "Um dia de aluno do CPOR/SP",
+      "formato": "carrossel",
+      "tema": "Rotina",
+      "dia": "2026-10-14",
+      "ideia": "A rotina hora a hora: chegada, formatura matinal, instrução, fim do expediente e a faculdade à tarde. Mostra que dá para conciliar o CPOR com a faculdade.",
+      "porque": "Quem pensa em se alistar quer saber se dá para estudar ao mesmo tempo.",
+      "confirmar": "Os horários reais de um dia comum.",
+      "status": "sugerida"
+    },
+    {
+      "id": "glossario-r2",
+      "titulo": "Glossário do R2",
+      "formato": "carrossel",
+      "tema": "Informativo",
+      "dia": "2026-10-15",
+      "ideia": "Termos que todo aluno aprende e a família não entende: Aspirante, R2, CFOR, arma, quadro, serviço, Período Básico, Portão das Armas. Um termo por slide, com explicação curta.",
+      "porque": "Ajuda as famílias a acompanhar e é o tipo de post que as pessoas salvam e mandam para alguém.",
+      "status": "sugerida"
+    },
+    {
+      "id": "do-alistamento-ao-aspirantado",
+      "titulo": "Do alistamento ao Aspirantado",
+      "formato": "carrossel",
+      "tema": "Como entrar",
+      "dia": "2026-10-16",
+      "ideia": "O caminho em etapas: alistamento aos 18 anos, seleção, incorporação em fevereiro, adaptação, Período Básico, Período de Qualificação na arma e o Aspirantado no fim do ano.",
+      "porque": "Explica de forma simples como chegar ao CPOR/SP, aproveitando o clima da formatura.",
+      "confirmar": "Nomes e duração das fases e se há mudança na seleção para 2027.",
+      "status": "sugerida"
+    },
+    {
+      "id": "39-voltaram",
+      "titulo": "40 foram, 39 voltaram",
+      "formato": "poster",
+      "tema": "História",
+      "dia": "2026-10-17",
+      "ideia": "Pôster histórico: 40 oficiais formados no CPOR/SP lutaram na FEB, na Itália, em 1944 e 1945. 39 voltaram. Com foto da placa ou do acervo da FEB que fica no quartel.",
+      "porque": "A história do próprio CPOR/SP gera orgulho e compartilhamento entre ex-alunos.",
+      "confirmar": "Foto da placa ou do acervo da FEB no quartel.",
+      "status": "sugerida"
+    }
+  ]
+}

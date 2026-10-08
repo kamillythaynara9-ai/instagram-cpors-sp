@@ -11,10 +11,25 @@ O site lê tudo direto do GitHub: basta fazer commit e push em `main`.
    - `data/pedidos/*.json` com `"status": "novo"`
    - `data/eventos/*.json` com `"gerarPosts": true` e `"status": "novo"`
    - `data/posts/*.json` com algum item em `ajustes` com `"feito": false`
+   - `data/ensinamentos/*.json` com `"status": "novo"` (algo que a equipe quer ensinar: aplique no padrão, marque `"aprendido"` e preencha `"resposta"`)
 3. Antes de produzir, marque o pedido/evento como `"status": "producao"` e faça push (evita trabalho duplicado).
 4. Produza os posts (abaixo), marque o pedido/evento como `"status": "feito"` e preencha `"respostaClaude"` com uma frase sobre o que foi criado.
    Para ajustes: aplique, marque `"feito": true`, preencha `"resposta"` e mude o status do post para `"rascunho"`.
-5. Commit com prefixo `[claude]` e push. Depois avise a Thaynara no chat do projeto (curto, em português).
+5. **Aprenda** (obrigatório a cada item da fila): atualize `data/padrao/padrao-cpor-sp.json` com o que o pedido, o ajuste, o ensinamento ou o descarte revelou sobre o que a equipe gosta ou não gosta, sobre o Exército e sobre o CPOR/SP. Edite a regra existente em vez de empilhar; o que ainda é dúvida vai em "A confirmar com vocês". Leia esse padrão antes de produzir qualquer post: ele vale mais que as regras gerais abaixo quando houver conflito.
+6. Commit com prefixo `[claude]` e push. Depois avise a Thaynara no chat do projeto (curto, em português, horários de Brasília).
+
+## Pauta semanal (segunda, 8h)
+
+A rotina de segunda gera `data/pauta/semana-AAAA-MM-DD.json` (data = a segunda-feira):
+`{ id, semana, titulo: "Semana de 12 a 17/10", resumo, ideias: [{ id, titulo, formato: carrossel|poster, tema, dia, ideia, porque, confirmar?, status: "sugerida" }] }`.
+- 4 a 6 ideias **diferentes da rotina**: informativos, rotina do CPOR/SP, história, armas, como entrar, curiosidades. Nada de eventos do calendário (já viram posts) e nada de "dia de algo" que não esteja no calendário.
+- Antes, revise a semana anterior: ideias com `"quero"` (viraram pedido) e `"nao"` (com `motivo`), ensinamentos e as edições manuais que a equipe fez nos posts (`git log --since="8 days ago" --author-date-order -p -- data/posts` nos commits `[site]`). Atualize o padrão com isso e use para escolher as novas ideias.
+- Não repita ideias já sugeridas; varie os temas. Fato que não está confirmado vai em `confirmar`.
+- "Quero esse post" no site cria um pedido normal (com `origemPauta`), que entra na fila.
+
+## Padrão aprendido
+
+`data/padrao/padrao-cpor-sp.json` (`secoes: [{titulo, itens[]}]`) aparece na aba Padrão do site. É a memória do que a equipe ensinou; mantenha curto, claro e atual.
 
 ## Arquivos enviados
 

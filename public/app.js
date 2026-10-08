@@ -21,7 +21,8 @@
   const TIPOS_EV = { evento: 'Evento', atividade: 'Atividade / instrução', data: 'Data comemorativa', aviso: 'Aviso / informativo', outro: 'Outro' };
   const FORMATOS = { claude: 'Claude decide', carrossel: 'Carrossel', poster: 'Pôster (imagem única)', ambos: 'Carrossel e pôster' };
 
-  const S = { posts: [], pedidos: [], eventos: [], arquivos: null, filtro: 'todos', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
+  const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao'];
+  const S = { posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
 
   // ---------------- API ----------------
   async function chamar(url, opts = {}) {
@@ -44,8 +45,8 @@
 
   async function carregar(silencioso) {
     try {
-      const [posts, pedidos, eventos] = await Promise.all(['posts', 'pedidos', 'eventos'].map(api.listar));
-      S.posts = posts; S.pedidos = pedidos; S.eventos = eventos; S.carregado = true;
+      const [posts, pedidos, eventos, pauta, ensinamentos, padrao] = await Promise.all(COLS.map(api.listar));
+      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao }); S.carregado = true;
       if (!S.editando) rota();
       S.erro = null;
     } catch (e) {
@@ -73,7 +74,7 @@
     const v = (location.hash || '#feed').slice(1);
     $$('#abas a').forEach((a) => a.classList.toggle('on', a.dataset.v === v));
     if (!S.carregado) { $('#view').innerHTML = '<div class="carregando">Carregando…</div>'; return; }
-    ({ feed: telaFeed, pedido: telaPedido, calendario: telaCalendario, pedidos: telaPedidos }[v] || telaFeed)();
+    ({ feed: telaFeed, pedido: telaPedido, pauta: telaPauta, calendario: telaCalendario, pedidos: telaPedidos, padrao: telaPadrao }[v] || telaFeed)();
     if (S.erro) $('#view').insertAdjacentHTML('afterbegin', `<div class="aviso-erro"><b>O site não conseguiu falar com o GitHub.</b> ${esc(S.erro)}<br><span class="dica">Abra <a href="/api/status" target="_blank">/api/status</a> para ver o diagnóstico.</span></div>`);
     ajustarEscalas();
   }
@@ -451,6 +452,73 @@
     };
   }
 
+  // ---------------- PAUTA ----------------
+  // Sugestões semanais do Claude (data/pauta/semana-AAAA-MM-DD.json). "Quero" vira pedido; "Não curti" ensina o Claude.
+  const DIAS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+  const ST_IDEIA = { sugerida: 'Sugestão', quero: 'Virou pedido', nao: 'Descartada' };
+  function telaPauta() {
+    const semanas = [...S.pauta].sort((a, b) => String(b.semana).localeCompare(String(a.semana)));
+    const card = (w, it) => {
+      const d = it.dia ? new Date(it.dia + 'T12:00') : null;
+      return `<div class="item ideia-${it.status || 'sugerida'}">
+        <div class="item-topo"><h3>${esc(it.titulo)}</h3><span class="st st-${it.status === 'quero' ? 'feito' : it.status === 'nao' ? 'postado' : 'novo'}">${ST_IDEIA[it.status || 'sugerida']}</span></div>
+        <div class="meta">${d ? `<span>${DIAS[d.getDay()]}, ${fmtCurta(it.dia)}</span>` : ''}${it.formato ? `<span>${FORMATOS[it.formato] || esc(it.formato)}</span>` : ''}${it.tema ? `<span>${esc(it.tema)}</span>` : ''}</div>
+        <p>${esc(it.ideia)}</p>
+        ${it.porque ? `<p class="dica"><b>Por quê:</b> ${esc(it.porque)}</p>` : ''}
+        ${it.confirmar ? `<p class="dica"><b>Preciso que você confirme:</b> ${esc(it.confirmar)}</p>` : ''}
+        ${it.motivo ? `<p class="dica"><b>Seu comentário:</b> ${esc(it.motivo)}</p>` : ''}
+        ${(it.status || 'sugerida') === 'sugerida' ? `<div class="acoes"><button class="bt pri mini" data-quero="${esc(w.id)}:${esc(it.id)}">Quero esse post</button><button class="bt mini" data-nao="${esc(w.id)}:${esc(it.id)}">Não curti</button></div>
+        <div class="nao-caixa" hidden><textarea rows="2" placeholder="O que não ficou bom? Isso me ensina o que vocês preferem (opcional)"></textarea><div class="acoes"><button class="bt mini" data-nao-ok="${esc(w.id)}:${esc(it.id)}">Descartar</button></div></div>` : ''}
+      </div>`;
+    };
+    $('#view').innerHTML = `
+      <div class="cabeca"><span class="rot">Pauta</span><h1>Sugestões da semana</h1><p>Toda segunda, às 8h, o Claude sugere posts diferentes para a semana: informativos, rotina do CPOR/SP, história, curiosidades. Eventos do calendário não entram aqui, eles já viram posts sozinhos. Clique em "Quero esse post" e ele vira pedido; se não curtir, diga o porquê que eu aprendo.</p></div>
+      ${semanas.length ? semanas.map((w, k) => `<details class="semana" ${k === 0 ? 'open' : ''}><summary><b>${esc(w.titulo)}</b>${w.resumo ? `<span class="dica">${esc(w.resumo)}</span>` : ''}</summary>
+        <div class="lista">${(w.ideias || []).map((it) => card(w, it)).join('')}</div></details>`).join('') : '<div class="vazio">A primeira pauta chega na segunda às 8h.</div>'}`;
+    const achar = (k) => { const [wid, iid] = k.split(':'); const w = S.pauta.find((x) => x.id === wid); return [w, w?.ideias.find((x) => x.id === iid)]; };
+    $$('[data-quero]').forEach((b) => (b.onclick = async () => {
+      const [w, it] = achar(b.dataset.quero); if (!it) return; b.disabled = true;
+      try {
+        const id = novoId(it.titulo);
+        await salvarItem('pedidos', { id, titulo: it.titulo, descricao: `${it.ideia}${it.porque ? `\n\nPor quê: ${it.porque}` : ''}`, formato: it.formato || 'claude', quantidade: 1, data: it.dia || null, fotos: [], videos: [], links: '', legenda: '', obs: `Veio da pauta (${w.titulo}).`, maisIdeias: false, status: 'novo', origemPauta: `${w.id}:${it.id}` }, `pedido da pauta: ${it.titulo}`);
+        const nw = clone(w); Object.assign(nw.ideias.find((x) => x.id === it.id), { status: 'quero', pedidoId: id });
+        await salvarItem('pauta', nw, `pauta: quero ${it.titulo}`);
+        toast('Virou pedido! O Claude já foi avisado.', 4500); telaPauta();
+      } catch (e) { toast('Erro: ' + e.message, 6000); b.disabled = false; }
+    }));
+    $$('[data-nao]').forEach((b) => (b.onclick = () => { const c = b.closest('.item').querySelector('.nao-caixa'); c.hidden = !c.hidden; if (!c.hidden) c.querySelector('textarea').focus(); }));
+    $$('[data-nao-ok]').forEach((b) => (b.onclick = async () => {
+      const [w, it] = achar(b.dataset.naoOk); if (!it) return; b.disabled = true;
+      const motivo = b.closest('.nao-caixa').querySelector('textarea').value.trim();
+      try {
+        const nw = clone(w); Object.assign(nw.ideias.find((x) => x.id === it.id), { status: 'nao', motivo });
+        await salvarItem('pauta', nw, `pauta: descartar ${it.titulo}`);
+        if (motivo) await salvarItem('ensinamentos', { id: novoId('pauta-' + it.titulo), texto: `Sobre a sugestão "${it.titulo}": ${motivo}`, origem: 'pauta', status: 'novo' }, 'ensinamento da pauta');
+        toast(motivo ? 'Descartada. Vou aprender com o seu comentário.' : 'Descartada.'); telaPauta();
+      } catch (e) { toast('Erro: ' + e.message, 6000); b.disabled = false; }
+    }));
+  }
+
+  // ---------------- PADRÃO ----------------
+  // O que o Claude aprendeu (data/padrao/padrao-cpor-sp.json) e o que vocês ensinaram (data/ensinamentos).
+  const ST_ENS = { novo: 'Aguardando Claude', producao: 'Aprendendo', aprendido: 'Aprendido' };
+  function telaPadrao() {
+    const pd = S.padrao.find((x) => x.id === 'padrao-cpor-sp') || S.padrao[0];
+    const ens = [...S.ensinamentos].sort((a, b) => String(b.criadoEm).localeCompare(String(a.criadoEm)));
+    $('#view').innerHTML = `
+      <div class="cabeca"><span class="rot">Padrão</span><h1>O que o Claude aprendeu</h1><p>Este é o padrão dos posts do CPOR/SP. Ele muda sozinho conforme vocês pedem, ajustam, editam e descartam sugestões. Se algo aqui estiver errado, ou se quiser ensinar algo novo, escreva abaixo.</p></div>
+      <form class="cartao ensinar" id="fEns"><label class="campo"><span>Ensinar algo ao Claude</span><textarea name="texto" rows="3" required placeholder="Ex.: Na formatura, os alunos recebem a espada no fim da cerimônia. / Não usar a palavra 'recrutas' para os alunos."></textarea></label><div class="acoes"><button class="bt pri">Enviar</button></div></form>
+      ${pd ? `<div class="padrao">${(pd.secoes || []).map((sec) => `<section class="cartao"><h2>${esc(sec.titulo)}</h2><ul>${(sec.itens || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}</div>
+        <p class="dica">Atualizado em ${fmtHora(pd.atualizadoEm)}.</p>` : '<div class="vazio">O padrão ainda está sendo montado.</div>'}
+      ${ens.length ? `<h2 class="sub">O que vocês ensinaram</h2><div class="lista">${ens.map((e) => `<div class="item"><div class="item-topo"><h3>${esc(e.texto)}</h3><span class="st st-${e.status === 'aprendido' ? 'feito' : e.status}">${ST_ENS[e.status] || e.status}</span></div><div class="meta"><span>${fmtHora(e.criadoEm)}</span>${e.origem === 'pauta' ? '<span>da pauta</span>' : ''}</div>${e.resposta ? `<p><b>Claude:</b> ${esc(e.resposta)}</p>` : ''}</div>`).join('')}</div>` : ''}`;
+    $('#fEns').onsubmit = async (ev) => {
+      ev.preventDefault(); const t = ev.target.texto.value.trim(); if (!t) return;
+      const b = ev.target.querySelector('button'); b.disabled = true;
+      try { await salvarItem('ensinamentos', { id: novoId(t.slice(0, 30)), texto: t, status: 'novo' }, 'novo ensinamento'); toast('Enviado! O Claude já foi avisado.'); telaPadrao(); }
+      catch (e) { toast('Erro: ' + e.message, 6000); b.disabled = false; }
+    };
+  }
+
   // ---------------- CALENDÁRIO ----------------
   function telaCalendario() {
     if (!S.mes) { const d = new Date(); S.mes = new Date(d.getFullYear(), d.getMonth(), 1); }
@@ -590,6 +658,10 @@
       const feitos = (l) => (l.ajustes || []).filter((j) => j.feito).length;
       if (feitos(p) > feitos(a)) msgs.push(`Ajuste feito: ${p.titulo}`);
     }
+    const semanas = new Set(antes.pauta.map((x) => x.id));
+    for (const w of S.pauta) if (!semanas.has(w.id)) msgs.push(`Pauta nova: ${w.titulo}`);
+    const ens = new Map(antes.ensinamentos.map((x) => [x.id, x.status]));
+    for (const e of S.ensinamentos) if (e.status === 'aprendido' && ens.get(e.id) && ens.get(e.id) !== 'aprendido') msgs.push('O Claude aprendeu o que você ensinou');
     return msgs;
   }
   async function aoVivo() {
@@ -598,16 +670,17 @@
     if (!S.versao) { S.versao = v; return; }
     if (v === S.versao) return;
     S.versao = v;
-    const antes = { posts: S.posts, pedidos: S.pedidos, eventos: S.eventos };
+    const antes = { posts: S.posts, pedidos: S.pedidos, eventos: S.eventos, pauta: S.pauta, ensinamentos: S.ensinamentos };
     try {
-      const [posts, pedidos, eventos] = await Promise.all(['posts', 'pedidos', 'eventos'].map(api.listar));
-      S.posts = posts; S.pedidos = pedidos; S.eventos = eventos; S.erro = null;
+      const [posts, pedidos, eventos, pauta, ensinamentos, padrao] = await Promise.all(COLS.map(api.listar));
+      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao }); S.erro = null;
     } catch { return; }
     const msgs = novidades(antes);
     if (msgs.length) toast(msgs.slice(0, 3).join(' · '), 6000);
     const tela = (location.hash || '#feed').slice(1);
     // não redesenha formulários que podem estar sendo preenchidos
-    if (!S.editando && ['feed', 'pedidos', ''].includes(tela)) rota();
+    const digitando = $$('#view textarea, #view input[type=text]').some((x) => x.value.trim()) || /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '');
+    if (!S.editando && (['feed', 'pedidos', ''].includes(tela) || (['pauta', 'padrao'].includes(tela) && !digitando))) rota();
     if (S.aberto && !S.editando) {
       const p = S.posts.find((x) => x.id === S.aberto.id);
       if (p && p.atualizadoEm !== S.aberto.atualizadoEm) { S.aberto = clone(p); desenharModal(); }

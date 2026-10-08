@@ -1,0 +1,61 @@
+{
+  "id": "padrao-cpor-sp",
+  "titulo": "Padrão dos posts do CPOR/SP",
+  "secoes": [
+    {
+      "titulo": "Objetivo",
+      "itens": [
+        "Foco em carrosséis e pôsteres informativos, com design e conteúdo profissionais.",
+        "Não criar posts de \"dia de algo\" por conta própria; datas só quando vocês marcam no calendário.",
+        "Eventos rendem mais de um post: aviso antes, post do dia e cobertura depois.",
+        "Sem vídeos por enquanto: o trabalho é post de feed."
+      ]
+    },
+    {
+      "titulo": "Design",
+      "itens": [
+        "Fundo verde-oliva quase preto, fontes Montserrat e Oswald.",
+        "Brasão no canto superior direito, selo dourado e rodapé \"CPOR/SP · ESCOLA DE LÍDERES\".",
+        "Títulos nunca em branco puro: prata ou dourado metalizado, textura leve e sombra suave.",
+        "Texto de apoio em off-white quente (#E6E0D0).",
+        "Nada de símbolos militares desenhados à mão: só fotos reais ou o brasão.",
+        "Fotos internas do carrossel com legenda fina e pino (estilo dos posts de PCI, aprovado)."
+      ]
+    },
+    {
+      "titulo": "Fotos",
+      "itens": [
+        "Todo quadro tirado de vídeo tem a qualidade melhorada sem mudar o conteúdo (resolução, ruído, nitidez; só clareia se estiver escuro).",
+        "Sempre preferir foto real do CPOR/SP; sem foto, a arte fica só com texto e brasão."
+      ]
+    },
+    {
+      "titulo": "Legenda e tom",
+      "itens": [
+        "Emoji-selo + título curto; 1ª frase diz o que, com quem e onde; 2ª frase dá um detalhe útil.",
+        "Grito da arma quando couber (ex.: Infa!!!).",
+        "Fecha com \"CPOR/SP - Escola de Líderes\" e hashtags: #CPORSP #ExércitoBrasileiro + tema + arma ou OM.",
+        "Tom sóbrio e institucional, frases curtas, vocabulário militar correto (Aspirante, R2, CFOR, arma, quadro, serviço); sem gíria e sem humor."
+      ]
+    },
+    {
+      "titulo": "Sobre o CPOR/SP",
+      "itens": [
+        "Forma Aspirantes a Oficial da Reserva (R2) pelo CFOR, em cerca de 10 meses (fevereiro ao fim do ano), com expediente pela manhã.",
+        "Armas, quadro e serviço: Infantaria, Cavalaria, Artilharia, Engenharia, Comunicações, Intendência e Material Bélico.",
+        "Primeira formatura em 1931, com 77 oficiais; quase 20 mil formados desde então.",
+        "Aspirantado 2026: 10/10, às 18h, no CPOR/SP."
+      ]
+    },
+    {
+      "titulo": "A confirmar com vocês",
+      "itens": [
+        "Se a formatura tem entrega de espadas e Medalha Correia Lima.",
+        "Horários reais da rotina dos alunos.",
+        "Requisitos de seleção para 2027."
+      ]
+    }
+  ],
+  "atualizadoEm": "2026-10-08T23:23:45.000Z",
+  "criadoEm": "2026-10-08T23:23:45.000Z"
+}
