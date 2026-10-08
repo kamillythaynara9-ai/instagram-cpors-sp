@@ -1,0 +1,31 @@
+{
+  "id": "ultimo-teste",
+  "titulo": "Último teste",
+  "tipo": "poster",
+  "status": "rascunho",
+  "ordem": 3,
+  "data": null,
+  "origem": {
+    "tipo": "pedido",
+    "id": "ultimo-teste-mv01oeiw"
+  },
+  "legenda": "🔰 Último teste\n\nPost de teste da Central de Posts do CPOR/SP, recebido pelo aviso automático.\nQuando conferir, pode apagar.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro",
+  "slides": [
+    {
+      "modelo": "aviso",
+      "selo": "Teste",
+      "sobretitulo": "Central de Posts",
+      "titulo": "Aviso",
+      "destaque": "automático",
+      "itens": [
+        "Pedido: 21:24",
+        "Claude avisado: 21:24"
+      ],
+      "texto": "O pedido chegou sozinho ao Claude.",
+      "foto": "media/pci-infantaria/campo.jpg"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-08T21:25:35.000Z",
+  "atualizadoEm": "2026-10-08T21:25:35.000Z"
+}
