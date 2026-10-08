@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Central de Posts CPOR/SP</title>
+<link rel="icon" href="/assets/brasao.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topo">
+  <div class="topo-in">
+    <a class="marca" href="#feed"><img src="/assets/brasao.png" alt=""><span><b>CPOR/SP</b><small>Central de Posts</small></span></a>
+    <nav class="abas" id="abas">
+      <a href="#feed" data-v="feed">Feed</a>
+      <a href="#pedido" data-v="pedido">Novo pedido</a>
+      <a href="#calendario" data-v="calendario">Calendário</a>
+      <a href="#pedidos" data-v="pedidos">Pedidos</a>
+    </nav>
+  </div>
+</header>
+<main id="view" class="pagina"></main>
+<div id="modal" hidden></div>
+<div id="toast" hidden></div>
+<div id="palco" aria-hidden="true"></div>
+<script src="/vendor/html-to-image.js"></script>
+<script src="/vendor/jszip.min.js"></script>
+<script src="/modelos.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

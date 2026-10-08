@@ -1,0 +1,6 @@
+{
+  "name": "cpor-central-de-posts",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" }
+}
