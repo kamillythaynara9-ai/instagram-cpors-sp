@@ -2,5 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "outputDirectory": "public",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet -- . ':(exclude)data' ':(exclude)uploads' ':(exclude)media'"
+  "ignoreCommand": "sh ignorar-deploy.sh"
 }
