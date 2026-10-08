@@ -126,7 +126,7 @@
 
   function render(s, i = 0, t = 1) {
     const m = R[s.modelo] ? s.modelo : 'foto';
-    return `<div class="sl sl-${m}">${R[m](s || {}, i, t)}</div>`;
+    return `<div class="sl sl-m-${m}">${R[m](s || {}, i, t)}</div>`;
   }
 
   const css = `
