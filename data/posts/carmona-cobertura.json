@@ -1,0 +1,54 @@
+{
+  "id": "carmona-cobertura",
+  "titulo": "Visita do Gen Carmona: cobertura",
+  "tipo": "carrossel",
+  "status": "rascunho",
+  "ordem": 11,
+  "data": "2026-10-15",
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ Visita do Comandante Militar do Sudeste\n\nNo dia 14 de outubro, o CPOR/SP recebeu o General de Exército Ricardo Piai Carmona, Comandante Militar do Sudeste e antigo comandante desta Escola.\nA visita teve formatura, desfile da tropa em sua honra e visita às instalações.\n\nObrigado pela presença, General!\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Cobertura",
+      "sobretitulo": "14 de outubro",
+      "titulo": "Visita do",
+      "destaque": "General Carmona",
+      "texto": "O Comandante Militar do Sudeste de volta ao CPOR/SP.",
+      "foto": "media/pauta-2026-10-12/grupo.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Cobertura",
+      "titulo": "Formatura",
+      "texto": "A tropa do CPOR/SP em forma para receber o Comandante Militar do Sudeste.",
+      "foto": "media/pci-infantaria/hd2-campo.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Cobertura",
+      "titulo": "Desfile",
+      "texto": "Os alunos desfilaram em continência ao General.",
+      "foto": "media/pci-infantaria/hd2-marcha.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Cobertura",
+      "titulo": "Visita às instalações",
+      "texto": "O General percorreu as dependências da Escola que já comandou.",
+      "foto": "media/pauta-2026-10-12/porta.jpg"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Obrigado,\nGeneral!",
+      "texto": "Uma honra receber o antigo comandante na Escola de Líderes.",
+      "sobretitulo": "@cporsp_exercito"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}

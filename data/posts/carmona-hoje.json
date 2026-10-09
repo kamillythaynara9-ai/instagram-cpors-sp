@@ -1,0 +1,33 @@
+{
+  "id": "carmona-hoje",
+  "titulo": "Hoje: visita do Gen Carmona",
+  "tipo": "poster",
+  "status": "rascunho",
+  "ordem": 10,
+  "data": "2026-10-14",
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ Hoje no CPOR/SP\n\nO Comandante Militar do Sudeste, General de Exército Ricardo Piai Carmona, visita hoje o CPOR/SP.\nA programação inclui formatura, desfile da tropa em sua honra e visita às instalações.\n\nAcompanhe a cobertura aqui no perfil.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE",
+  "slides": [
+    {
+      "modelo": "aviso",
+      "selo": "Hoje",
+      "sobretitulo": "14 de outubro",
+      "titulo": "Visita do Comandante",
+      "destaque": "Militar do Sudeste",
+      "itens": [
+        "Formatura: tropa em forma",
+        "Desfile: em honra ao General",
+        "Visita: instalações da Escola",
+        "Quem: Gen Ex Ricardo Piai Carmona"
+      ],
+      "texto": "Comandante Militar do Sudeste e antigo comandante do CPOR/SP",
+      "foto": "media/pauta-2026-10-12/grupo.jpg"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}

@@ -9,7 +9,8 @@
         "Não criar posts de \"dia de algo\" por conta própria; datas só quando vocês marcam no calendário.",
         "Eventos rendem mais de um post: aviso antes, post do dia e cobertura depois.",
         "Sem vídeos por enquanto: o trabalho é post de feed.",
-        "Da pauta, vocês escolheram primeiro história do CPOR/SP (FEB) e \"como entrar\": são temas que funcionam."
+        "Da pauta, vocês escolheram primeiro história do CPOR/SP (FEB) e \"como entrar\": são temas que funcionam.",
+        "Visita de autoridade: aviso antes, trajetória da pessoa, homenagem e post do dia, cobertura e agradecimento depois; sempre prestigiar o visitante."
       ]
     },
     {
@@ -28,7 +29,8 @@
       "titulo": "Fotos",
       "itens": [
         "Todo quadro tirado de vídeo tem a qualidade melhorada sem mudar o conteúdo (resolução, ruído, nitidez; só clareia se estiver escuro).",
-        "Sempre usar foto real do CPOR/SP; cortar a marca d'água (brasão pequeno) que vem nos reels."
+        "Sempre usar foto real do CPOR/SP; cortar a marca d'água (brasão pequeno) que vem nos reels.",
+        "Foto de autoridade na capa não precisa ser do rosto: pode ser em tropa ou em visita anterior ao CPOR/SP."
       ]
     },
     {
@@ -46,7 +48,8 @@
         "Forma Aspirantes a Oficial da Reserva (R2) pelo CFOR, em cerca de 10 meses (fevereiro ao fim do ano), com expediente pela manhã.",
         "Armas, quadro e serviço: Infantaria, Cavalaria, Artilharia, Engenharia, Comunicações, Intendência e Material Bélico.",
         "Primeira formatura em 1931, com 77 oficiais; quase 20 mil formados desde então.",
-        "Aspirantado 2026: 10/10, às 18h, no CPOR/SP."
+        "Aspirantado 2026: 10/10, às 18h, no CPOR/SP.",
+        "Gen Ex Ricardo Piai Carmona: antigo comandante do CPOR/SP, oficial de Artilharia (Aspirante em 1988), Comandante Militar do Sudeste desde 16/12/2025."
       ]
     },
     {
@@ -54,10 +57,11 @@
       "itens": [
         "Se a formatura tem entrega de espadas e Medalha Correia Lima.",
         "Horários reais da rotina dos alunos.",
-        "Requisitos de seleção para 2027."
+        "Requisitos de seleção para 2027.",
+        "Anos em que o Gen Carmona comandou o CPOR/SP (antes de 2018) e o horário da visita de 14/10."
       ]
     }
   ],
-  "atualizadoEm": "2026-10-09T14:09:36.000Z",
+  "atualizadoEm": "2026-10-09T14:16:11.000Z",
   "criadoEm": "2026-10-08T23:23:45.000Z"
 }

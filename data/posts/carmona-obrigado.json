@@ -1,0 +1,27 @@
+{
+  "id": "carmona-obrigado",
+  "titulo": "Obrigado, General Carmona",
+  "tipo": "poster",
+  "status": "rascunho",
+  "ordem": 12,
+  "data": "2026-10-15",
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ Obrigado, General\n\nO CPOR/SP agradece a visita do General de Exército Ricardo Piai Carmona, Comandante Militar do Sudeste.\nFoi uma honra receber de volta o antigo comandante da Escola de Líderes.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Agradecimento",
+      "sobretitulo": "Visita de 14 de outubro",
+      "titulo": "Obrigado,",
+      "destaque": "General Carmona",
+      "texto": "O CPOR/SP agradece a presença do Comandante Militar do Sudeste.",
+      "foto": "media/pauta-2026-10-12/nevoa.jpg"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "o-que-e-o-cmse",
+  "titulo": "O que é o Comando Militar do Sudeste",
+  "tipo": "carrossel",
+  "status": "ideia",
+  "ordem": 13,
+  "data": null,
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ O que é o Comando Militar do Sudeste\n\nO CPOR/SP faz parte do Comando Militar do Sudeste, que reúne as organizações militares do Exército no estado de São Paulo.\nSaiba como o CMSE se organiza e onde a Escola de Líderes se encaixa.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Informativo",
+      "sobretitulo": "Você sabia?",
+      "titulo": "O que é o",
+      "destaque": "CMSE",
+      "texto": "O Comando Militar do Sudeste e o CPOR/SP.",
+      "foto": "media/aspirantado-2026/bandeira.jpg"
+    },
+    {
+      "modelo": "info",
+      "selo": "Informativo",
+      "sobretitulo": "Comando Militar do Sudeste",
+      "titulo": "O Exército",
+      "destaque": "em São Paulo",
+      "itens": [
+        "Sede na cidade de São Paulo",
+        "Reúne as organizações militares do Exército no estado",
+        "O CPOR/SP é uma delas"
+      ],
+      "foto": "media/pauta-2026-10-12/morro.jpg"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Escola de\nLíderes",
+      "texto": "Formando oficiais da reserva para o Exército em São Paulo.",
+      "sobretitulo": "@cporsp_exercito"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}

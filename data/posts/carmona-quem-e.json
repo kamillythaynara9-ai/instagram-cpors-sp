@@ -1,0 +1,74 @@
+{
+  "id": "carmona-quem-e",
+  "titulo": "Quem é o General Carmona",
+  "tipo": "carrossel",
+  "status": "rascunho",
+  "ordem": 8,
+  "data": "2026-10-13",
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ Quem é o General Carmona\n\nO General de Exército Ricardo Piai Carmona, Comandante Militar do Sudeste, visita o CPOR/SP nesta quarta-feira (14/10).\nOficial de Artilharia, ele já comandou esta Escola e hoje comanda o Exército em São Paulo.\n\nArraste para conhecer a trajetória do General.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE #Artilharia",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Trajetória",
+      "sobretitulo": "Comandante Militar do Sudeste",
+      "titulo": "General",
+      "destaque": "Carmona",
+      "texto": "De comandante do CPOR/SP ao comando do Exército em São Paulo.",
+      "foto": "media/pauta-2026-10-12/grupo.jpg"
+    },
+    {
+      "modelo": "info",
+      "selo": "Trajetória",
+      "sobretitulo": "Formação",
+      "titulo": "Oficial de",
+      "destaque": "Artilharia",
+      "itens": [
+        "Paulistano, nascido em 1966",
+        "Ingressou na AMAN em 1985",
+        "Aspirante a Oficial de Artilharia em 1988",
+        "Cursos da EsAO e da ECEME, e Estado-Maior na Venezuela e no Peru"
+      ],
+      "foto": "media/pauta-2026-10-12/morro.jpg"
+    },
+    {
+      "modelo": "info",
+      "selo": "Trajetória",
+      "sobretitulo": "Comandos e funções",
+      "titulo": "Uma carreira de",
+      "destaque": "liderança",
+      "itens": [
+        "Comandou o Curso de Artilharia da AMAN",
+        "Comandou o 20º GAC L e o CPOR/SP",
+        "Comandou a 18ª Bda Inf Fron (Corumbá)",
+        "Foi Comandante Militar do Planalto"
+      ],
+      "foto": "media/pauta-2026-10-12/soldado.jpg"
+    },
+    {
+      "modelo": "info",
+      "selo": "Trajetória",
+      "sobretitulo": "Desde 16 de dezembro de 2025",
+      "titulo": "Comandante Militar",
+      "destaque": "do Sudeste",
+      "itens": [
+        "General de Exército desde novembro de 2025",
+        "Comanda o Exército no estado de São Paulo",
+        "O CPOR/SP é uma das organizações do CMSE"
+      ],
+      "foto": "media/aspirantado-2026/bandeira.jpg"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Seja bem-vindo,\nGeneral!",
+      "texto": "O CPOR/SP recebe com honra o seu antigo comandante.",
+      "sobretitulo": "@cporsp_exercito"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "galeria-ex-comandantes",
+  "titulo": "Galeria de ex-comandantes",
+  "tipo": "carrossel",
+  "status": "ideia",
+  "ordem": 14,
+  "data": null,
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ Quem já comandou o CPOR/SP\n\nDesde 1931, a Escola de Líderes teve comandantes que depois chegaram ao generalato.\nConheça alguns nomes da história do CPOR/SP.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "História",
+      "sobretitulo": "Desde 1931",
+      "titulo": "Quem já comandou",
+      "destaque": "o CPOR/SP",
+      "texto": "Precisamos da lista e das fotos da galeria de comandantes.",
+      "foto": "media/pauta-2026-10-12/nevoa.jpg"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "Escola de\nLíderes",
+      "texto": "Uma história de comandantes e de oficiais formados.",
+      "sobretitulo": "@cporsp_exercito"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}

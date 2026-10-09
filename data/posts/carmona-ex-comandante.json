@@ -1,0 +1,27 @@
+{
+  "id": "carmona-ex-comandante",
+  "titulo": "De volta à Escola de Líderes",
+  "tipo": "poster",
+  "status": "rascunho",
+  "ordem": 9,
+  "data": "2026-10-14",
+  "origem": {
+    "tipo": "pedido",
+    "id": "visita-general-carmona-mv11fs4p"
+  },
+  "legenda": "🎖️ De volta à Escola de Líderes\n\nHoje o CPOR/SP recebe o General de Exército Ricardo Piai Carmona, que já comandou esta Escola e hoje é o Comandante Militar do Sudeste.\nÉ uma honra receber de volta quem ajudou a formar os oficiais da reserva de São Paulo.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #ComandoMilitarDoSudeste #CMSE",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Homenagem",
+      "sobretitulo": "Antigo comandante do CPOR/SP",
+      "titulo": "De volta à",
+      "destaque": "Escola de Líderes",
+      "texto": "Gen Ex Ricardo Piai Carmona\nComandante Militar do Sudeste",
+      "foto": "media/pauta-2026-10-12/nevoa.jpg"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T15:30:00.000Z",
+  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+}
