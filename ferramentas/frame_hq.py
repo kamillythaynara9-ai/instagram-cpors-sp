@@ -3,13 +3,15 @@
 # super-resolução EDSR x2, corrige exposição só se estiver escura, nitidez leve.
 import cv2, numpy as np, sys, time
 video, t, y0, out, model = sys.argv[1], float(sys.argv[2]), int(sys.argv[3]), sys.argv[4], sys.argv[5]
+# opcionais: largura do recorte (altura = 1,25 x largura) e x inicial
+W = int(sys.argv[6]) if len(sys.argv) > 6 else 720; H = int(W * 1.25); x0 = int(sys.argv[7]) if len(sys.argv) > 7 else 0
 cap = cv2.VideoCapture(video); fps = cap.get(cv2.CAP_PROP_FPS) or 30
 f0 = int(round(t * fps)) - 5; cap.set(cv2.CAP_PROP_POS_FRAMES, max(0, f0))
 fr = []
 for _ in range(11):
     ok, im = cap.read()
     if not ok: break
-    fr.append(im[y0:y0 + 900, 0:720].copy())
+    fr.append(im[y0:y0 + H, x0:x0 + W].copy())
 nit = [cv2.Laplacian(cv2.cvtColor(x, cv2.COLOR_BGR2GRAY), cv2.CV_64F).var() for x in fr]
 k = int(np.argmax(nit[3:8])) + 3  # só até 2 quadros do momento escolhido
 win = fr[k - 2:k + 3]
