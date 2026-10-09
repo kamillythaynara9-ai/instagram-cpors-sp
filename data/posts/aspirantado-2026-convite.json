@@ -30,8 +30,14 @@
       "texto": "troque só o fundo",
       "slide": 1,
       "feito": false
+    },
+    {
+      "quando": "2026-10-09T00:00:33.178Z",
+      "texto": "troque só o fundo",
+      "slide": 1,
+      "feito": false
     }
   ],
   "criadoEm": "2026-10-08T22:23:46.000Z",
-  "atualizadoEm": "2026-10-09T00:00:30.107Z"
+  "atualizadoEm": "2026-10-09T00:00:33.454Z"
 }
