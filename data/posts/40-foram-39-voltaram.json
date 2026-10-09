@@ -1,0 +1,28 @@
+{
+  "id": "40-foram-39-voltaram",
+  "titulo": "40 foram, 39 voltaram",
+  "tipo": "poster",
+  "status": "rascunho",
+  "ordem": 5,
+  "data": "2026-10-17",
+  "origem": {
+    "tipo": "pedido",
+    "id": "40-foram-39-voltaram-mv0762sk"
+  },
+  "legenda": "🇧🇷 40 foram, 39 voltaram\n\nEntre 1944 e 1945, 40 oficiais formados no CPOR/SP lutaram na Itália com a Força Expedicionária Brasileira.\n39 voltaram para casa. A homenagem a eles está até hoje no quartel, e faz parte da formação de cada turma.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #FEB #História #OficialDaReserva",
+  "slides": [
+    {
+      "modelo": "numero",
+      "selo": "História",
+      "sobretitulo": "CPOR/SP na FEB · 1944–1945",
+      "destaque": "40",
+      "titulo": "foram.\n39 voltaram.",
+      "texto": "Oficiais formados no CPOR/SP lutaram na Itália com a Força Expedicionária Brasileira. A homenagem a eles está até hoje no quartel.",
+      "foto": "media/pauta-2026-10-12/nevoa.jpg",
+      "posicao": "60% 50%"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T02:01:29.000Z",
+  "atualizadoEm": "2026-10-09T02:01:29.000Z"
+}

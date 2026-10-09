@@ -90,7 +90,7 @@
       const it = itensDe(s).map((x) => { const k = x.indexOf(':'); return k > 0 ? [x.slice(0, k).trim(), x.slice(k + 1).trim()] : ['', x]; });
       const caixas = it.length ? `<div class="sl-caixas" style="grid-template-columns:${it.length > 1 ? '1fr 1fr' : '1fr'}">${it.map(([r, v]) => `<div class="sl-caixa">${r ? `<small>${esc(r)}</small>` : ''}<b>${br(v)}</b></div>`).join('')}</div>` : '';
       return `${foto(s)}
-      <div class="sl-cobre" style="background:${s.foto ? 'radial-gradient(ellipse at 50% 40%,rgba(11,14,9,.55) 0%,rgba(11,14,9,.88) 70%),' : ''}linear-gradient(180deg,rgba(11,14,9,.4),rgba(11,14,9,.95))"></div>
+      <div class="sl-cobre" style="background:${s.foto ? 'linear-gradient(180deg,rgba(11,14,9,.55) 0%,rgba(11,14,9,.2) 22%,rgba(11,14,9,.35) 55%,rgba(11,14,9,.92) 100%)' : 'linear-gradient(180deg,rgba(11,14,9,.4),rgba(11,14,9,.95))'}"></div>
       <div class="sl-cordao" style="top:380px"></div>
       ${selo(s)}${brasao()}
       <div class="sl-bloco" style="left:80px;right:80px;top:270px;bottom:160px;align-items:center;justify-content:center;text-align:center;gap:22px">

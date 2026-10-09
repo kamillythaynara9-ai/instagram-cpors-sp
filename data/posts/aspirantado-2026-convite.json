@@ -2,7 +2,7 @@
   "id": "aspirantado-2026-convite",
   "titulo": "Aspirantado 2026: convite",
   "tipo": "poster",
-  "status": "ajuste",
+  "status": "rascunho",
   "ordem": 2,
   "data": "2026-10-09",
   "legenda": "🎖️ Aspirantado 2026\n\nNeste sábado, 10 de outubro, às 18h, o CPOR/SP realiza a formatura da turma de 2026, que declara os novos Aspirantes a Oficial da Reserva.\nA cerimônia reúne familiares, convidados e autoridades militares para celebrar o fim de um ano de formação.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #Aspirantado2026 #OficialDaReserva #R2",
@@ -17,7 +17,9 @@
         "Data: Sábado, 10/10 · 18h",
         "Local: CPOR/SP"
       ],
-      "texto": "Declaração dos novos Aspirantes a Oficial da Reserva, com a presença de familiares e autoridades militares."
+      "texto": "Declaração dos novos Aspirantes a Oficial da Reserva, com a presença de familiares e autoridades militares.",
+      "foto": "media/aspirantado-2026/bandeira.jpg",
+      "posicao": "50% 50%"
     }
   ],
   "origem": {
@@ -29,15 +31,17 @@
       "quando": "2026-10-09T00:00:29.930Z",
       "texto": "troque só o fundo",
       "slide": 1,
-      "feito": false
+      "feito": true,
+      "resposta": "Coloquei de fundo a bandeira do Brasil hasteada no CPOR/SP, com a qualidade melhorada. O resto ficou igual."
     },
     {
       "quando": "2026-10-09T00:00:33.178Z",
       "texto": "troque só o fundo",
       "slide": 1,
-      "feito": false
+      "feito": true,
+      "resposta": "Coloquei de fundo a bandeira do Brasil hasteada no CPOR/SP, com a qualidade melhorada. O resto ficou igual."
     }
   ],
   "criadoEm": "2026-10-08T22:23:46.000Z",
-  "atualizadoEm": "2026-10-09T00:00:33.454Z"
+  "atualizadoEm": "2026-10-09T02:21:47.000Z"
 }

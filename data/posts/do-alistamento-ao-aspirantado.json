@@ -1,0 +1,60 @@
+{
+  "id": "do-alistamento-ao-aspirantado",
+  "titulo": "Do alistamento ao Aspirantado",
+  "tipo": "carrossel",
+  "status": "rascunho",
+  "ordem": 6,
+  "data": "2026-10-16",
+  "origem": {
+    "tipo": "pedido",
+    "id": "do-alistamento-ao-aspirantado-mv075ls8"
+  },
+  "legenda": "🎖️ Do alistamento ao Aspirantado\n\nFaz faculdade e vai se alistar? O caminho até se tornar Aspirante a Oficial da Reserva no CPOR/SP tem cinco etapas, do alistamento aos 18 anos à formatura no fim do ano.\nO expediente é pela manhã, para dar tempo de seguir com a faculdade.\n\nSalve este post e mande para quem vai se alistar.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #Alistamento #OficialDaReserva #R2",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Como entrar",
+      "sobretitulo": "O caminho até o CPOR/SP",
+      "titulo": "Do alistamento",
+      "destaque": "ao Aspirantado",
+      "foto": "media/pauta-2026-10-12/morro.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Como entrar",
+      "titulo": "01 · Alistamento",
+      "texto": "Aos 18 anos. Quem faz faculdade manifesta interesse no CPOR e passa pela seleção.",
+      "foto": "media/pauta-2026-10-12/porta.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Como entrar",
+      "titulo": "02 · Incorporação",
+      "texto": "Em fevereiro. As duas primeiras semanas são de adaptação, em regime integral.",
+      "foto": "media/pauta-2026-10-12/soldado.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Como entrar",
+      "titulo": "03 · Período Básico",
+      "texto": "Cerca de 4 meses de formação básica do combatente, igual para todos.",
+      "foto": "media/pauta-2026-10-12/metralhadora.jpg"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Como entrar",
+      "titulo": "04 · Qualificação",
+      "texto": "Cerca de 5 a 6 meses na sua arma, quadro ou serviço, com exercícios no terreno.",
+      "foto": "media/pauta-2026-10-12/grupo.jpg"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "05 · Aspirantado",
+      "texto": "No fim do ano, a formatura: os alunos se tornam Aspirantes a Oficial da Reserva.",
+      "sobretitulo": "Salve e mande para quem vai se alistar"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-09T02:01:29.000Z",
+  "atualizadoEm": "2026-10-09T02:01:29.000Z"
+}
