@@ -216,8 +216,10 @@
     return o ? `${p.origem.tipo === 'evento' ? 'calendário' : 'pedido'} "${o.titulo}"` : '';
   }
 
+  // atualiza o post aberto no mesmo objeto: os botões da tela guardam referência a ele
+  function recarregarAberto(r) { const n = clone(r); Object.keys(S.aberto).forEach((k) => delete S.aberto[k]); Object.assign(S.aberto, n); }
   async function salvarAberto(oque, msgOk) {
-    try { const r = await salvarItem('posts', S.aberto, `${oque}: ${S.aberto.id}`); S.aberto = clone(r); toast(msgOk || 'Salvo.'); }
+    try { const r = await salvarItem('posts', S.aberto, `${oque}: ${S.aberto.id}`); recarregarAberto(r); toast(msgOk || 'Salvo.'); }
     catch (e) { toast('Erro ao salvar: ' + e.message, 6000); }
   }
   const maxOrdem = () => S.posts.reduce((m, p) => Math.max(m, p.ordem ?? 0), 0);
