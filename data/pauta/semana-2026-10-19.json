@@ -1,0 +1,76 @@
+{
+  "id": "semana-2026-10-19",
+  "semana": "2026-10-19",
+  "titulo": "Semana de 19 a 24/10",
+  "resumo": "Seguindo o que vocês escolheram (história e como entrar), com temas novos: patrono, mitos, vida de R2, insígnias e o quartel.",
+  "criadoEm": "2026-10-12T10:50:00.000Z",
+  "atualizadoEm": "2026-10-12T10:50:00.000Z",
+  "ideias": [
+    {
+      "id": "mitos-e-verdades-cpor",
+      "titulo": "Mitos e verdades sobre o CPOR/SP",
+      "formato": "carrossel",
+      "tema": "Como entrar",
+      "dia": "2026-10-19",
+      "ideia": "Um mito por slide com a resposta ao lado: \"Quem faz CPOR não pode fazer faculdade\", \"Depois do CPOR é preciso seguir carreira\", \"Só entra quem já é atleta\". Fecha com onde se informar.",
+      "porque": "Vocês escolheram \"como entrar\"; este responde às dúvidas que afastam os candidatos.",
+      "confirmar": "Quais dúvidas mais chegam por direct e as respostas oficiais.",
+      "status": "sugerida"
+    },
+    {
+      "id": "patrono-do-cpor",
+      "titulo": "Quem é o patrono do CPOR/SP",
+      "formato": "carrossel",
+      "tema": "História",
+      "dia": "2026-10-20",
+      "ideia": "Capa com o nome do patrono, depois quem foi, por que dá nome à escola e onde ele aparece no dia a dia do CPOR/SP (placa, brasão, canção).",
+      "porque": "História funcionou com vocês (a FEB) e o patrono é pouco conhecido fora dos muros.",
+      "confirmar": "Se o CPOR/SP tem patrono ou denominação histórica e uma foto da placa ou do retrato.",
+      "status": "sugerida"
+    },
+    {
+      "id": "r2-depois-da-formatura",
+      "titulo": "E depois do Aspirantado?",
+      "formato": "carrossel",
+      "tema": "Como entrar",
+      "dia": "2026-10-21",
+      "ideia": "O caminho do R2 depois de formado: estágio em OM, promoção a 2º Tenente, convocação, e a vida civil com a formação de líder. Um slide por etapa com foto real.",
+      "porque": "Fecha a história que o post \"Do alistamento ao Aspirantado\" começou.",
+      "confirmar": "Como funciona hoje o estágio de instrução e o tempo até 2º Tenente.",
+      "status": "sugerida"
+    },
+    {
+      "id": "insignias-do-aluno",
+      "titulo": "O que diz o uniforme do aluno",
+      "formato": "carrossel",
+      "tema": "Curiosidades",
+      "dia": "2026-10-22",
+      "ideia": "Foto real de um aluno fardado com pinos apontando cada detalhe: distintivo da arma, platina, nome, brasão do CPOR/SP. Um detalhe por slide, no estilo dos posts de PCI.",
+      "porque": "Curiosidade visual que usa o modelo de foto com pino que vocês aprovaram.",
+      "confirmar": "Uma foto nítida de aluno fardado de frente e o nome correto de cada peça.",
+      "status": "sugerida"
+    },
+    {
+      "id": "o-quartel-por-dentro",
+      "titulo": "O CPOR/SP por dentro",
+      "formato": "carrossel",
+      "tema": "Rotina",
+      "dia": "2026-10-23",
+      "ideia": "Tour pelos lugares do quartel: portão, pátio de formatura, salas de instrução, galeria dos ex-comandantes, rancho. Uma foto por lugar, com uma frase do que acontece ali.",
+      "porque": "Mostra o dia a dia sem depender de horários e apresenta a escola para as famílias.",
+      "confirmar": "Fotos dos ambientes e o que pode ser mostrado.",
+      "status": "sugerida"
+    },
+    {
+      "id": "cpor-em-numeros",
+      "titulo": "O CPOR/SP em números",
+      "formato": "poster",
+      "tema": "História",
+      "dia": "2026-10-24",
+      "ideia": "Pôster com foto de fundo e três números grandes: 1931 (primeira formatura), 77 oficiais na primeira turma, quase 20 mil formados.",
+      "porque": "Pôster curto e forte, com fatos que já estão no padrão.",
+      "confirmar": "O número atual de formados, se tiverem o dado exato.",
+      "status": "sugerida"
+    }
+  ]
+}
