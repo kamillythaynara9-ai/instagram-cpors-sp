@@ -17,8 +17,7 @@
       "sobretitulo": "Você sabia?",
       "titulo": "O que é o",
       "destaque": "CMSE",
-      "texto": "O Comando Militar do Sudeste e o CPOR/SP.",
-      "foto": "media/aspirantado-2026/bandeira.jpg"
+      "texto": "O Comando Militar do Sudeste e o CPOR/SP."
     },
     {
       "modelo": "info",
@@ -30,8 +29,7 @@
         "Sede na cidade de São Paulo",
         "Reúne as organizações militares do Exército no estado",
         "O CPOR/SP é uma delas"
-      ],
-      "foto": "media/pauta-2026-10-12/morro.jpg"
+      ]
     },
     {
       "modelo": "fechamento",
@@ -42,5 +40,5 @@
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T15:30:00.000Z",
-  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+  "atualizadoEm": "2026-10-14T13:40:00.000Z"
 }

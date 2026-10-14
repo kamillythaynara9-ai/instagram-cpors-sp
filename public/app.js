@@ -20,9 +20,12 @@
   const ST_PED = { novo: 'Aguardando Claude', producao: 'Em produção', feito: 'Pronto' };
   const TIPOS_EV = { evento: 'Evento', atividade: 'Atividade / instrução', data: 'Data comemorativa', aviso: 'Aviso / informativo', outro: 'Outro' };
   const FORMATOS = { claude: 'Claude decide', carrossel: 'Carrossel', poster: 'Pôster (imagem única)', ambos: 'Carrossel e pôster' };
+  const FORMATOS_STORY = { claude: 'Claude decide', unico: 'Story único', sequencia: 'Sequência de stories' };
+  const ehStoryPost = (p) => p?.destino === 'story';
+  const nomeFormato = (p) => (ehStoryPost(p) ? FORMATOS_STORY : FORMATOS)[p.formato] || p.formato;
 
   const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao'];
-  const S = { posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
+  const S = { posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
 
   // ---------------- API ----------------
   async function chamar(url, opts = {}) {
@@ -65,7 +68,7 @@
   }
 
   // ---------------- escala dos slides ----------------
-  function slideBox(slide, i, t, extra = '') { return `<div class="escala" ${extra}>${Modelos.render(slide || {}, i, t)}</div>`; }
+  function slideBox(slide, i, t, extra = '') { return `<div class="escala${Modelos.ehStory(slide) ? ' story' : ''}" ${extra}>${Modelos.render(slide || {}, i, t)}</div>`; }
   function ajustarEscalas(root = document) { $$('.escala', root).forEach((e) => { const sl = e.firstElementChild; if (sl && e.clientWidth) sl.style.transform = `scale(${e.clientWidth / 1080})`; }); }
   new ResizeObserver(() => ajustarEscalas()).observe(document.body);
 
@@ -97,8 +100,10 @@
   const ordenados = () => [...S.posts].sort((a, b) => (b.ordem ?? 0) - (a.ordem ?? 0) || String(b.criadoEm).localeCompare(String(a.criadoEm)));
 
   function telaFeed() {
-    const todos = ordenados();
-    const cont = (st) => S.posts.filter((p) => p.status === st).length;
+    const doFeed = S.posts.filter((p) => !ehStoryPost(p)), stories = S.posts.filter(ehStoryPost);
+    const daAba = S.aba === 'story' ? stories : doFeed;
+    const todos = ordenados().filter((p) => ehStoryPost(p) === (S.aba === 'story'));
+    const cont = (st) => daAba.filter((p) => p.status === st).length;
     const lista = S.filtro === 'todos' ? todos : todos.filter((p) => p.status === S.filtro);
     const pend = S.pedidos.filter((p) => p.status !== 'feito').length + S.eventos.filter((e) => e.gerarPosts && e.status !== 'feito').length;
     const icoCarrossel = `<svg class="cel-ico" viewBox="0 0 24 24" fill="#ECE6D6"><path d="M7 3h11a3 3 0 0 1 3 3v11a1 1 0 0 1-2 0V6a1 1 0 0 0-1-1H7a1 1 0 0 1 0-2zm-3 4h11a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/></svg>`;
@@ -107,12 +112,13 @@
         <div class="perfil-foto"><img src="/assets/brasao.png" alt="Brasão do CPOR/SP"></div>
         <div class="perfil-info">
           <h1>cporsp_exercito</h1>
-          <div class="nums"><span><b>${S.posts.length}</b> posts</span><span><b>${cont('aprovado')}</b> aprovados</span><span><b>${cont('rascunho') + cont('ideia')}</b> para revisar</span><span><b>${pend}</b> pedidos na fila</span></div>
+          <div class="nums"><span><b>${doFeed.length}</b> posts</span><span><b>${stories.length}</b> stories</span><span><b>${cont('aprovado')}</b> aprovados</span><span><b>${cont('rascunho') + cont('ideia')}</b> para revisar</span><span><b>${pend}</b> pedidos na fila</span></div>
           <div class="bio"><b>CPOR/SP · Escola de Líderes</b><br>Centro de Preparação de Oficiais da Reserva de São Paulo</div>
         </div>
       </section>
+      <div class="abas-feed"><button data-aba="feed" class="${S.aba === 'feed' ? 'on' : ''}">Feed · ${doFeed.length}</button><button data-aba="story" class="${S.aba === 'story' ? 'on' : ''}">Stories · ${stories.length}</button></div>
       <div class="filtros">${[['todos', 'Todos'], ...Object.entries(ST_POST)].map(([k, n]) => `<button data-f="${k}" class="${S.filtro === k ? 'on' : ''}">${n}${k !== 'todos' ? ` · ${cont(k)}` : ''}</button>`).join('')}</div>
-      ${lista.length ? `<div class="grade-feed">${lista.map((p) => `
+      ${lista.length ? `<div class="grade-feed${S.aba === 'story' ? ' stories' : ''}">${lista.map((p) => `
         <button class="cel" data-id="${esc(p.id)}" aria-label="${esc(p.titulo)}">
           ${slideBox(p.slides?.[0], 0, p.slides?.length || 1)}
           ${(p.slides?.length || 0) > 1 ? icoCarrossel : ''}
@@ -120,7 +126,8 @@
           ${p.data ? `<span class="cel-data">${fmtCurta(p.data)}</span>` : ''}
           <span class="cel-hover">${esc(p.titulo)}</span>
         </button>`).join('')}</div>`
-        : `<div class="vazio">${S.posts.length ? 'Nenhum post com esse status.' : 'Ainda não há posts. Faça um pedido ou marque algo no calendário.'}</div>`}`;
+        : `<div class="vazio">${daAba.length ? 'Nada com esse status.' : S.aba === 'story' ? 'Ainda não há stories. Faça um pedido e escolha "Story" no topo.' : 'Ainda não há posts. Faça um pedido ou marque algo no calendário.'}</div>`}`;
+    $$('.abas-feed button').forEach((b) => (b.onclick = () => { S.aba = b.dataset.aba; S.filtro = 'todos'; telaFeed(); ajustarEscalas(); }));
     $$('.filtros button').forEach((b) => (b.onclick = () => { S.filtro = b.dataset.f; telaFeed(); ajustarEscalas(); }));
     $$('.cel').forEach((c) => (c.onclick = () => abrirPost(c.dataset.id)));
   }
@@ -129,7 +136,7 @@
   function abrirPost(id, idx = 0) {
     const p = S.posts.find((x) => x.id === id); if (!p) return;
     S.aberto = clone(p); S.idx = idx; S.editando = false;
-    if (!Array.isArray(S.aberto.slides) || !S.aberto.slides.length) S.aberto.slides = [{ modelo: 'capa', titulo: p.titulo }];
+    if (!Array.isArray(S.aberto.slides) || !S.aberto.slides.length) S.aberto.slides = [{ modelo: ehStoryPost(p) ? 'story' : 'capa', titulo: p.titulo }];
     desenharModal();
   }
   function fecharModal() { S.aberto = null; S.editando = false; $('#modal').hidden = true; $('#modal').innerHTML = ''; document.body.style.overflow = ''; rota(); }
@@ -140,11 +147,11 @@
     m.innerHTML = `<div class="mcaixa" role="dialog" aria-modal="true">
       <div class="mesq">
         <button class="fechar fechar-cel" data-a="fechar" aria-label="Fechar">×</button>
-        <div class="visor">${t > 1 ? `<button class="seta e" data-a="ant" aria-label="Anterior">‹</button><button class="seta d" data-a="prox" aria-label="Próximo">›</button>` : ''}<div id="visor">${slideBox(p.slides[S.idx], S.idx, t)}</div></div>
+        <div class="visor${ehStoryPost(p) ? ' story' : ''}">${t > 1 ? `<button class="seta e" data-a="ant" aria-label="Anterior">‹</button><button class="seta d" data-a="prox" aria-label="Próximo">›</button>` : ''}<div id="visor">${slideBox(p.slides[S.idx], S.idx, t)}</div></div>
         ${t > 1 ? `<div class="pontos">${p.slides.map((_, i) => `<button data-i="${i}" class="${i === S.idx ? 'on' : ''}" aria-label="Slide ${i + 1}"></button>`).join('')}</div>` : ''}
       </div>
       <div class="mdir">
-        <div class="mcab"><img src="/assets/brasao.png" alt=""><div class="tt"><b>${esc(p.titulo)}</b><small>${t > 1 ? `Carrossel · ${t} slides` : 'Post único'}${p.data ? ` · ${fmtData(p.data)}` : ''}</small></div><button class="fechar" data-a="fechar" aria-label="Fechar">×</button></div>
+        <div class="mcab"><img src="/assets/brasao.png" alt=""><div class="tt"><b>${esc(p.titulo)}</b><small>${ehStoryPost(p) ? (t > 1 ? `Stories · ${t} telas` : 'Story') : t > 1 ? `Carrossel · ${t} slides` : 'Post único'}${p.data ? ` · ${fmtData(p.data)}` : ''}</small></div><button class="fechar" data-a="fechar" aria-label="Fechar">×</button></div>
         <div class="mcorpo" id="mcorpo"></div>
       </div></div>`;
     m.onclick = (ev) => { if (ev.target === m) fecharModal(); };
@@ -168,9 +175,9 @@
         ${p.slides.length > 1 ? `<button class="bt" id="bBaixar1">Baixar este slide</button>` : ''}
         <button class="bt" id="bEditar">Editar</button>
       </div>
-      <div class="secao"><div class="rot">Legenda</div>
+      ${ehStoryPost(p) && !p.legenda ? '' : `<div class="secao"><div class="rot">Legenda</div>
         <div class="legenda">${esc(p.legenda || 'Sem legenda ainda.')}</div>
-        ${p.legenda ? `<div><button class="bt mini" id="bCopiar">Copiar legenda</button></div>` : ''}</div>
+        ${p.legenda ? `<div><button class="bt mini" id="bCopiar">Copiar legenda</button></div>` : ''}</div>`}
       <div class="secao"><div class="rot">Status e data</div>
         <div class="grade2">
           <label class="campo"><span>Status</span><select id="vStatus">${Object.entries(ST_POST).map(([k, n]) => `<option value="${k}" ${p.status === k ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
@@ -258,23 +265,23 @@
         <div class="acoes"><button class="bt mini" id="sEsq">← Mover</button><button class="bt mini" id="sDir">Mover →</button><button class="bt mini" id="sNovo">+ Novo slide</button><button class="bt mini" id="sDup">Duplicar slide</button><button class="bt mini perigo" id="sDel" ${p.slides.length < 2 ? 'disabled' : ''}>Remover slide</button></div>
       </div>
       <div class="secao"><div class="rot">Slide ${S.idx + 1}</div>
-        <label class="campo"><span>Modelo</span><select id="eModelo">${Object.entries(Modelos.MODELOS).map(([k, v]) => `<option value="${k}" ${s.modelo === k ? 'selected' : ''}>${v.nome}</option>`).join('')}</select></label>
-        ${campos.filter((c) => c !== 'foto').map((c) => {
+        <label class="campo"><span>Modelo</span><select id="eModelo">${Object.entries(Modelos.MODELOS).filter(([, v]) => !!v.story === ehStoryPost(p)).map(([k, v]) => `<option value="${k}" ${s.modelo === k ? 'selected' : ''}>${v.nome}</option>`).join('')}</select></label>
+        ${campos.filter((c) => !/^foto/.test(c)).map((c) => {
           const multi = ['titulo', 'destaque', 'texto', 'itens', 'sobretitulo'].includes(c);
           const v = c === 'itens' ? valItens : (s[c] || '');
           return `<label class="campo"><span>${Modelos.CAMPOS[c]}</span>${multi ? `<textarea data-c="${c}" rows="${c === 'texto' || c === 'itens' ? 4 : 2}">${esc(v)}</textarea>` : `<input type="text" data-c="${c}" value="${esc(v)}">`}</label>`;
         }).join('')}
         <label class="campo"><span>Texto do canto inferior direito <em>(vazio = numeração automática)</em></span><input type="text" data-c="rodape" value="${esc(s.rodape || '')}"></label>
-        ${campos.includes('foto') ? `
-        <div class="campo"><span>Foto</span>
-          <div class="fotos-esc">${['', ...fotos].map((f) => `<button data-f="${esc(f)}" class="${(s.foto || '') === f ? 'on' : ''}" title="${esc(f || 'Sem foto')}">${f ? `<img src="${esc(src(f))}" loading="lazy" alt="">` : '<span class="dica">sem foto</span>'}</button>`).join('')}</div>
-          <div class="acoes"><label class="bt mini">Enviar outra foto<input type="file" accept="image/*" id="eUp" hidden></label>
-          <select id="ePos" style="width:auto">${[['50% 50%', 'Enquadrar: centro'], ['50% 20%', 'Enquadrar: topo'], ['50% 80%', 'Enquadrar: base'], ['25% 50%', 'Enquadrar: esquerda'], ['75% 50%', 'Enquadrar: direita']].map(([v, n]) => `<option value="${v}" ${(s.posicao || '50% 50%') === v ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
-        </div>` : ''}
+        ${campos.filter((c) => /^foto/.test(c)).map((fc) => { const pc = fc.replace('foto', 'posicao'); return `
+        <div class="campo" data-fc="${fc}"><span>${Modelos.CAMPOS[fc]}</span>
+          <div class="fotos-esc">${['', ...fotos].map((f) => `<button data-f="${esc(f)}" class="${(s[fc] || '') === f ? 'on' : ''}" title="${esc(f || 'Sem foto')}">${f ? `<img src="${esc(src(f))}" loading="lazy" alt="">` : '<span class="dica">sem foto</span>'}</button>`).join('')}</div>
+          <div class="acoes"><label class="bt mini">Enviar outra foto<input type="file" accept="image/*" class="eUp" hidden></label>
+          <select class="ePos" style="width:auto">${[['50% 50%', 'Enquadrar: centro'], ['50% 20%', 'Enquadrar: topo'], ['50% 80%', 'Enquadrar: base'], ['25% 50%', 'Enquadrar: esquerda'], ['75% 50%', 'Enquadrar: direita']].map(([v, n]) => `<option value="${v}" ${(s[pc] || '50% 50%') === v ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
+        </div>`; }).join('')}
       </div>
       <div class="secao"><div class="rot">Post</div>
         <label class="campo"><span>Nome do post</span><input type="text" id="eTitulo" value="${esc(p.titulo)}"></label>
-        <label class="campo"><span>Legenda</span><textarea id="eLegenda" rows="8">${esc(p.legenda || '')}</textarea></label>
+        <label class="campo"><span>Legenda${ehStoryPost(p) ? ' <em>(story normalmente não tem)</em>' : ''}</span><textarea id="eLegenda" rows="${ehStoryPost(p) ? 3 : 8}">${esc(p.legenda || '')}</textarea></label>
       </div>`;
 
     const c = $('#mcorpo');
@@ -286,20 +293,23 @@
     }));
     $('#eModelo').onchange = (e) => { s.modelo = e.target.value; desenharModal(); };
     $$('.slides-mini button', c).forEach((b) => (b.onclick = () => { S.idx = +b.dataset.i; desenharModal(); }));
-    $$('.fotos-esc button', c).forEach((b) => (b.onclick = () => { s.foto = b.dataset.f || null; $$('.fotos-esc button', c).forEach((x) => x.classList.toggle('on', x === b)); redesenharVisor(); }));
-    if ($('#ePos')) $('#ePos').onchange = (e) => { s.posicao = e.target.value; redesenharVisor(); };
-    if ($('#eUp')) $('#eUp').onchange = async (e) => {
-      const f = e.target.files[0]; if (!f) return;
-      toast('Enviando foto…', 20000);
-      try { const [path] = await enviarArquivos([f], `uploads/edicao/${p.id}`); s.foto = path; S.arquivos = null; p.fotosExtras = [...(p.fotosExtras || []), path]; toast('Foto enviada.'); desenharModal(); }
-      catch (er) { toast('Erro no envio: ' + er.message, 6000); }
-    };
+    $$('[data-fc]', c).forEach((bloco) => {
+      const fc = bloco.dataset.fc, pc = fc.replace('foto', 'posicao');
+      $$('.fotos-esc button', bloco).forEach((b) => (b.onclick = () => { s[fc] = b.dataset.f || null; $$('.fotos-esc button', bloco).forEach((x) => x.classList.toggle('on', x === b)); redesenharVisor(); }));
+      $('.ePos', bloco).onchange = (e) => { s[pc] = e.target.value; redesenharVisor(); };
+      $('.eUp', bloco).onchange = async (e) => {
+        const f = e.target.files[0]; if (!f) return;
+        toast('Enviando foto…', 20000);
+        try { const [path] = await enviarArquivos([f], `uploads/edicao/${p.id}`); s[fc] = path; S.arquivos = null; p.fotosExtras = [...(p.fotosExtras || []), path]; toast('Foto enviada.'); desenharModal(); }
+        catch (er) { toast('Erro no envio: ' + er.message, 6000); }
+      };
+    });
     $('#eTitulo').oninput = (e) => (p.titulo = e.target.value);
     $('#eLegenda').oninput = (e) => (p.legenda = e.target.value);
     const mexer = (d) => { const j = S.idx + d; if (j < 0 || j >= p.slides.length) return; [p.slides[S.idx], p.slides[j]] = [p.slides[j], p.slides[S.idx]]; S.idx = j; desenharModal(); };
     $('#sEsq').onclick = () => mexer(-1);
     $('#sDir').onclick = () => mexer(1);
-    $('#sNovo').onclick = () => { p.slides.splice(S.idx + 1, 0, { modelo: 'foto', selo: s.selo || '', texto: 'Novo slide' }); S.idx++; desenharModal(); };
+    $('#sNovo').onclick = () => { p.slides.splice(S.idx + 1, 0, { modelo: ehStoryPost(p) ? 'story' : 'foto', selo: s.selo || '', texto: 'Novo slide' }); S.idx++; desenharModal(); };
     $('#sDup').onclick = () => { p.slides.splice(S.idx + 1, 0, clone(s)); S.idx++; desenharModal(); };
     $('#sDel').onclick = () => { if (p.slides.length < 2) return; p.slides.splice(S.idx, 1); S.idx = Math.max(0, S.idx - 1); desenharModal(); };
     $('#eCancelar').onclick = () => { const id = p.id, i = S.idx; abrirPost(id, i); };
@@ -316,7 +326,7 @@
   async function carregarArquivos() { try { S.arquivos = (await chamar('/api/arquivos')).map((a) => a.path); } catch { S.arquivos = []; } }
   function fotosDisponiveis(p) {
     const set = new Set();
-    p.slides.forEach((x) => x.foto && set.add(x.foto));
+    p.slides.forEach((x) => ['foto', 'foto2', 'foto3'].forEach((k) => x[k] && set.add(x[k])));
     (p.fotosExtras || []).forEach((f) => set.add(f));
     const o = p.origem && (p.origem.tipo === 'evento' ? S.eventos : S.pedidos).find((x) => x.id === p.origem.id);
     (o?.fotos || []).forEach((f) => set.add(f));
@@ -331,7 +341,7 @@
     const node = palco.firstElementChild;
     await Promise.all($$('img', node).map((im) => im.complete ? 0 : new Promise((ok) => { im.onload = im.onerror = ok; })));
     await document.fonts.ready;
-    const opts = { width: 1080, height: 1350, pixelRatio: 1, quality: 0.95, backgroundColor: '#0d110b' };
+    const opts = { width: 1080, height: Modelos.altura(p.slides[i]), pixelRatio: 1, quality: 0.95, backgroundColor: '#0d110b' };
     await htmlToImage.toJpeg(node, opts); // 1ª passada carrega fontes e imagens no Safari
     return htmlToImage.toBlob(node, { ...opts, type: 'image/jpeg' });
   }
@@ -415,21 +425,32 @@
     $('#view').innerHTML = `
       <div class="cabeca"><span class="rot">Novo pedido</span><h1>O que vamos postar?</h1><p>Conte o assunto e o que você quer. Fotos, vídeos e legenda são opcionais: se faltar algo, eu crio. O Claude é avisado na hora e o site mostra ao vivo quando ele começa e quando os posts ficam prontos no feed.</p></div>
       <form class="form" id="fPed">
+        <div class="campo"><span>Para onde é</span>
+          <div class="destino" id="pDestino">
+            <button type="button" data-d="feed" class="${S.destinoPed === 'feed' ? 'on' : ''}"><b>Feed</b><small>Carrossel ou pôster, com legenda</small></button>
+            <button type="button" data-d="story" class="${S.destinoPed === 'story' ? 'on' : ''}"><b>Story</b><small>Imagem vertical, mais simples, sem legenda</small></button>
+          </div></div>
         <label class="campo"><span>Assunto</span><input type="text" name="titulo" required placeholder="Ex.: Inscrições para o CPOR 2027"></label>
         <label class="campo"><span>O que você quer no post</span><textarea name="descricao" rows="6" required placeholder="Explique a ideia, as informações que precisam aparecer, o tom e para quem é. Ex.: avisar que as inscrições abrem dia 3/11, quem pode se inscrever, documentos e o link."></textarea></label>
         <div class="grade3">
-          <label class="campo"><span>Formato</span><select name="formato">${Object.entries(FORMATOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
-          <label class="campo"><span>Quantos posts sobre o assunto</span><input type="number" name="quantidade" min="1" max="12" value="1"></label>
+          <label class="campo"><span>Formato</span><select name="formato">${Object.entries(S.destinoPed === 'story' ? FORMATOS_STORY : FORMATOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
+          <label class="campo"><span>${S.destinoPed === 'story' ? 'Quantos stories' : 'Quantos posts sobre o assunto'}</span><input type="number" name="quantidade" min="1" max="12" value="1"></label>
           <label class="campo"><span>Data de publicação <em>(opcional)</em></span><input type="date" name="data"></label>
         </div>
         <div class="campo"><span>Fotos <em>(opcional)</em></span><div id="selFotos"></div></div>
         <div class="campo"><span>Vídeos <em>(opcional, eu tiro os melhores quadros e melhoro a qualidade)</em></span><div id="selVideos"></div></div>
         <label class="campo"><span>Links <em>(opcional: Drive, site, inscrição…)</em></span><input type="text" name="links" placeholder="Cole um ou mais links"></label>
-        <label class="campo"><span>Legenda <em>(opcional: se ficar vazia, eu escrevo)</em></span><textarea name="legenda" rows="4"></textarea></label>
+        ${S.destinoPed === 'story' ? '' : `<label class="campo"><span>Legenda <em>(opcional: se ficar vazia, eu escrevo)</em></span><textarea name="legenda" rows="4"></textarea></label>`}
         <label class="campo"><span>Observações <em>(opcional)</em></span><textarea name="obs" rows="3" placeholder="Algo que não pode faltar, nomes, autoridades, cores…"></textarea></label>
         <label class="check"><input type="checkbox" name="ideias" checked><span><b>Me dê mais ideias</b><br><span class="dica">Além do que pedi, sugira outros posts sobre o mesmo assunto (aparecem no feed como "Ideia").</span></span></label>
         <div class="acoes"><button class="bt pri" id="bEnviarPed">Enviar pedido</button><span class="dica" id="pedMsg"></span></div>
       </form>`;
+    $$('#pDestino button').forEach((b) => (b.onclick = () => {
+      if (S.destinoPed === b.dataset.d) return;
+      const f = $('#fPed'), guarda = { titulo: f.titulo.value, descricao: f.descricao.value, data: f.data.value, links: f.links.value, obs: f.obs.value };
+      S.destinoPed = b.dataset.d; telaPedido();
+      const g = $('#fPed'); Object.entries(guarda).forEach(([k, v]) => (g[k].value = v));
+    }));
     const sf = seletor($('#selFotos'), 'image/*', 'Adicionar fotos');
     const sv = seletor($('#selVideos'), 'video/*', 'Adicionar vídeos');
     $('#fPed').onsubmit = async (ev) => {
@@ -443,9 +464,9 @@
         const videos = sv.files.length ? await enviarArquivos(sv.files, `uploads/pedidos/${id}/videos`, sv.progresso) : [];
         msg.textContent = 'Salvando…';
         await salvarItem('pedidos', {
-          id, titulo: fd.get('titulo').trim(), descricao: fd.get('descricao').trim(), formato: fd.get('formato'),
+          id, destino: S.destinoPed, titulo: fd.get('titulo').trim(), descricao: fd.get('descricao').trim(), formato: fd.get('formato'),
           quantidade: Math.max(1, +fd.get('quantidade') || 1), data: fd.get('data') || null, fotos, videos,
-          links: fd.get('links').trim(), legenda: fd.get('legenda').trim(), obs: fd.get('obs').trim(),
+          links: fd.get('links').trim(), legenda: (fd.get('legenda') || '').trim(), obs: fd.get('obs').trim(),
           maisIdeias: !!fd.get('ideias'), status: 'novo',
         }, `novo pedido: ${fd.get('titulo')}`);
         toast('Pedido enviado! O Claude já foi avisado; acompanhe aqui.', 5000);
@@ -623,7 +644,7 @@
         const ps = S.posts.filter((x) => x.origem?.id === p.id);
         return `<div class="item">
           <div class="item-topo"><h3>${esc(p.titulo)}</h3><span class="st st-${p.status}">${ST_PED[p.status] || p.status}</span></div>
-          <div class="meta"><span>${p._tipo === 'evento' ? `Calendário · ${fmtData(p.data)}` : 'Pedido'}</span><span>enviado ${fmtHora(p.criadoEm)}</span>${p.formato ? `<span>${FORMATOS[p.formato] || p.formato}</span>` : ''}${p.quantidade ? `<span>${p.quantidade} post(s)</span>` : ''}${p.fotos?.length ? `<span>${p.fotos.length} foto(s)</span>` : ''}${p.videos?.length ? `<span>${p.videos.length} vídeo(s)</span>` : ''}${p.data && p._tipo === 'pedido' ? `<span>publicar ${fmtData(p.data)}</span>` : ''}</div>
+          <div class="meta"><span>${p._tipo === 'evento' ? `Calendário · ${fmtData(p.data)}` : ehStoryPost(p) ? 'Pedido · Story' : 'Pedido · Feed'}</span><span>enviado ${fmtHora(p.criadoEm)}</span>${p.formato ? `<span>${nomeFormato(p)}</span>` : ''}${p.quantidade ? `<span>${p.quantidade} ${ehStoryPost(p) ? 'story(s)' : 'post(s)'}</span>` : ''}${p.fotos?.length ? `<span>${p.fotos.length} foto(s)</span>` : ''}${p.videos?.length ? `<span>${p.videos.length} vídeo(s)</span>` : ''}${p.data && p._tipo === 'pedido' ? `<span>publicar ${fmtData(p.data)}</span>` : ''}</div>
           ${p.descricao ? `<p>${esc(p.descricao)}</p>` : ''}
           ${p.respostaClaude ? `<p><b>Claude:</b> ${esc(p.respostaClaude)}</p>` : ''}
           ${ps.length ? `<div class="miniaturas">${ps.map((x) => `<div data-post="${esc(x.id)}" title="${esc(x.titulo)}">${slideBox(x.slides?.[0], 0, x.slides?.length || 1)}</div>`).join('')}</div>` : ''}

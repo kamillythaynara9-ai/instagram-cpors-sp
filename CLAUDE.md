@@ -35,6 +35,7 @@ A rotina de segunda gera `data/pauta/semana-AAAA-MM-DD.json` (data = a segunda-f
 
 - Fotos: caminhos em `fotos` (ex.: `uploads/pedidos/<id>/01-nome.jpg`), já comprimidas em JPEG até 2600 px.
 - Vídeos grandes chegam em partes: `video.mp4.part000`, `.part001`… mais `video.mp4.partes.json`. Junte com `cat video.mp4.part* > video.mp4`.
+- **Só use imagens enviadas no próprio pedido** (fotos ou quadros dos vídeos daquele pedido). Os vídeos que a Thaynara mandou no chat como referência servem só para entender o estilo: nunca use quadros deles. Sem foto no pedido, faça a arte sem foto e diga que falta foto.
 - **Toda imagem tirada de vídeo deve ter a qualidade melhorada sem alterar o conteúdo** (super-resolução, ex.: OpenCV `dnn_superres` EDSR x2). Salve o resultado em `media/<id-do-pedido>/`.
   Use `python3 ferramentas/frame_hq.py <video> <segundo> <y0 do recorte 720x900> <saida.jpg> <EDSR_x2.pb>`: escolhe o quadro mais nítido (até 2 quadros do momento), tira ruído com os vizinhos, EDSR x2, clareia só se escuro.
 - Imagens que você cria/trata vão em `media/`. Use nomes novos em vez de sobrescrever (o site faz cache por 1 dia).
@@ -57,6 +58,8 @@ A rotina de segunda gera `data/pauta/semana-AAAA-MM-DD.json` (data = a segunda-f
 }
 ```
 
+Pedido com `"destino": "story"` vira post com `"destino": "story"` e `"tipo": "story"` (aparece na aba Stories, 1080x1920). Story é simples: só a imagem e pouco texto, sem legenda (`"legenda": ""`); pode ser uma tela ou uma sequência, e uma ou várias fotos compostas de forma criativa. Formatos do pedido de story: `claude`, `unico`, `sequencia`. Sem `destino` = feed.
+
 Use `"status": "rascunho"` para o que foi pedido e `"status": "ideia"` para sugestões extras (quando `maisIdeias` é true).
 
 ### Modelos de slide (`public/modelos.js`)
@@ -68,6 +71,9 @@ Use `"status": "rascunho"` para o que foi pedido e `"status": "ideia"` para suge
 | `info` | informativo em tópicos | selo, sobretitulo, titulo, destaque, itens[], texto, foto (topo) |
 | `aviso` | pôster / convite; itens como "Rótulo: valor" viram caixas | selo, sobretitulo, titulo, destaque, itens[], texto, foto |
 | `numero` | número grande em destaque (ex.: "265" corredores) | selo, sobretitulo, destaque (o número), titulo, texto, foto |
+| `story` | story com foto de fundo (só em posts de story) | selo, sobretitulo, titulo, destaque, texto, foto |
+| `storyColagem` | story com 1 a 3 fotos em moldura, inclinadas | selo, titulo, destaque, texto, foto, foto2, foto3 (posicao, posicao2, posicao3) |
+| `storyTexto` | story só texto (foto opcional bem apagada no fundo) | selo, sobretitulo, titulo, destaque, texto, foto |
 | `fechamento` | último slide com brasão | titulo (grito/agradecimento), texto, sobretitulo (padrão @cporsp_exercito), foto |
 
 Campos opcionais em qualquer slide: `posicao` (object-position da foto, ex. `"50% 20%"`), `rodape` (texto do canto inferior direito; vazio = numeração).

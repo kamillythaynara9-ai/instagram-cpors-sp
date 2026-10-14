@@ -17,29 +17,25 @@
       "sobretitulo": "14 de outubro",
       "titulo": "Visita do",
       "destaque": "General Carmona",
-      "texto": "O Comandante Militar do Sudeste de volta ao CPOR/SP.",
-      "foto": "media/pauta-2026-10-12/grupo.jpg"
+      "texto": "O Comandante Militar do Sudeste de volta ao CPOR/SP."
     },
     {
       "modelo": "foto",
       "selo": "Cobertura",
       "titulo": "Formatura",
-      "texto": "A tropa do CPOR/SP em forma para receber o Comandante Militar do Sudeste.",
-      "foto": "media/pci-infantaria/hd2-campo.jpg"
+      "texto": "A tropa do CPOR/SP em forma para receber o Comandante Militar do Sudeste."
     },
     {
       "modelo": "foto",
       "selo": "Cobertura",
       "titulo": "Desfile",
-      "texto": "Os alunos desfilaram em continência ao General.",
-      "foto": "media/pci-infantaria/hd2-marcha.jpg"
+      "texto": "Os alunos desfilaram em continência ao General."
     },
     {
       "modelo": "foto",
       "selo": "Cobertura",
       "titulo": "Visita às instalações",
-      "texto": "O General percorreu as dependências da Escola que já comandou.",
-      "foto": "media/pauta-2026-10-12/porta.jpg"
+      "texto": "O General percorreu as dependências da Escola que já comandou."
     },
     {
       "modelo": "fechamento",
@@ -50,5 +46,5 @@
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T15:30:00.000Z",
-  "atualizadoEm": "2026-10-09T15:30:00.000Z"
+  "atualizadoEm": "2026-10-14T13:40:00.000Z"
 }

@@ -25,9 +25,7 @@
       "sobretitulo": "A formação",
       "destaque": "10",
       "titulo": "meses de curso",
-      "texto": "De fevereiro ao fim do ano, os alunos conciliam a instrução militar com a faculdade.",
-      "foto": "media/pci-infantaria/hd2-campo.jpg",
-      "posicao": "70% 50%"
+      "texto": "De fevereiro ao fim do ano, os alunos conciliam a instrução militar com a faculdade."
     },
     {
       "modelo": "info",
@@ -62,5 +60,5 @@
   },
   "ajustes": [],
   "criadoEm": "2026-10-08T22:23:46.000Z",
-  "atualizadoEm": "2026-10-08T22:23:46.000Z"
+  "atualizadoEm": "2026-10-14T13:40:00.000Z"
 }

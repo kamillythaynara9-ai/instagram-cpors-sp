@@ -201,3 +201,18 @@ textarea{resize:vertical;min-height:80px}
 .padrao h2{font-size:15px;font-family:Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro2);margin:0 0 8px}
 .padrao ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--fg)}
 .sub{font-size:18px;margin:26px 0 10px}
+
+/* stories (9:16) */
+.escala.story{aspect-ratio:9/16}
+.grade-feed.stories{grid-template-columns:repeat(4,1fr)}
+@media (max-width:640px){.grade-feed.stories{grid-template-columns:repeat(3,1fr)}}
+.visor.story{max-width:min(400px,calc((100vh - 140px)*.5625))}
+.abas-feed{display:flex;border-top:1px solid var(--linha2);margin-top:8px}
+.abas-feed button{flex:1;background:none;border:0;border-top:2px solid transparent;margin-top:-1px;padding:12px 0;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--mut)}
+.abas-feed button.on{border-top-color:var(--ouro);color:var(--ouro2)}
+.destino{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.destino button{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;padding:14px 16px;border:1px solid var(--linha2);border-radius:10px;background:var(--card);color:var(--fg);cursor:pointer}
+.destino button b{font-size:16px}
+.destino button small{color:var(--mut);font-size:12px}
+.destino button.on{border-color:var(--ouro);background:rgba(200,162,75,.1)}
+.destino button.on b{color:var(--ouro2)}

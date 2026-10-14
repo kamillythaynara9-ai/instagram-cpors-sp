@@ -8,7 +8,8 @@
         "Foco em carrosséis e pôsteres informativos, com design e conteúdo profissionais.",
         "Não criar posts de \"dia de algo\" por conta própria; datas só quando vocês marcam no calendário.",
         "Eventos rendem mais de um post: aviso antes, post do dia e cobertura depois.",
-        "Sem vídeos por enquanto: o trabalho é post de feed.",
+        "Sem vídeos por enquanto: o trabalho é post de feed e story.",
+        "Story é separado do feed (escolhido no topo do pedido): imagem vertical, simples, sem legenda; só a imagem e talvez algum texto, ou uma ou mais fotos compostas de forma criativa.",
         "Da pauta, vocês escolheram história do CPOR/SP (FEB) e \"como entrar\": são os temas que funcionam e puxam as próximas pautas. Ideia sem resposta continua em aberto, não conta como descartada.",
         "Visita de autoridade: aviso antes, trajetória da pessoa, homenagem e post do dia, cobertura e agradecimento depois; sempre prestigiar o visitante."
       ]
@@ -28,6 +29,7 @@
     {
       "titulo": "Fotos",
       "itens": [
+        "Só usar fotos e vídeos enviados no próprio pedido. Os vídeos mandados no chat como referência são só para entender o estilo: nunca usar quadros deles.",
         "Todo quadro tirado de vídeo tem a qualidade melhorada sem mudar o conteúdo (resolução, ruído, nitidez; só clareia se estiver escuro).",
         "Sempre usar foto real do CPOR/SP; cortar a marca d'água (brasão pequeno) que vem nos reels.",
         "Foto de autoridade na capa não precisa ser do rosto: pode ser em tropa ou em visita anterior ao CPOR/SP."
@@ -64,6 +66,6 @@
       ]
     }
   ],
-  "atualizadoEm": "2026-10-14T12:55:00.000Z",
+  "atualizadoEm": "2026-10-14T13:40:00.000Z",
   "criadoEm": "2026-10-08T23:23:45.000Z"
 }

@@ -16,36 +16,31 @@
       "selo": "Como entrar",
       "sobretitulo": "O caminho até o CPOR/SP",
       "titulo": "Do alistamento",
-      "destaque": "ao Aspirantado",
-      "foto": "media/pauta-2026-10-12/morro.jpg"
+      "destaque": "ao Aspirantado"
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "01 · Alistamento",
-      "texto": "Aos 18 anos. Quem faz faculdade manifesta interesse no CPOR e passa pela seleção.",
-      "foto": "media/pauta-2026-10-12/porta.jpg"
+      "texto": "Aos 18 anos. Quem faz faculdade manifesta interesse no CPOR e passa pela seleção."
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "02 · Incorporação",
-      "texto": "Em fevereiro. As duas primeiras semanas são de adaptação, em regime integral.",
-      "foto": "media/pauta-2026-10-12/soldado.jpg"
+      "texto": "Em fevereiro. As duas primeiras semanas são de adaptação, em regime integral."
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "03 · Período Básico",
-      "texto": "Cerca de 4 meses de formação básica do combatente, igual para todos.",
-      "foto": "media/pauta-2026-10-12/metralhadora.jpg"
+      "texto": "Cerca de 4 meses de formação básica do combatente, igual para todos."
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "04 · Qualificação",
-      "texto": "Cerca de 5 a 6 meses na sua arma, quadro ou serviço, com exercícios no terreno.",
-      "foto": "media/pauta-2026-10-12/grupo.jpg"
+      "texto": "Cerca de 5 a 6 meses na sua arma, quadro ou serviço, com exercícios no terreno."
     },
     {
       "modelo": "fechamento",
@@ -56,5 +51,5 @@
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T02:01:29.000Z",
-  "atualizadoEm": "2026-10-09T02:01:29.000Z"
+  "atualizadoEm": "2026-10-14T13:40:00.000Z"
 }

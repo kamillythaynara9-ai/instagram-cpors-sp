@@ -1,7 +1,7 @@
 // Modelos de slide do CPOR/SP (1080 x 1350, formato 4:5 do feed).
 // Cada slide é um objeto JSON; o mesmo modelo serve para a prévia, a edição e o download.
 (function () {
-  const W = 1080, H = 1350;
+  const W = 1080, H = 1350, HS = 1920; // feed 4:5 · story 9:16
 
   const MODELOS = {
     capa:       { nome: 'Capa com foto',        campos: ['selo', 'sobretitulo', 'titulo', 'destaque', 'texto', 'foto'] },
@@ -10,7 +10,12 @@
     aviso:      { nome: 'Pôster / aviso',       campos: ['selo', 'sobretitulo', 'titulo', 'destaque', 'itens', 'texto', 'foto'] },
     numero:     { nome: 'Número em destaque',   campos: ['selo', 'sobretitulo', 'destaque', 'titulo', 'texto', 'foto'] },
     fechamento: { nome: 'Fechamento',           campos: ['titulo', 'texto', 'sobretitulo', 'foto'] },
+    // stories (1080 x 1920). O topo e a base ficam livres para a interface do Instagram.
+    story:        { nome: 'Story com foto',      story: true, campos: ['selo', 'sobretitulo', 'titulo', 'destaque', 'texto', 'foto'] },
+    storyColagem: { nome: 'Story colagem (até 3 fotos)', story: true, campos: ['selo', 'titulo', 'destaque', 'texto', 'foto', 'foto2', 'foto3'] },
+    storyTexto:   { nome: 'Story só texto',      story: true, campos: ['selo', 'sobretitulo', 'titulo', 'destaque', 'texto', 'foto'] },
   };
+  const ehStory = (s) => !!(MODELOS[s?.modelo] || {}).story;
 
   const CAMPOS = {
     selo: 'Selo (canto superior)',
@@ -20,6 +25,8 @@
     texto: 'Texto',
     itens: 'Tópicos (um por linha; no pôster use "Rótulo: valor")',
     foto: 'Foto',
+    foto2: 'Foto 2',
+    foto3: 'Foto 3',
   };
 
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -34,6 +41,8 @@
 
   let srcDe = (p) => p;
 
+  const quadro = (f, pos, css) => f ? `<div class="sl-quadro" style="${css}"><img src="${esc(srcDe(f))}" style="object-position:${esc(pos || '50% 50%')}" alt=""></div>` : '';
+  const assinatura = () => `<div class="sl-assina">CPOR/SP · ESCOLA DE LÍDERES</div>`;
   const foto = (s, extra = '') => s.foto ? `<img class="sl-foto" src="${esc(srcDe(s.foto))}" style="object-position:${esc(s.posicao || '50% 50%')};${extra}" alt="">` : '';
   const selo = (s) => s.selo ? `<div class="sl-selo">${esc(s.selo)}</div>` : '';
   const brasao = () => `<img class="sl-brasao" src="/assets/brasao.png" alt="">`;
@@ -124,14 +133,56 @@
     },
   };
 
+  // ---- stories ----
+  Object.assign(R, {
+    story(s) {
+      return `${foto(s)}
+      <div class="sl-cobre" style="background:linear-gradient(180deg,rgba(13,17,11,.6) 0%,rgba(13,17,11,0) 20%,rgba(13,17,11,0) 45%,rgba(13,17,11,.85) 72%,#0d110b 100%)"></div>
+      <div class="sl-cordao" style="top:1080px"></div>
+      ${selo(s)}${brasao()}
+      <div class="sl-bloco" style="left:80px;right:80px;bottom:330px;align-items:flex-start;text-align:left;gap:14px">
+        ${sobre(s)}${titulo(s, 150, 64)}${destaque(s, 132, 56)}${s.texto ? `<div class="sl-linha"></div>` : ''}${texto(s)}
+      </div>${assinatura()}`;
+    },
+    storyColagem(s) {
+      const fs = [[s.foto, s.posicao], [s.foto2, s.posicao2], [s.foto3, s.posicao3]].filter(([f]) => f);
+      const pos = {
+        1: ['left:110px;top:400px;width:860px;height:900px;transform:rotate(-2deg)'],
+        2: ['left:90px;top:400px;width:620px;height:600px;transform:rotate(-4deg)', 'left:370px;top:800px;width:620px;height:560px;transform:rotate(3deg)'],
+        3: ['left:80px;top:400px;width:560px;height:480px;transform:rotate(-5deg)', 'left:440px;top:640px;width:560px;height:460px;transform:rotate(4deg)', 'left:120px;top:930px;width:560px;height:420px;transform:rotate(-2deg)'],
+      }[fs.length] || [];
+      return `<div class="sl-cordao" style="top:520px;opacity:.3"></div><div class="sl-cordao" style="top:1300px;opacity:.22"></div>
+      ${fs.map(([f, p], k) => quadro(f, p, pos[k])).join('')}
+      ${selo(s)}${brasao()}
+      <div class="sl-bloco" style="left:80px;right:80px;bottom:330px;align-items:center;text-align:center;gap:12px">
+        ${titulo(s, 120, 56)}${destaque(s, 104, 48)}${texto(s)}
+      </div>${assinatura()}`;
+    },
+    storyTexto(s) {
+      return `${foto(s, 'opacity:.3')}
+      <div class="sl-cobre" style="background:radial-gradient(ellipse at 50% 50%,rgba(13,17,11,.35) 0%,rgba(13,17,11,.92) 80%)"></div>
+      <div class="sl-cordao" style="top:760px"></div>
+      ${selo(s)}${brasao()}
+      <div class="sl-bloco" style="left:90px;right:90px;top:330px;bottom:330px;align-items:center;justify-content:center;text-align:center;gap:24px">
+        ${sobre(s)}${titulo(s, 160, 64)}${destaque(s, 140, 56)}${s.texto ? `<div class="sl-linha"></div>` : ''}${texto(s)}
+      </div>${assinatura()}`;
+    },
+  });
+
   function render(s, i = 0, t = 1) {
     const m = R[s.modelo] ? s.modelo : 'foto';
-    return `<div class="sl sl-m-${m}">${R[m](s || {}, i, t)}</div>`;
+    return `<div class="sl sl-m-${m}${ehStory(s) ? ' sl-story' : ''}">${R[m](s || {}, i, t)}</div>`;
   }
 
   const css = `
   .sl{width:${W}px;height:${H}px;position:relative;overflow:hidden;background:#0d110b;font-family:Montserrat,Arial,sans-serif;color:#E6E0D0;text-align:left;line-height:1.2}
   .sl *{box-sizing:border-box}
+  .sl.sl-story{height:${HS}px}
+  .sl-story .sl-selo{top:250px}
+  .sl-story .sl-brasao{top:236px}
+  .sl-quadro{position:absolute;border:10px solid #E6E0D0;box-shadow:0 0 0 2px #C8A24B,0 24px 60px rgba(0,0,0,.7);background:#0d110b;overflow:hidden}
+  .sl-quadro img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
+  .sl-assina{position:absolute;left:0;right:0;bottom:250px;text-align:center;font-weight:400;font-size:24px;letter-spacing:7px;color:rgba(230,224,208,.8)}
   .sl-foto{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block;max-width:none}
   .sl-cobre{position:absolute;inset:0}
   .sl-cordao{position:absolute;left:-180px;width:1500px;height:60px;border-radius:40px;background:linear-gradient(90deg,rgba(122,92,30,0) 0%,#C8A24B 30%,#F1D58A 50%,#C8A24B 70%,rgba(122,92,30,0) 100%);transform:rotate(-7deg);filter:blur(26px);opacity:.42}
@@ -166,5 +217,5 @@
   st.textContent = css;
   document.head.appendChild(st);
 
-  window.Modelos = { MODELOS, CAMPOS, render, W, H, usarFonte(fn) { srcDe = fn; } };
+  window.Modelos = { MODELOS, CAMPOS, render, W, H, HS, ehStory, altura: (s) => (ehStory(s) ? HS : H), usarFonte(fn) { srcDe = fn; } };
 })();

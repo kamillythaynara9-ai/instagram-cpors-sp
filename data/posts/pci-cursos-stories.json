@@ -1,0 +1,46 @@
+{
+  "id": "pci-cursos-stories",
+  "destino": "story",
+  "titulo": "PCIs: stories",
+  "tipo": "story",
+  "status": "ideia",
+  "ordem": 17,
+  "data": "2026-10-13",
+  "origem": {
+    "tipo": "pedido",
+    "id": "conhecimento-que-ultrapassa-a-sala-de-au-mv82nk6z"
+  },
+  "legenda": "",
+  "slides": [
+    {
+      "modelo": "storyColagem",
+      "selo": "PCI · Cursos",
+      "titulo": "Além da\nsala de aula",
+      "foto": "media/pci-cursos-2026/01-obuseiro.jpg",
+      "posicao": "40% 50%",
+      "foto2": "media/pci-cursos-2026/02-pe-escudos.jpg",
+      "foto3": "media/pci-cursos-2026/07-simulador-1.jpg",
+      "posicao3": "80% 50%"
+    },
+    {
+      "modelo": "story",
+      "selo": "PCI · Cursos",
+      "sobretitulo": "5 cursos · 3 estados",
+      "titulo": "6 Organizações",
+      "destaque": "Militares",
+      "foto": "media/pci-cursos-2026/03-brigada-amv.jpg",
+      "posicao": "12% 50%"
+    },
+    {
+      "modelo": "storyTexto",
+      "selo": "PCI · Cursos",
+      "titulo": "Teoria",
+      "destaque": "na prática",
+      "texto": "Veja o post completo no feed",
+      "foto": "media/pci-cursos-2026/04-eipot.jpg"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-14T13:20:00.000Z",
+  "atualizadoEm": "2026-10-14T13:20:00.000Z"
+}
