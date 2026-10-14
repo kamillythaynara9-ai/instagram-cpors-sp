@@ -24,7 +24,7 @@
         "Texto de apoio em off-white quente (#E6E0D0).",
         "Nada de símbolos militares desenhados à mão: só fotos reais ou o brasão.",
         "Fotos internas do carrossel com legenda fina e pino (estilo dos posts de PCI): aprovado e postado. Cobertura = capa + uma foto por slide, com pouco texto: básico, mas criativo.",
-        "Pôster sem foto fica fraco: usar foto real de fundo, bem visível (mesmo que de outra atividade do CPOR/SP). Exceção: capa de carrossel pode ser sem foto quando a ideia é criativa (ex.: número grande em destaque).",
+        "Pôster sem foto fica fraco: usar foto real de fundo, bem visível. Exceção: capa de carrossel pode ser sem foto quando a ideia é criativa (ex.: número grande em destaque).",
         "Story em colagem de 3 fotos com moldura: aprovado (\"ficou muito bom\"). O texto da tela ainda pode melhorar: frase curta e concreta, não genérica."
       ]
     },
@@ -32,6 +32,7 @@
       "titulo": "Fotos",
       "itens": [
         "Só usar fotos e vídeos que vocês mandam pelo site: os do pedido, os anexados num ajuste e os do Acervo (sempre olhar o Acervo antes de fazer arte sem foto). Os vídeos mandados no chat como referência são só para entender o estilo: nunca usar quadros deles.",
+        "Post de evento (formatura, visita, PCI, cobertura) só leva fotos daquele evento. Nunca usar foto de outro evento num evento novo. Fotos do Acervo só entram em posts informativos ou gerais (como entrar, história, rotina, armas) e nos de evento só se forem do mesmo evento. Sem foto do evento: arte sem foto e avisar que falta.",
         "Todo quadro tirado de vídeo tem a qualidade melhorada sem mudar o conteúdo (resolução, ruído, nitidez; só clareia se estiver escuro).",
         "Sempre usar foto real do CPOR/SP; cortar a marca d'água (brasão pequeno) que vem nos reels.",
         "Foto de autoridade na capa não precisa ser do rosto: pode ser em tropa ou em visita anterior ao CPOR/SP."
@@ -68,6 +69,6 @@
       ]
     }
   ],
-  "atualizadoEm": "2026-10-14T13:05:43.957840+00:00",
+  "atualizadoEm": "2026-10-14T13:12:03.452588+00:00",
   "criadoEm": "2026-10-08T23:23:45.000Z"
 }

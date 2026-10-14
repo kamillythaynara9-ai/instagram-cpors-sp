@@ -601,9 +601,8 @@
     const lotes = [...S.acervo].sort((a, b) => String(b.criadoEm).localeCompare(String(a.criadoEm)));
     const cont = (k) => lotes.filter((l) => l.tema === k).reduce((n, l) => n + (l.fotos || []).length, 0);
     const vis = S.temaAcervo === 'todos' ? lotes : lotes.filter((l) => l.tema === S.temaAcervo);
-    const semFoto = S.posts.filter((p) => p.status !== 'postado' && !(p.slides || []).some((x) => x.foto || x.foto2 || x.foto3)).length;
     $('#view').innerHTML = `
-      <div class="cabeca"><span class="rot">Acervo</span><h1>Fotos para usar nos posts</h1><p>Suba as fotos uma vez, separadas por tema, e conte rapidamente o que são. O Claude passa a usar essas fotos em qualquer post e já coloca nos rascunhos que estão sem foto${semFoto ? ` (hoje são ${semFoto})` : ''}.</p></div>
+      <div class="cabeca"><span class="rot">Acervo</span><h1>Fotos para usar nos posts</h1><p>Suba as fotos uma vez, separadas por tema, e conte rapidamente o que são. O Claude usa essas fotos em posts informativos e gerais (como entrar, história, rotina, armas). Em post de evento, só entram fotos daquele mesmo evento.</p></div>
       <form class="form cartao" id="fAcv">
         <div class="grade2">
           <label class="campo"><span>O que são</span><input type="text" name="titulo" required placeholder="Ex.: Formatura de 2025, entrega das espadas"></label>
@@ -612,7 +611,7 @@
         <label class="campo" id="cOutro" hidden><span>Do que se trata</span><input type="text" name="temaOutro" placeholder="Ex.: Desfile de 7 de setembro, Banda de música"></label>
         <label class="campo"><span>Detalhes <em>(opcional: quando, onde, quem aparece, de qual OM)</em></span><textarea name="descricao" rows="2"></textarea></label>
         <div class="campo"><span>Fotos</span><div id="selAcv"></div></div>
-        <label class="check"><input type="checkbox" name="usar" checked><span><b>Usar nos rascunhos sem foto</b><br><span class="dica">O Claude coloca estas fotos nos posts que combinam com elas.</span></span></label>
+        <label class="check"><input type="checkbox" name="usar" checked><span><b>Usar nos rascunhos sem foto</b><br><span class="dica">O Claude coloca estas fotos nos posts que combinam com elas, nunca em evento diferente do das fotos.</span></span></label>
         <div class="acoes"><button class="bt pri" id="bAcv">Salvar no acervo</button><span class="dica" id="acvMsg"></span></div>
       </form>
       <label class="campo filtro-acv"><span>Mostrar</span><select id="selTema">${[['todos', `Todos · ${lotes.reduce((n, l) => n + (l.fotos || []).length, 0)} fotos`], ...Object.entries(TEMAS).map(([k, n]) => [k, `${n} · ${cont(k)}`])].map(([k, n]) => `<option value="${k}" ${S.temaAcervo === k ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
