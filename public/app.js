@@ -24,8 +24,8 @@
   const ehStoryPost = (p) => p?.destino === 'story';
   const nomeFormato = (p) => (ehStoryPost(p) ? FORMATOS_STORY : FORMATOS)[p.formato] || p.formato;
 
-  const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao'];
-  const S = { posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
+  const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao', 'acervo'];
+  const S = { acervo: [], temaAcervo: 'todos', comIdeias: false, pronto: null, posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
 
   // ---------------- API ----------------
   async function chamar(url, opts = {}) {
@@ -48,8 +48,8 @@
 
   async function carregar(silencioso) {
     try {
-      const [posts, pedidos, eventos, pauta, ensinamentos, padrao] = await Promise.all(COLS.map(api.listar));
-      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao }); S.carregado = true;
+      const [posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo] = await Promise.all(COLS.map(api.listar));
+      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo }); S.carregado = true;
       if (!S.editando) rota();
       S.erro = null;
     } catch (e) {
@@ -77,7 +77,7 @@
     const v = (location.hash || '#feed').slice(1);
     $$('#abas a').forEach((a) => a.classList.toggle('on', a.dataset.v === v));
     if (!S.carregado) { $('#view').innerHTML = '<div class="carregando">Carregando…</div>'; return; }
-    ({ feed: telaFeed, pedido: telaPedido, pauta: telaPauta, calendario: telaCalendario, pedidos: telaPedidos, padrao: telaPadrao }[v] || telaFeed)();
+    ({ feed: telaFeed, pedido: telaPedido, pauta: telaPauta, calendario: telaCalendario, pedidos: telaPedidos, padrao: telaPadrao, acervo: telaAcervo }[v] || telaFeed)();
     if (S.erro) $('#view').insertAdjacentHTML('afterbegin', `<div class="aviso-erro"><b>O site não conseguiu falar com o GitHub.</b> ${esc(S.erro)}<br><span class="dica">Abra <a href="/api/status" target="_blank">/api/status</a> para ver o diagnóstico.</span></div>`);
     ajustarEscalas();
   }
@@ -100,6 +100,7 @@
   const ordenados = () => [...S.posts].sort((a, b) => (b.ordem ?? 0) - (a.ordem ?? 0) || String(b.criadoEm).localeCompare(String(a.criadoEm)));
 
   function telaFeed() {
+    if (S.aba === 'previa') return telaPrevia();
     const doFeed = S.posts.filter((p) => !ehStoryPost(p)), stories = S.posts.filter(ehStoryPost);
     const daAba = S.aba === 'story' ? stories : doFeed;
     const todos = ordenados().filter((p) => ehStoryPost(p) === (S.aba === 'story'));
@@ -116,7 +117,7 @@
           <div class="bio"><b>CPOR/SP · Escola de Líderes</b><br>Centro de Preparação de Oficiais da Reserva de São Paulo</div>
         </div>
       </section>
-      <div class="abas-feed"><button data-aba="feed" class="${S.aba === 'feed' ? 'on' : ''}">Feed · ${doFeed.length}</button><button data-aba="story" class="${S.aba === 'story' ? 'on' : ''}">Stories · ${stories.length}</button></div>
+      <div class="abas-feed"><button data-aba="feed" class="${S.aba === 'feed' ? 'on' : ''}">Feed · ${doFeed.length}</button><button data-aba="story" class="${S.aba === 'story' ? 'on' : ''}">Stories · ${stories.length}</button><button data-aba="previa">Prévia</button></div>
       <div class="filtros">${[['todos', 'Todos'], ...Object.entries(ST_POST)].map(([k, n]) => `<button data-f="${k}" class="${S.filtro === k ? 'on' : ''}">${n}${k !== 'todos' ? ` · ${cont(k)}` : ''}</button>`).join('')}</div>
       ${lista.length ? `<div class="grade-feed${S.aba === 'story' ? ' stories' : ''}">${lista.map((p) => `
         <button class="cel" data-id="${esc(p.id)}" aria-label="${esc(p.titulo)}">
@@ -130,6 +131,46 @@
     $$('.abas-feed button').forEach((b) => (b.onclick = () => { S.aba = b.dataset.aba; S.filtro = 'todos'; telaFeed(); ajustarEscalas(); }));
     $$('.filtros button').forEach((b) => (b.onclick = () => { S.filtro = b.dataset.f; telaFeed(); ajustarEscalas(); }));
     $$('.cel').forEach((c) => (c.onclick = () => abrirPost(c.dataset.id)));
+  }
+
+  // ---------------- PRÉVIA DO PERFIL ----------------
+  // Como o perfil vai ficar: próximos posts por cima dos já publicados, no recorte 3:4 da grade do Instagram.
+  function telaPrevia() {
+    const feed = ordenados().filter((p) => !ehStoryPost(p));
+    const proximos = feed.filter((p) => ['aprovado', 'rascunho', 'ajuste', ...(S.comIdeias ? ['ideia'] : [])].includes(p.status));
+    const postados = feed.filter((p) => p.status === 'postado');
+    // prints dos posts que já estão no Instagram: o último envio em uploads/perfil/<carimbo>/
+    const prints = (S.arquivos || []).filter((f) => /^uploads\/perfil\/\d+\//.test(f));
+    const ult = prints.map((f) => +f.split('/')[2]).reduce((m, x) => Math.max(m, x), 0);
+    const daVez = prints.filter((f) => +f.split('/')[2] === ult).sort();
+    const cel = (p, tag) => `<button class="cel pv" data-id="${esc(p.id)}" aria-label="${esc(p.titulo)}"><div class="pv-in">${slideBox(p.slides?.[0], 0, p.slides?.length || 1)}</div>${tag ? `<span class="pv-tag">${tag}</span>` : ''}</button>`;
+    $('#view').innerHTML = `
+      <div class="abas-feed"><button data-aba="feed">Feed</button><button data-aba="story">Stories</button><button data-aba="previa" class="on">Prévia</button></div>
+      <div class="pv-topo">
+        <p class="dica">Os próximos posts aparecem em cima dos que já foram publicados, no recorte da grade do Instagram (3:4). Para mudar a ordem, abra o post e use "Mover no feed".</p>
+        <div class="acoes"><label class="check"><input type="checkbox" id="pvIdeias" ${S.comIdeias ? 'checked' : ''}><span>Mostrar ideias</span></label>
+        <label class="bt mini">${daVez.length ? 'Atualizar' : 'Enviar'} posts já publicados<input type="file" id="pvUp" accept="image/*" multiple hidden></label></div>
+        <span class="dica" id="pvMsg">${S.arquivos === null ? 'Carregando os posts publicados…' : daVez.length ? '' : 'Envie as imagens dos últimos posts do perfil, do mais recente para o mais antigo, para ver tudo junto.'}</span>
+      </div>
+      <div class="pv-celular"><div class="pv-cab"><img src="/assets/brasao.png" alt=""><b>cporsp_exercito</b></div>
+        <div class="grade-feed pv-grade">
+          ${proximos.map((p) => cel(p, p.status === 'aprovado' ? 'próximo' : ST_POST[p.status])).join('')}
+          ${postados.map((p) => cel(p, '')).join('')}
+          ${daVez.map((f) => `<div class="cel pv"><img class="pv-print" src="${esc(src(f))}" loading="lazy" alt=""></div>`).join('')}
+        </div>
+        ${proximos.length + postados.length + daVez.length ? '' : '<div class="vazio">Nada para mostrar ainda.</div>'}
+      </div>`;
+    $$('.abas-feed button').forEach((b) => (b.onclick = () => { S.aba = b.dataset.aba; S.filtro = 'todos'; telaFeed(); ajustarEscalas(); }));
+    $$('.cel[data-id]').forEach((c) => (c.onclick = () => abrirPost(c.dataset.id)));
+    $('#pvIdeias').onchange = (e) => { S.comIdeias = e.target.checked; telaPrevia(); ajustarEscalas(); };
+    $('#pvUp').onchange = async (e) => {
+      const fs = [...e.target.files]; if (!fs.length) return;
+      $('#pvMsg').textContent = 'Enviando…';
+      try { await enviarArquivos(fs, `uploads/perfil/${Date.now()}`); S.arquivos = null; await carregarArquivos(); toast('Posts publicados atualizados.'); }
+      catch (er) { toast('Erro no envio: ' + er.message, 6000); }
+      if (S.aba === 'previa' && (location.hash || '#feed') === '#feed') { telaPrevia(); ajustarEscalas(); }
+    };
+    if (S.arquivos === null) carregarArquivos().then(() => { if (S.aba === 'previa' && !S.aberto && ['#feed', ''].includes(location.hash)) { telaPrevia(); ajustarEscalas(); } });
   }
 
   // ---------------- MODAL DO POST ----------------
@@ -171,7 +212,8 @@
     $('#mcorpo').innerHTML = `
       <div class="acoes"><span class="st st-${p.status}">${ST_POST[p.status] || p.status}</span>${orig ? `<span class="dica">Origem: ${esc(orig)}</span>` : ''}</div>
       <div class="acoes">
-        <button class="bt pri" id="bBaixar">Baixar ${p.slides.length > 1 ? 'tudo (.zip)' : 'imagem'}</button>
+        <button class="bt pri" id="bPronto">Pronto para postar</button>
+        <button class="bt" id="bBaixar">Baixar ${p.slides.length > 1 ? 'tudo (.zip)' : 'imagem'}</button>
         ${p.slides.length > 1 ? `<button class="bt" id="bBaixar1">Baixar este slide</button>` : ''}
         <button class="bt" id="bEditar">Editar</button>
       </div>
@@ -188,12 +230,14 @@
       <div class="secao"><div class="rot">Pedir ajuste ao Claude</div>
         <textarea id="tAjuste" placeholder="Ex.: no slide ${S.idx + 1}, troque a foto por uma da tropa em forma e deixe o título mais curto."></textarea>
         <label class="check"><input type="checkbox" id="cSlide" checked><span>É sobre o slide ${S.idx + 1}</span></label>
-        <div><button class="bt" id="bAjuste">Enviar pedido de ajuste</button></div>
-        ${(p.ajustes || []).length ? `<div class="lista">${p.ajustes.slice().reverse().map((a) => `<div class="ajuste ${a.feito ? 'feito' : ''}">${a.slide ? `<b>Slide ${a.slide}:</b> ` : ''}${esc(a.texto)}<small>${fmtHora(a.quando)} · ${a.feito ? 'feito' + (a.resposta ? ` · ${esc(a.resposta)}` : '') : 'aguardando Claude'}</small></div>`).join('')}</div>` : ''}
+        <div id="selAjuste"></div>
+        <div class="acoes"><button class="bt" id="bAjuste">Enviar pedido de ajuste</button><span class="dica" id="ajMsg"></span></div>
+        ${(p.ajustes || []).length ? `<div class="lista">${p.ajustes.slice().reverse().map((a) => `<div class="ajuste ${a.feito ? 'feito' : ''}">${a.slide ? `<b>Slide ${a.slide}:</b> ` : ''}${esc(a.texto)}${(a.fotos || []).length ? `<span class="ajuste-fotos">${a.fotos.map((f) => `<a href="${esc(src(f))}" target="_blank"><img src="${esc(src(f))}" loading="lazy" alt=""></a>`).join('')}</span>` : ''}<small>${fmtHora(a.quando)} · ${a.feito ? 'feito' + (a.resposta ? ` · ${esc(a.resposta)}` : '') : 'aguardando Claude'}</small></div>`).join('')}</div>` : ''}
       </div>
       <div class="secao"><div class="acoes"><button class="bt mini" id="bDuplicar">Duplicar</button><button class="bt mini perigo" id="bApagar">Excluir post</button></div></div>`;
 
     $('#bEditar').onclick = () => { S.editando = true; desenharModal(); };
+    $('#bPronto').onclick = () => prontoParaPostar(p);
     $('#bBaixar').onclick = (ev) => baixar(p, null, ev.currentTarget);
     if ($('#bBaixar1')) $('#bBaixar1').onclick = (ev) => baixar(p, S.idx, ev.currentTarget);
     if ($('#bCopiar')) $('#bCopiar').onclick = () => copiar(p.legenda);
@@ -201,10 +245,16 @@
     $('#vData').onchange = async (e) => { p.data = e.target.value || null; await salvarAberto('data'); };
     $('#bEsq').onclick = () => mover(-1);
     $('#bDir').onclick = () => mover(1);
-    $('#bAjuste').onclick = async () => {
+    const sAj = seletor($('#selAjuste'), 'image/*', 'Anexar fotos (opcional)');
+    $('#bAjuste').onclick = async (ev) => {
       const txt = $('#tAjuste').value.trim(); if (!txt) return toast('Escreva o que quer mudar.');
+      const b = ev.currentTarget; b.disabled = true;
+      let fotos = [];
+      try { if (sAj.files.length) { $('#ajMsg').textContent = 'Enviando fotos…'; fotos = await enviarArquivos(sAj.files, `uploads/ajustes/${p.id}-${Date.now().toString(36)}`, sAj.progresso); } }
+      catch (e) { $('#ajMsg').textContent = ''; b.disabled = false; return toast('Erro no envio: ' + e.message, 6000); }
       p.ajustes = p.ajustes || [];
-      p.ajustes.push({ quando: new Date().toISOString(), texto: txt, slide: $('#cSlide').checked ? S.idx + 1 : null, feito: false });
+      p.ajustes.push({ quando: new Date().toISOString(), texto: txt, slide: $('#cSlide').checked ? S.idx + 1 : null, ...(fotos.length ? { fotos } : {}), feito: false });
+      if (fotos.length) { p.fotosExtras = [...(p.fotosExtras || []), ...fotos]; S.arquivos = null; }
       p.status = 'ajuste';
       await salvarAberto('pedido de ajuste', 'Ajuste enviado. O Claude já foi avisado.');
       corpoVer();
@@ -332,7 +382,9 @@
     (p.fotosExtras || []).forEach((f) => set.add(f));
     const o = p.origem && (p.origem.tipo === 'evento' ? S.eventos : S.pedidos).find((x) => x.id === p.origem.id);
     (o?.fotos || []).forEach((f) => set.add(f));
-    (S.arquivos || []).forEach((f) => set.add(f));
+    (p.ajustes || []).forEach((a) => (a.fotos || []).forEach((f) => set.add(f)));
+    S.acervo.forEach((l) => (l.fotos || []).forEach((f) => set.add(f)));
+    (S.arquivos || []).filter((f) => !/^uploads\/perfil\//.test(f)).forEach((f) => set.add(f));
     return [...set];
   }
 
@@ -343,7 +395,7 @@
     const node = palco.firstElementChild;
     await Promise.all($$('img', node).map((im) => im.complete ? 0 : new Promise((ok) => { im.onload = im.onerror = ok; })));
     await document.fonts.ready;
-    const opts = { width: 1080, height: Modelos.altura(p.slides[i]), pixelRatio: 1, quality: 0.95, backgroundColor: '#0d110b' };
+    const opts = { width: 1080, height: Modelos.altura(p.slides[i]), pixelRatio: 1, quality: 0.95, backgroundColor: '#0d110b', includeQueryParams: true }; // as fotos vêm de /api/arquivo?p=…: sem isso todas viram a mesma imagem
     await htmlToImage.toJpeg(node, opts); // 1ª passada carrega fontes e imagens no Safari
     return htmlToImage.toBlob(node, { ...opts, type: 'image/jpeg' });
   }
@@ -367,6 +419,44 @@
       }
     } catch (e) { toast('Erro ao gerar a imagem: ' + e.message, 6000); }
     $('#palco').innerHTML = ''; btn.textContent = txt; btn.disabled = false;
+  }
+
+  // ---------------- PRONTO PARA POSTAR ----------------
+  // Gera as imagens na ordem; no celular abre o Instagram pelo menu de compartilhar, no computador baixa uma por uma.
+  async function prontoParaPostar(p) {
+    const c = $('#mcorpo'), t = p.slides.length, nome = slug(p.titulo), story = ehStoryPost(p);
+    c.innerHTML = `<div class="pronto"><div class="rot">Pronto para postar</div><p class="dica" id="prMsg">Gerando as imagens…</p></div>`;
+    const arqs = [];
+    try {
+      for (let i = 0; i < t; i++) {
+        $('#prMsg').textContent = `Gerando ${i + 1} de ${t}…`;
+        const blob = await imagemDoSlide(p, i);
+        arqs.push(new File([blob], `${nome}${t > 1 ? '-' + pad(i + 1) : ''}.jpg`, { type: 'image/jpeg' }));
+      }
+    } catch (e) { $('#palco').innerHTML = ''; toast('Erro ao gerar: ' + e.message, 6000); return corpoVer(); }
+    $('#palco').innerHTML = '';
+    const urls = arqs.map((f) => URL.createObjectURL(f));
+    const podeCompartilhar = !!(navigator.canShare && navigator.canShare({ files: arqs }));
+    const passos = [];
+    if (p.legenda) passos.push(`<div class="passo"><b>Copie a legenda</b><span class="dica">Ela fica guardada para você colar no Instagram.</span><div><button class="bt mini" id="prLeg">Copiar legenda</button></div></div>`);
+    passos.push(podeCompartilhar
+      ? `<div class="passo"><b>Abra no Instagram</b><span class="dica">Toque, escolha Instagram e depois ${story ? '"Story"' : '"Feed"'}. As imagens já vão na ordem.</span><div><button class="bt pri" id="prShare">Enviar ${t > 1 ? `as ${t} imagens` : 'a imagem'}</button></div></div>`
+      : `<div class="passo"><b>Baixe as imagens</b><span class="dica">Os arquivos saem numerados na ordem certa. Dá para arrastar cada miniatura também.</span><div class="acoes"><button class="bt pri" id="prBaixar">Baixar ${t > 1 ? `as ${t} imagens` : 'a imagem'}</button>${t > 1 ? '<button class="bt mini" id="prZip">Baixar .zip</button>' : ''}</div></div>`);
+    if (p.status !== 'postado') passos.push(`<div class="passo"><b>Depois de publicar</b><span class="dica">Marque aqui para o post ir para a parte de publicados.</span><div><button class="bt mini" id="prPostado">Marcar como postado</button></div></div>`);
+    c.innerHTML = `<div class="pronto">
+      <div class="acoes" style="justify-content:space-between;align-items:center"><div class="rot">Pronto para postar</div><button class="bt mini" id="prVoltar">Voltar</button></div>
+      <div class="pronto-mini${story ? ' story' : ''}">${urls.map((u, i) => `<a href="${u}" download="${esc(arqs[i].name)}"><img src="${u}" alt="Slide ${i + 1}"><span>${i + 1}</span></a>`).join('')}</div>
+      <ol class="passos">${passos.map((x) => `<li>${x}</li>`).join('')}</ol></div>`;
+    const limpar = () => setTimeout(() => urls.forEach((u) => URL.revokeObjectURL(u)), 60000);
+    $('#prVoltar').onclick = () => { limpar(); corpoVer(); };
+    if ($('#prLeg')) $('#prLeg').onclick = () => copiar(p.legenda);
+    if ($('#prShare')) $('#prShare').onclick = async () => {
+      try { await navigator.share({ files: arqs, ...(p.legenda ? { text: p.legenda } : {}) }); }
+      catch (e) { if (e.name !== 'AbortError') toast('Não consegui abrir o compartilhar: ' + e.message, 6000); }
+    };
+    if ($('#prBaixar')) $('#prBaixar').onclick = async () => { for (const f of arqs) { salvarArquivo(f, f.name); await new Promise((ok) => setTimeout(ok, 400)); } if (p.legenda) salvarArquivo(new Blob([p.legenda], { type: 'text/plain' }), `${nome}-legenda.txt`); };
+    if ($('#prZip')) $('#prZip').onclick = async () => { const zip = new JSZip(); arqs.forEach((f) => zip.file(f.name, f)); if (p.legenda) zip.file(`${nome}-legenda.txt`, p.legenda); salvarArquivo(await zip.generateAsync({ type: 'blob' }), `${nome}.zip`); };
+    if ($('#prPostado')) $('#prPostado').onclick = async () => { p.status = 'postado'; if (!p.data) p.data = hojeISO(); await salvarAberto('postado', 'Marcado como postado.'); limpar(); corpoVer(); };
   }
 
   // ---------------- UPLOAD ----------------
@@ -544,6 +634,56 @@
     };
   }
 
+  // ---------------- ACERVO ----------------
+  // Fotos que a equipe sobe uma vez, por tema, para o Claude usar em qualquer post (data/acervo/<id>.json).
+  const TEMAS = { formatura: 'Formaturas e aspirantado', instrucao: 'Instrução e exercícios', pci: 'PCI e atividades externas', rotina: 'Rotina do CPOR/SP', eventos: 'Eventos, visitas e autoridades', instalacoes: 'Instalações e símbolos', outros: 'Outros' };
+  const ST_ACV = { novo: 'Claude vai ver', producao: 'Claude vendo', catalogado: 'No acervo' };
+  function telaAcervo() {
+    const lotes = [...S.acervo].sort((a, b) => String(b.criadoEm).localeCompare(String(a.criadoEm)));
+    const cont = (k) => lotes.filter((l) => l.tema === k).reduce((n, l) => n + (l.fotos || []).length, 0);
+    const vis = S.temaAcervo === 'todos' ? lotes : lotes.filter((l) => l.tema === S.temaAcervo);
+    const semFoto = S.posts.filter((p) => p.status !== 'postado' && !(p.slides || []).some((x) => x.foto || x.foto2 || x.foto3)).length;
+    $('#view').innerHTML = `
+      <div class="cabeca"><span class="rot">Acervo</span><h1>Fotos para usar nos posts</h1><p>Suba as fotos uma vez, separadas por tema, e conte rapidamente o que são. O Claude passa a usar essas fotos em qualquer post e já coloca nos rascunhos que estão sem foto${semFoto ? ` (hoje são ${semFoto})` : ''}.</p></div>
+      <form class="form cartao" id="fAcv">
+        <div class="grade2">
+          <label class="campo"><span>O que são</span><input type="text" name="titulo" required placeholder="Ex.: Formatura de 2025, entrega das espadas"></label>
+          <label class="campo"><span>Tema</span><select name="tema">${Object.entries(TEMAS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
+        </div>
+        <label class="campo"><span>Detalhes <em>(opcional: quando, onde, quem aparece, de qual OM)</em></span><textarea name="descricao" rows="2"></textarea></label>
+        <div class="campo"><span>Fotos</span><div id="selAcv"></div></div>
+        <label class="check"><input type="checkbox" name="usar" checked><span><b>Usar nos rascunhos sem foto</b><br><span class="dica">O Claude coloca estas fotos nos posts que combinam com elas.</span></span></label>
+        <div class="acoes"><button class="bt pri" id="bAcv">Salvar no acervo</button><span class="dica" id="acvMsg"></span></div>
+      </form>
+      <div class="filtros">${[['todos', 'Todos'], ...Object.entries(TEMAS)].map(([k, n]) => `<button data-t="${k}" class="${S.temaAcervo === k ? 'on' : ''}">${n}${k !== 'todos' ? ` · ${cont(k)}` : ''}</button>`).join('')}</div>
+      ${vis.length ? `<div class="lista">${vis.map((l) => `<div class="item">
+        <div class="item-topo"><h3>${esc(l.titulo)}</h3><span class="st st-${l.status === 'catalogado' ? 'feito' : l.status}">${ST_ACV[l.status] || l.status}</span></div>
+        <div class="meta"><span>${TEMAS[l.tema] || esc(l.tema)}</span><span>${(l.fotos || []).length} foto(s)</span><span>enviado ${fmtHora(l.criadoEm)}</span></div>
+        ${l.descricao ? `<p>${esc(l.descricao)}</p>` : ''}
+        ${l.respostaClaude ? `<p><b>Claude:</b> ${esc(l.respostaClaude)}</p>` : ''}
+        <div class="acervo-fotos">${(l.fotos || []).map((f) => `<a href="${esc(src(f))}" target="_blank" title="Abrir"><img src="${esc(src(f))}" loading="lazy" alt=""></a>`).join('')}</div>
+        <div><button class="bt mini perigo" data-apagar-acv="${esc(l.id)}">Tirar do acervo</button></div>
+      </div>`).join('')}</div>` : `<div class="vazio">${lotes.length ? 'Nada neste tema ainda.' : 'O acervo ainda está vazio. Suba as primeiras fotos acima.'}</div>`}`;
+    const sel = seletor($('#selAcv'), 'image/*', 'Adicionar fotos');
+    $$('[data-t]').forEach((b) => (b.onclick = () => { S.temaAcervo = b.dataset.t; telaAcervo(); }));
+    $$('[data-apagar-acv]').forEach((b) => confirmar(b, 'Confirmar', async () => { await api.apagar('acervo', b.dataset.apagarAcv); S.acervo = S.acervo.filter((x) => x.id !== b.dataset.apagarAcv); telaAcervo(); }));
+    $('#fAcv').onsubmit = async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(ev.target), b = $('#bAcv'), msg = $('#acvMsg');
+      if (!sel.files.length) return toast('Escolha as fotos.');
+      b.disabled = true;
+      try {
+        const id = novoId(fd.get('titulo')), tema = fd.get('tema');
+        msg.textContent = 'Enviando fotos…';
+        const fotos = await enviarArquivos(sel.files, `uploads/acervo/${tema}/${id}`, sel.progresso);
+        msg.textContent = 'Salvando…';
+        await salvarItem('acervo', { id, titulo: fd.get('titulo').trim(), tema, descricao: fd.get('descricao').trim(), fotos, usarNosRascunhos: !!fd.get('usar'), status: 'novo' }, `acervo: ${fd.get('titulo')}`);
+        S.arquivos = null; S.temaAcervo = tema;
+        toast('Fotos no acervo! O Claude já foi avisado.', 4500); telaAcervo();
+      } catch (e) { msg.textContent = 'Erro: ' + e.message; b.disabled = false; }
+    };
+  }
+
   // ---------------- CALENDÁRIO ----------------
   function telaCalendario() {
     if (!S.mes) { const d = new Date(); S.mes = new Date(d.getFullYear(), d.getMonth(), 1); }
@@ -697,15 +837,15 @@
     S.versao = v;
     const antes = { posts: S.posts, pedidos: S.pedidos, eventos: S.eventos, pauta: S.pauta, ensinamentos: S.ensinamentos };
     try {
-      const [posts, pedidos, eventos, pauta, ensinamentos, padrao] = await Promise.all(COLS.map(api.listar));
-      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao }); S.erro = null;
+      const [posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo] = await Promise.all(COLS.map(api.listar));
+      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo }); S.erro = null;
     } catch { return; }
     const msgs = novidades(antes);
     if (msgs.length) toast(msgs.slice(0, 3).join(' · '), 6000);
     const tela = (location.hash || '#feed').slice(1);
     // não redesenha formulários que podem estar sendo preenchidos
     const digitando = $$('#view textarea, #view input[type=text]').some((x) => x.value.trim()) || /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '');
-    if (!S.editando && (['feed', 'pedidos', ''].includes(tela) || (['pauta', 'padrao'].includes(tela) && !digitando))) rota();
+    if (!S.editando && (['feed', 'pedidos', ''].includes(tela) || (['pauta', 'padrao', 'acervo'].includes(tela) && !digitando))) rota();
     if (S.aberto && !S.editando) {
       const p = S.posts.find((x) => x.id === S.aberto.id);
       if (p && p.atualizadoEm !== S.aberto.atualizadoEm) { S.aberto = clone(p); desenharModal(); }

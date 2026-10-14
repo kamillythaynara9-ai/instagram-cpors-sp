@@ -12,6 +12,7 @@ O site lê tudo direto do GitHub: basta fazer commit e push em `main`.
    - `data/eventos/*.json` com `"gerarPosts": true` e `"status": "novo"`
    - `data/posts/*.json` com algum item em `ajustes` com `"feito": false`
    - `data/ensinamentos/*.json` com `"status": "novo"` (algo que a equipe quer ensinar: aplique no padrão, marque `"aprendido"` e preencha `"resposta"`)
+   - `data/acervo/*.json` com `"status": "novo"` (fotos novas no Acervo; veja abaixo)
 3. Antes de produzir, marque o pedido/evento como `"status": "producao"` e faça push (evita trabalho duplicado).
 4. Produza os posts (abaixo), marque o pedido/evento como `"status": "feito"` e preencha `"respostaClaude"` com uma frase sobre o que foi criado.
    Para ajustes: aplique, marque `"feito": true`, preencha `"resposta"` e mude o status do post para `"rascunho"`.
@@ -36,9 +37,11 @@ A rotina de segunda gera `data/pauta/semana-AAAA-MM-DD.json` (data = a segunda-f
 
 - Fotos: caminhos em `fotos` (ex.: `uploads/pedidos/<id>/01-nome.jpg`), já comprimidas em JPEG até 2600 px.
 - Vídeos grandes chegam em partes: `video.mp4.part000`, `.part001`… mais `video.mp4.partes.json`. Junte com `cat video.mp4.part* > video.mp4`.
-- **Só use imagens enviadas no próprio pedido** (fotos ou quadros dos vídeos daquele pedido). Os vídeos que a Thaynara mandou no chat como referência servem só para entender o estilo: nunca use quadros deles. Sem foto no pedido, faça a arte sem foto e diga que falta foto.
+- **Só use imagens enviadas pela equipe no site**: as do próprio pedido (fotos ou quadros dos vídeos), as anexadas num ajuste (`ajustes[].fotos`) e as do **Acervo**. Os vídeos que a Thaynara mandou no chat como referência servem só para entender o estilo: nunca use quadros deles. Sem foto no pedido, faça a arte sem foto e diga que falta foto.
 - **Toda imagem tirada de vídeo deve ter a qualidade melhorada sem alterar o conteúdo** (super-resolução, ex.: OpenCV `dnn_superres` EDSR x2). Salve o resultado em `media/<id-do-pedido>/`.
   Use `python3 ferramentas/frame_hq.py <video> <segundo> <y0 do recorte 720x900> <saida.jpg> <EDSR_x2.pb>`: escolhe o quadro mais nítido (até 2 quadros do momento), tira ruído com os vizinhos, EDSR x2, clareia só se escuro.
+- **Acervo** (`data/acervo/<id>.json`: `{ id, titulo, tema, descricao, fotos[], usarNosRascunhos, status: novo|producao|catalogado, respostaClaude }`, fotos em `uploads/acervo/<tema>/<id>/`): fotos que a equipe sobe uma vez para usar em qualquer post. Temas: formatura, instrucao, pci, rotina, eventos, instalacoes, outros. Ao chegar um lote novo: olhe as fotos; se `usarNosRascunhos`, coloque-as nos rascunhos/ideias sem foto (ou com foto provisória) que combinam com o tema e a descrição, sem repetir a mesma foto em posts vizinhos; marque `"catalogado"` e preencha `respostaClaude` dizendo onde usou. Ao produzir qualquer post, procure antes no acervo uma foto que combine. Nunca invente o que a foto mostra: o que não estiver na descrição vai em "A confirmar".
+- `uploads/perfil/<carimbo>/` são imagens dos posts que já estão no Instagram, só para a aba Prévia do site: não use em posts.
 - Imagens que você cria/trata vão em `media/`. Use nomes novos em vez de sobrescrever (o site faz cache por 1 dia).
 
 ## Formato de um post (`data/posts/<id>.json`)

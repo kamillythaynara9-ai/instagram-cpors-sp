@@ -216,3 +216,36 @@ textarea{resize:vertical;min-height:80px}
 .destino button small{color:var(--mut);font-size:12px}
 .destino button.on{border-color:var(--ouro);background:rgba(200,162,75,.1)}
 .destino button.on b{color:var(--ouro2)}
+
+/* ajuste com fotos */
+.ajuste-fotos{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 2px}
+.ajuste-fotos img{width:48px;height:48px;object-fit:cover;border-radius:4px;display:block}
+
+/* pronto para postar */
+.pronto{display:flex;flex-direction:column;gap:14px}
+.pronto-mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:6px}
+.pronto-mini a{position:relative;display:block;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:var(--bg2)}
+.pronto-mini.story a{aspect-ratio:9/16}
+.pronto-mini img{width:100%;height:100%;object-fit:cover;display:block}
+.pronto-mini span{position:absolute;left:4px;top:4px;min-width:20px;height:20px;border-radius:999px;background:rgba(11,13,10,.85);color:var(--ouro2);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.passos{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px}
+.passos li::marker{color:var(--ouro2);font-weight:800}
+.passo{display:flex;flex-direction:column;gap:4px}
+
+/* acervo */
+.acervo-fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px}
+.acervo-fotos a{display:block;aspect-ratio:1;border-radius:4px;overflow:hidden;background:var(--bg2)}
+.acervo-fotos img{width:100%;height:100%;object-fit:cover;display:block}
+#fAcv{margin-bottom:6px}
+
+/* prévia do perfil */
+.pv-topo{display:flex;flex-direction:column;gap:10px;padding:16px 0}
+.pv-topo p{margin:0;max-width:70ch}
+.pv-celular{max-width:470px;margin:0 auto;border:1px solid var(--linha2);border-radius:22px;padding:14px 0 0;background:#000;overflow:hidden}
+.pv-cab{display:flex;align-items:center;gap:8px;padding:0 14px 12px;font-size:14px}
+.pv-cab img{width:28px;height:28px;border-radius:50%}
+.pv-grade{gap:2px}
+.cel.pv{aspect-ratio:3/4;overflow:hidden}
+.pv-in{position:absolute;top:0;bottom:0;left:-3.34%;width:106.68%}
+.pv-print{width:100%;height:100%;object-fit:cover;display:block}
+.pv-tag{position:absolute;left:4px;bottom:4px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:rgba(11,13,10,.85);color:var(--ouro2);padding:2px 6px;border-radius:999px}
