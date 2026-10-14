@@ -21,8 +21,8 @@
         "Títulos nunca em branco puro: prata ou dourado metalizado, textura leve e sombra suave.",
         "Texto de apoio em off-white quente (#E6E0D0).",
         "Nada de símbolos militares desenhados à mão: só fotos reais ou o brasão.",
-        "Fotos internas do carrossel com legenda fina e pino (estilo dos posts de PCI): aprovado e postado, é o modelo para carrosséis de foto.",
-        "Pôster sem foto fica fraco: sempre usar uma foto real de fundo, bem visível (mesmo que de outra atividade do CPOR/SP), sem mexer no texto."
+        "Fotos internas do carrossel com legenda fina e pino (estilo dos posts de PCI): aprovado e postado. Cobertura = capa + uma foto por slide, com pouco texto: básico, mas criativo.",
+        "Pôster sem foto fica fraco: usar foto real de fundo, bem visível (mesmo que de outra atividade do CPOR/SP). Exceção: capa de carrossel pode ser sem foto quando a ideia é criativa (ex.: número grande em destaque)."
       ]
     },
     {
@@ -49,7 +49,8 @@
         "Armas, quadro e serviço: Infantaria, Cavalaria, Artilharia, Engenharia, Comunicações, Intendência e Material Bélico.",
         "Primeira formatura em 1931, com 77 oficiais; quase 20 mil formados desde então.",
         "Aspirantado 2026: 10/10, às 18h, no CPOR/SP.",
-        "Gen Ex Ricardo Piai Carmona: antigo comandante do CPOR/SP, oficial de Artilharia (Aspirante em 1988), Comandante Militar do Sudeste desde 16/12/2025."
+        "Gen Ex Ricardo Piai Carmona: antigo comandante do CPOR/SP, oficial de Artilharia (Aspirante em 1988), Comandante Militar do Sudeste desde 16/12/2025.",
+        "PCIs 2026: Artilharia, Comunicações, Engenharia, Infantaria e Material Bélico visitaram AMAN (Resende-RJ), 12ª Cia Com Amv (Caçapava-SP), 2º B Fv e CIEng (Araguari-MG), 2º BPE (Osasco-SP) e AGSP (Barueri-SP)."
       ]
     },
     {
@@ -58,10 +59,11 @@
         "Se a formatura tem entrega de espadas e Medalha Correia Lima.",
         "Horários reais da rotina dos alunos.",
         "Requisitos de seleção para 2027.",
-        "Anos em que o Gen Carmona comandou o CPOR/SP (antes de 2018) e o horário da visita de 14/10."
+        "Anos em que o Gen Carmona comandou o CPOR/SP (antes de 2018) e o horário da visita de 14/10.",
+        "Em qual OM foi tirada cada foto dos PCIs (auditório, viaturas, simuladores, EIPOT), para dar nome certo nas legendas das fotos."
       ]
     }
   ],
-  "atualizadoEm": "2026-10-12T10:50:00.000Z",
+  "atualizadoEm": "2026-10-14T12:55:00.000Z",
   "criadoEm": "2026-10-08T23:23:45.000Z"
 }

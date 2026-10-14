@@ -1,0 +1,82 @@
+{
+  "id": "pci-cursos-nas-oms",
+  "titulo": "PCIs: conhecimento que ultrapassa a sala de aula",
+  "tipo": "carrossel",
+  "status": "rascunho",
+  "ordem": 15,
+  "data": "2026-10-13",
+  "origem": {
+    "tipo": "pedido",
+    "id": "conhecimento-que-ultrapassa-a-sala-de-au-mv82nk6z"
+  },
+  "legenda": "🪖🇧🇷🔰 Conhecimento que ultrapassa a sala de aula: CPOR/SP nos PCIs\n\nOs Alunos dos cursos de Artilharia, Comunicações, Engenharia, Infantaria e Material Bélico do CPOR/SP visitaram seis Organizações Militares para viver, na prática, o que aprenderam em sala de aula.\nForam à Academia Militar das Agulhas Negras (AMAN), em Resende (RJ); à 12ª Companhia de Comunicações Aeromóvel (12ª Cia Com Amv), em Caçapava (SP); ao 2º Batalhão Ferroviário (2º B Fv) – Batalhão Mauá e ao Centro de Instrução de Engenharia (CIEng), ambos em Araguari (MG); ao 2º Batalhão de Polícia do Exército (2º BPE), em Osasco (SP); e ao Arsenal de Guerra de São Paulo (AGSP), em Barueri (SP).\n\nNosso agradecimento a todas as Organizações Militares pelo apoio na formação dos futuros Oficiais da Reserva.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #PCI #Artilharia #Comunicações #Engenharia #Infantaria #MaterialBélico",
+  "slides": [
+    {
+      "modelo": "numero",
+      "selo": "PCI · Cursos",
+      "sobretitulo": "Conhecimento que ultrapassa\na sala de aula",
+      "destaque": "6",
+      "titulo": "Organizações\nMilitares",
+      "texto": "5 cursos · 5 cidades · 3 estados"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Artilharia: o obuseiro 105 mm visto de perto",
+      "foto": "media/pci-cursos-2026/01-obuseiro.jpg",
+      "posicao": "42% 50%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Polícia do Exército: controle de distúrbios na prática",
+      "foto": "media/pci-cursos-2026/02-pe-escudos.jpg",
+      "posicao": "50% 50%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Comunicações na Brigada Aeromóvel",
+      "foto": "media/pci-cursos-2026/03-brigada-amv.jpg",
+      "posicao": "40% 50%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Cada OM abriu as portas para os nossos Alunos",
+      "foto": "media/pci-cursos-2026/05-auditorio.jpg",
+      "posicao": "45% 50%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "No terreno, o que foi visto em sala",
+      "foto": "media/pci-cursos-2026/06-viaturas.jpg",
+      "posicao": "62% 50%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Simuladores: tecnologia a serviço da instrução",
+      "foto": "media/pci-cursos-2026/07-simulador-1.jpg",
+      "posicao": "85% 40%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Treinar antes de executar",
+      "foto": "media/pci-cursos-2026/08-simulador-2.jpg",
+      "posicao": "96% 40%"
+    },
+    {
+      "modelo": "foto",
+      "selo": "PCI · Cursos",
+      "texto": "Da sala de aula para a tropa.\nObrigado a cada Organização Militar!",
+      "foto": "media/pci-cursos-2026/04-eipot.jpg",
+      "posicao": "42% 50%"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-14T12:40:00.000Z",
+  "atualizadoEm": "2026-10-14T12:40:00.000Z"
+}

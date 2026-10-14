@@ -1,0 +1,34 @@
+{
+  "id": "pci-cursos-poster-oms",
+  "titulo": "PCIs: as 6 OMs visitadas (pôster)",
+  "tipo": "poster",
+  "status": "ideia",
+  "ordem": 16,
+  "data": null,
+  "origem": {
+    "tipo": "pedido",
+    "id": "conhecimento-que-ultrapassa-a-sala-de-au-mv82nk6z"
+  },
+  "legenda": "🔰 Onde estiveram nossos Alunos\n\nNos PCIs, os cursos do CPOR/SP passaram por seis Organizações Militares em três estados.\nCada visita levou para o terreno o que foi aprendido em sala de aula.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #PCI",
+  "slides": [
+    {
+      "modelo": "aviso",
+      "selo": "PCI · Cursos",
+      "sobretitulo": "Onde estiveram nossos Alunos",
+      "titulo": "6 OMs",
+      "destaque": "3 estados",
+      "itens": [
+        "Resende (RJ): AMAN",
+        "Caçapava (SP): 12ª Cia Com Amv",
+        "Araguari (MG): 2º B Fv e CIEng",
+        "Osasco (SP): 2º BPE",
+        "Barueri (SP): AGSP"
+      ],
+      "foto": "media/pci-cursos-2026/05-auditorio.jpg",
+      "posicao": "45% 50%"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-14T12:40:00.000Z",
+  "atualizadoEm": "2026-10-14T12:40:00.000Z"
+}
