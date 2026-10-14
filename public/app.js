@@ -25,7 +25,7 @@
   const nomeFormato = (p) => (ehStoryPost(p) ? FORMATOS_STORY : FORMATOS)[p.formato] || p.formato;
 
   const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao', 'acervo'];
-  const S = { acervo: [], temaAcervo: 'todos', comIdeias: false, pronto: null, posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
+  const S = { acervo: [], temaAcervo: 'todos', posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
 
   // ---------------- API ----------------
   async function chamar(url, opts = {}) {
@@ -100,7 +100,6 @@
   const ordenados = () => [...S.posts].sort((a, b) => (b.ordem ?? 0) - (a.ordem ?? 0) || String(b.criadoEm).localeCompare(String(a.criadoEm)));
 
   function telaFeed() {
-    if (S.aba === 'previa') return telaPrevia();
     const doFeed = S.posts.filter((p) => !ehStoryPost(p)), stories = S.posts.filter(ehStoryPost);
     const daAba = S.aba === 'story' ? stories : doFeed;
     const todos = ordenados().filter((p) => ehStoryPost(p) === (S.aba === 'story'));
@@ -117,7 +116,7 @@
           <div class="bio"><b>CPOR/SP · Escola de Líderes</b><br>Centro de Preparação de Oficiais da Reserva de São Paulo</div>
         </div>
       </section>
-      <div class="abas-feed"><button data-aba="feed" class="${S.aba === 'feed' ? 'on' : ''}">Feed · ${doFeed.length}</button><button data-aba="story" class="${S.aba === 'story' ? 'on' : ''}">Stories · ${stories.length}</button><button data-aba="previa">Prévia</button></div>
+      <div class="abas-feed"><button data-aba="feed" class="${S.aba === 'feed' ? 'on' : ''}">Feed · ${doFeed.length}</button><button data-aba="story" class="${S.aba === 'story' ? 'on' : ''}">Stories · ${stories.length}</button></div>
       <div class="filtros">${[['todos', 'Todos'], ...Object.entries(ST_POST)].map(([k, n]) => `<button data-f="${k}" class="${S.filtro === k ? 'on' : ''}">${n}${k !== 'todos' ? ` · ${cont(k)}` : ''}</button>`).join('')}</div>
       ${lista.length ? `<div class="grade-feed${S.aba === 'story' ? ' stories' : ''}">${lista.map((p) => `
         <button class="cel" data-id="${esc(p.id)}" aria-label="${esc(p.titulo)}">
@@ -131,46 +130,6 @@
     $$('.abas-feed button').forEach((b) => (b.onclick = () => { S.aba = b.dataset.aba; S.filtro = 'todos'; telaFeed(); ajustarEscalas(); }));
     $$('.filtros button').forEach((b) => (b.onclick = () => { S.filtro = b.dataset.f; telaFeed(); ajustarEscalas(); }));
     $$('.cel').forEach((c) => (c.onclick = () => abrirPost(c.dataset.id)));
-  }
-
-  // ---------------- PRÉVIA DO PERFIL ----------------
-  // Como o perfil vai ficar: próximos posts por cima dos já publicados, no recorte 3:4 da grade do Instagram.
-  function telaPrevia() {
-    const feed = ordenados().filter((p) => !ehStoryPost(p));
-    const proximos = feed.filter((p) => ['aprovado', 'rascunho', 'ajuste', ...(S.comIdeias ? ['ideia'] : [])].includes(p.status));
-    const postados = feed.filter((p) => p.status === 'postado');
-    // prints dos posts que já estão no Instagram: o último envio em uploads/perfil/<carimbo>/
-    const prints = (S.arquivos || []).filter((f) => /^uploads\/perfil\/\d+\//.test(f));
-    const ult = prints.map((f) => +f.split('/')[2]).reduce((m, x) => Math.max(m, x), 0);
-    const daVez = prints.filter((f) => +f.split('/')[2] === ult).sort();
-    const cel = (p, tag) => `<button class="cel pv" data-id="${esc(p.id)}" aria-label="${esc(p.titulo)}"><div class="pv-in">${slideBox(p.slides?.[0], 0, p.slides?.length || 1)}</div>${tag ? `<span class="pv-tag">${tag}</span>` : ''}</button>`;
-    $('#view').innerHTML = `
-      <div class="abas-feed"><button data-aba="feed">Feed</button><button data-aba="story">Stories</button><button data-aba="previa" class="on">Prévia</button></div>
-      <div class="pv-topo">
-        <p class="dica">Os próximos posts aparecem em cima dos que já foram publicados, no recorte da grade do Instagram (3:4). Para mudar a ordem, abra o post e use "Mover no feed".</p>
-        <div class="acoes"><label class="check"><input type="checkbox" id="pvIdeias" ${S.comIdeias ? 'checked' : ''}><span>Mostrar ideias</span></label>
-        <label class="bt mini">${daVez.length ? 'Atualizar' : 'Enviar'} posts já publicados<input type="file" id="pvUp" accept="image/*" multiple hidden></label></div>
-        <span class="dica" id="pvMsg">${S.arquivos === null ? 'Carregando os posts publicados…' : daVez.length ? '' : 'Envie as imagens dos últimos posts do perfil, do mais recente para o mais antigo, para ver tudo junto.'}</span>
-      </div>
-      <div class="pv-celular"><div class="pv-cab"><img src="/assets/brasao.png" alt=""><b>cporsp_exercito</b></div>
-        <div class="grade-feed pv-grade">
-          ${proximos.map((p) => cel(p, p.status === 'aprovado' ? 'próximo' : ST_POST[p.status])).join('')}
-          ${postados.map((p) => cel(p, '')).join('')}
-          ${daVez.map((f) => `<div class="cel pv"><img class="pv-print" src="${esc(src(f))}" loading="lazy" alt=""></div>`).join('')}
-        </div>
-        ${proximos.length + postados.length + daVez.length ? '' : '<div class="vazio">Nada para mostrar ainda.</div>'}
-      </div>`;
-    $$('.abas-feed button').forEach((b) => (b.onclick = () => { S.aba = b.dataset.aba; S.filtro = 'todos'; telaFeed(); ajustarEscalas(); }));
-    $$('.cel[data-id]').forEach((c) => (c.onclick = () => abrirPost(c.dataset.id)));
-    $('#pvIdeias').onchange = (e) => { S.comIdeias = e.target.checked; telaPrevia(); ajustarEscalas(); };
-    $('#pvUp').onchange = async (e) => {
-      const fs = [...e.target.files]; if (!fs.length) return;
-      $('#pvMsg').textContent = 'Enviando…';
-      try { await enviarArquivos(fs, `uploads/perfil/${Date.now()}`); S.arquivos = null; await carregarArquivos(); toast('Posts publicados atualizados.'); }
-      catch (er) { toast('Erro no envio: ' + er.message, 6000); }
-      if (S.aba === 'previa' && (location.hash || '#feed') === '#feed') { telaPrevia(); ajustarEscalas(); }
-    };
-    if (S.arquivos === null) carregarArquivos().then(() => { if (S.aba === 'previa' && !S.aberto && ['#feed', ''].includes(location.hash)) { telaPrevia(); ajustarEscalas(); } });
   }
 
   // ---------------- MODAL DO POST ----------------
@@ -384,7 +343,7 @@
     (o?.fotos || []).forEach((f) => set.add(f));
     (p.ajustes || []).forEach((a) => (a.fotos || []).forEach((f) => set.add(f)));
     S.acervo.forEach((l) => (l.fotos || []).forEach((f) => set.add(f)));
-    (S.arquivos || []).filter((f) => !/^uploads\/perfil\//.test(f)).forEach((f) => set.add(f));
+    (S.arquivos || []).forEach((f) => set.add(f));
     return [...set];
   }
 
@@ -650,22 +609,25 @@
           <label class="campo"><span>O que são</span><input type="text" name="titulo" required placeholder="Ex.: Formatura de 2025, entrega das espadas"></label>
           <label class="campo"><span>Tema</span><select name="tema">${Object.entries(TEMAS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
         </div>
+        <label class="campo" id="cOutro" hidden><span>Do que se trata</span><input type="text" name="temaOutro" placeholder="Ex.: Desfile de 7 de setembro, Banda de música"></label>
         <label class="campo"><span>Detalhes <em>(opcional: quando, onde, quem aparece, de qual OM)</em></span><textarea name="descricao" rows="2"></textarea></label>
         <div class="campo"><span>Fotos</span><div id="selAcv"></div></div>
         <label class="check"><input type="checkbox" name="usar" checked><span><b>Usar nos rascunhos sem foto</b><br><span class="dica">O Claude coloca estas fotos nos posts que combinam com elas.</span></span></label>
         <div class="acoes"><button class="bt pri" id="bAcv">Salvar no acervo</button><span class="dica" id="acvMsg"></span></div>
       </form>
-      <div class="filtros">${[['todos', 'Todos'], ...Object.entries(TEMAS)].map(([k, n]) => `<button data-t="${k}" class="${S.temaAcervo === k ? 'on' : ''}">${n}${k !== 'todos' ? ` · ${cont(k)}` : ''}</button>`).join('')}</div>
+      <label class="campo filtro-acv"><span>Mostrar</span><select id="selTema">${[['todos', `Todos · ${lotes.reduce((n, l) => n + (l.fotos || []).length, 0)} fotos`], ...Object.entries(TEMAS).map(([k, n]) => [k, `${n} · ${cont(k)}`])].map(([k, n]) => `<option value="${k}" ${S.temaAcervo === k ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       ${vis.length ? `<div class="lista">${vis.map((l) => `<div class="item">
         <div class="item-topo"><h3>${esc(l.titulo)}</h3><span class="st st-${l.status === 'catalogado' ? 'feito' : l.status}">${ST_ACV[l.status] || l.status}</span></div>
-        <div class="meta"><span>${TEMAS[l.tema] || esc(l.tema)}</span><span>${(l.fotos || []).length} foto(s)</span><span>enviado ${fmtHora(l.criadoEm)}</span></div>
+        <div class="meta"><span>${TEMAS[l.tema] || esc(l.tema)}${l.temaOutro ? `: ${esc(l.temaOutro)}` : ''}</span><span>${(l.fotos || []).length} foto(s)</span><span>enviado ${fmtHora(l.criadoEm)}</span></div>
         ${l.descricao ? `<p>${esc(l.descricao)}</p>` : ''}
         ${l.respostaClaude ? `<p><b>Claude:</b> ${esc(l.respostaClaude)}</p>` : ''}
         <div class="acervo-fotos">${(l.fotos || []).map((f) => `<a href="${esc(src(f))}" target="_blank" title="Abrir"><img src="${esc(src(f))}" loading="lazy" alt=""></a>`).join('')}</div>
         <div><button class="bt mini perigo" data-apagar-acv="${esc(l.id)}">Tirar do acervo</button></div>
       </div>`).join('')}</div>` : `<div class="vazio">${lotes.length ? 'Nada neste tema ainda.' : 'O acervo ainda está vazio. Suba as primeiras fotos acima.'}</div>`}`;
     const sel = seletor($('#selAcv'), 'image/*', 'Adicionar fotos');
-    $$('[data-t]').forEach((b) => (b.onclick = () => { S.temaAcervo = b.dataset.t; telaAcervo(); }));
+    $('#selTema').onchange = (e) => { S.temaAcervo = e.target.value; telaAcervo(); };
+    const fA = $('#fAcv');
+    fA.tema.onchange = () => { const o = fA.tema.value === 'outros'; $('#cOutro').hidden = !o; fA.temaOutro.required = o; if (o) fA.temaOutro.focus(); };
     $$('[data-apagar-acv]').forEach((b) => confirmar(b, 'Confirmar', async () => { await api.apagar('acervo', b.dataset.apagarAcv); S.acervo = S.acervo.filter((x) => x.id !== b.dataset.apagarAcv); telaAcervo(); }));
     $('#fAcv').onsubmit = async (ev) => {
       ev.preventDefault();
@@ -677,7 +639,7 @@
         msg.textContent = 'Enviando fotos…';
         const fotos = await enviarArquivos(sel.files, `uploads/acervo/${tema}/${id}`, sel.progresso);
         msg.textContent = 'Salvando…';
-        await salvarItem('acervo', { id, titulo: fd.get('titulo').trim(), tema, descricao: fd.get('descricao').trim(), fotos, usarNosRascunhos: !!fd.get('usar'), status: 'novo' }, `acervo: ${fd.get('titulo')}`);
+        await salvarItem('acervo', { id, titulo: fd.get('titulo').trim(), tema, ...(tema === 'outros' ? { temaOutro: (fd.get('temaOutro') || '').trim() } : {}), descricao: fd.get('descricao').trim(), fotos, usarNosRascunhos: !!fd.get('usar'), status: 'novo' }, `acervo: ${fd.get('titulo')}`);
         S.arquivos = null; S.temaAcervo = tema;
         toast('Fotos no acervo! O Claude já foi avisado.', 4500); telaAcervo();
       } catch (e) { msg.textContent = 'Erro: ' + e.message; b.disabled = false; }
