@@ -60,6 +60,7 @@ A rotina de segunda gera `data/pauta/semana-AAAA-MM-DD.json` (data = a segunda-f
 ```
 
 Pedido com `"destino": "story"` vira post com `"destino": "story"` e `"tipo": "story"` (aparece na aba Stories, 1080x1920). Story é simples: só a imagem e pouco texto, sem legenda (`"legenda": ""`); pode ser uma tela ou uma sequência, e uma ou várias fotos compostas de forma criativa. Formatos do pedido de story: `claude`, `unico`, `sequencia`. Sem `destino` = feed.
+Pedido com `"destino": "ambos"` (Feed + Story) gera os dois do mesmo assunto: os posts de feed (`formato`, `quantidade`, legenda) e os stories (`formatoStory`, `quantidadeStory`), com a mesma `origem`. Os stories seguem o visual do post e funcionam como chamada para ele (ex.: "Post novo no feed"), sem repetir o carrossel inteiro.
 
 Use `"status": "rascunho"` para o que foi pedido e `"status": "ideia"` para sugestões extras (quando `maisIdeias` é true).
 

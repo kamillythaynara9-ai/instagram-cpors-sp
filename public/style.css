@@ -210,7 +210,9 @@ textarea{resize:vertical;min-height:80px}
 .abas-feed{display:flex;border-top:1px solid var(--linha2);margin-top:8px}
 .abas-feed button{flex:1;background:none;border:0;border-top:2px solid transparent;margin-top:-1px;padding:12px 0;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--mut)}
 .abas-feed button.on{border-top-color:var(--ouro);color:var(--ouro2)}
-.destino{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.destino{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:640px){.destino{grid-template-columns:1fr}}
+.bloco-story{border-left:3px solid var(--ouro-esc);padding-left:14px;align-items:end}
 .destino button{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;padding:14px 16px;border:1px solid var(--linha2);border-radius:10px;background:var(--card);color:var(--fg);cursor:pointer}
 .destino button b{font-size:16px}
 .destino button small{color:var(--mut);font-size:12px}

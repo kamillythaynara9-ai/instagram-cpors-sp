@@ -479,14 +479,18 @@
           <div class="destino" id="pDestino">
             <button type="button" data-d="feed" class="${S.destinoPed === 'feed' ? 'on' : ''}"><b>Feed</b><small>Carrossel ou pôster, com legenda</small></button>
             <button type="button" data-d="story" class="${S.destinoPed === 'story' ? 'on' : ''}"><b>Story</b><small>Imagem vertical, mais simples, sem legenda</small></button>
+            <button type="button" data-d="ambos" class="${S.destinoPed === 'ambos' ? 'on' : ''}"><b>Feed + Story</b><small>Os dois sobre o mesmo assunto</small></button>
           </div></div>
         <label class="campo"><span>Assunto</span><input type="text" name="titulo" required placeholder="Ex.: Inscrições para o CPOR 2027"></label>
         <label class="campo"><span>O que você quer no post</span><textarea name="descricao" rows="6" required placeholder="Explique a ideia, as informações que precisam aparecer, o tom e para quem é. Ex.: avisar que as inscrições abrem dia 3/11, quem pode se inscrever, documentos e o link."></textarea></label>
         <div class="grade3">
-          <label class="campo"><span>Formato</span><select name="formato">${Object.entries(S.destinoPed === 'story' ? FORMATOS_STORY : FORMATOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
+          <label class="campo"><span>${S.destinoPed === 'ambos' ? 'Formato do post' : 'Formato'}</span><select name="formato">${Object.entries(S.destinoPed === 'story' ? FORMATOS_STORY : FORMATOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
           <label class="campo"><span>${S.destinoPed === 'story' ? 'Quantos stories' : 'Quantos posts sobre o assunto'}</span><input type="number" name="quantidade" min="1" max="12" value="1"></label>
           <label class="campo"><span>Data de publicação <em>(opcional)</em></span><input type="date" name="data"></label>
         </div>
+        ${S.destinoPed === 'ambos' ? `<div class="grade3 bloco-story"><label class="campo"><span>Formato do story</span><select name="formatoStory">${Object.entries(FORMATOS_STORY).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
+          <label class="campo"><span>Quantos stories</span><input type="number" name="quantidadeStory" min="1" max="12" value="1"></label>
+          <p class="dica">O story sai junto com o post, no mesmo estilo, e chama para ele.</p></div>` : ''}
         <div class="campo"><span>Fotos <em>(opcional)</em></span><div id="selFotos"></div></div>
         <div class="campo"><span>Vídeos <em>(opcional, eu tiro os melhores quadros e melhoro a qualidade)</em></span><div id="selVideos"></div></div>
         <label class="campo"><span>Links <em>(opcional: Drive, site, inscrição…)</em></span><input type="text" name="links" placeholder="Cole um ou mais links"></label>
@@ -517,6 +521,7 @@
           id, destino: S.destinoPed, titulo: fd.get('titulo').trim(), descricao: fd.get('descricao').trim(), formato: fd.get('formato'),
           quantidade: Math.max(1, +fd.get('quantidade') || 1), data: fd.get('data') || null, fotos, videos,
           links: fd.get('links').trim(), legenda: (fd.get('legenda') || '').trim(), obs: fd.get('obs').trim(),
+          ...(S.destinoPed === 'ambos' ? { formatoStory: fd.get('formatoStory'), quantidadeStory: Math.max(1, +fd.get('quantidadeStory') || 1) } : {}),
           maisIdeias: !!fd.get('ideias'), status: 'novo',
         }, `novo pedido: ${fd.get('titulo')}`);
         toast('Pedido enviado! O Claude já foi avisado; acompanhe aqui.', 5000);
@@ -694,7 +699,7 @@
         const ps = S.posts.filter((x) => x.origem?.id === p.id);
         return `<div class="item">
           <div class="item-topo"><h3>${esc(p.titulo)}</h3><span class="st st-${p.status}">${ST_PED[p.status] || p.status}</span></div>
-          <div class="meta"><span>${p._tipo === 'evento' ? `Calendário · ${fmtData(p.data)}` : ehStoryPost(p) ? 'Pedido · Story' : 'Pedido · Feed'}</span><span>enviado ${fmtHora(p.criadoEm)}</span>${p.formato ? `<span>${nomeFormato(p)}</span>` : ''}${p.quantidade ? `<span>${p.quantidade} ${ehStoryPost(p) ? 'story(s)' : 'post(s)'}</span>` : ''}${p.fotos?.length ? `<span>${p.fotos.length} foto(s)</span>` : ''}${p.videos?.length ? `<span>${p.videos.length} vídeo(s)</span>` : ''}${p.data && p._tipo === 'pedido' ? `<span>publicar ${fmtData(p.data)}</span>` : ''}</div>
+          <div class="meta"><span>${p._tipo === 'evento' ? `Calendário · ${fmtData(p.data)}` : p.destino === 'ambos' ? 'Pedido · Feed + Story' : ehStoryPost(p) ? 'Pedido · Story' : 'Pedido · Feed'}</span><span>enviado ${fmtHora(p.criadoEm)}</span>${p.formato ? `<span>${nomeFormato(p)}</span>` : ''}${p.quantidade ? `<span>${p.quantidade} ${ehStoryPost(p) ? 'story(s)' : 'post(s)'}${p.destino === 'ambos' ? ` + ${p.quantidadeStory || 1} story(s)` : ''}</span>` : ''}${p.fotos?.length ? `<span>${p.fotos.length} foto(s)</span>` : ''}${p.videos?.length ? `<span>${p.videos.length} vídeo(s)</span>` : ''}${p.data && p._tipo === 'pedido' ? `<span>publicar ${fmtData(p.data)}</span>` : ''}</div>
           ${p.descricao ? `<p>${esc(p.descricao)}</p>` : ''}
           ${p.respostaClaude ? `<p><b>Claude:</b> ${esc(p.respostaClaude)}</p>` : ''}
           ${ps.length ? `<div class="miniaturas">${ps.map((x) => `<div data-post="${esc(x.id)}" title="${esc(x.titulo)}">${slideBox(x.slides?.[0], 0, x.slides?.length || 1)}</div>`).join('')}</div>` : ''}
