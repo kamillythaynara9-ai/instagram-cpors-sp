@@ -24,8 +24,8 @@
   const ehStoryPost = (p) => p?.destino === 'story';
   const nomeFormato = (p) => (ehStoryPost(p) ? FORMATOS_STORY : FORMATOS)[p.formato] || p.formato;
 
-  const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao', 'acervo'];
-  const S = { acervo: [], temaAcervo: 'todos', posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
+  const COLS = ['posts', 'pedidos', 'eventos', 'pauta', 'ensinamentos', 'padrao'];
+  const S = { posts: [], pedidos: [], eventos: [], pauta: [], ensinamentos: [], padrao: [], arquivos: null, filtro: 'todos', aba: 'feed', destinoPed: 'feed', mes: null, diaSel: null, aberto: null, idx: 0, editando: false, carregado: false };
 
   // ---------------- API ----------------
   async function chamar(url, opts = {}) {
@@ -48,8 +48,8 @@
 
   async function carregar(silencioso) {
     try {
-      const [posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo] = await Promise.all(COLS.map(api.listar));
-      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo }); S.carregado = true;
+      const [posts, pedidos, eventos, pauta, ensinamentos, padrao] = await Promise.all(COLS.map(api.listar));
+      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao }); S.carregado = true;
       if (!S.editando) rota();
       S.erro = null;
     } catch (e) {
@@ -77,7 +77,7 @@
     const v = (location.hash || '#feed').slice(1);
     $$('#abas a').forEach((a) => a.classList.toggle('on', a.dataset.v === v));
     if (!S.carregado) { $('#view').innerHTML = '<div class="carregando">Carregando…</div>'; return; }
-    ({ feed: telaFeed, pedido: telaPedido, pauta: telaPauta, calendario: telaCalendario, pedidos: telaPedidos, padrao: telaPadrao, acervo: telaAcervo }[v] || telaFeed)();
+    ({ feed: telaFeed, pedido: telaPedido, pauta: telaPauta, calendario: telaCalendario, pedidos: telaPedidos, padrao: telaPadrao }[v] || telaFeed)();
     if (S.erro) $('#view').insertAdjacentHTML('afterbegin', `<div class="aviso-erro"><b>O site não conseguiu falar com o GitHub.</b> ${esc(S.erro)}<br><span class="dica">Abra <a href="/api/status" target="_blank">/api/status</a> para ver o diagnóstico.</span></div>`);
     ajustarEscalas();
   }
@@ -342,7 +342,6 @@
     const o = p.origem && (p.origem.tipo === 'evento' ? S.eventos : S.pedidos).find((x) => x.id === p.origem.id);
     (o?.fotos || []).forEach((f) => set.add(f));
     (p.ajustes || []).forEach((a) => (a.fotos || []).forEach((f) => set.add(f)));
-    S.acervo.forEach((l) => (l.fotos || []).forEach((f) => set.add(f)));
     (S.arquivos || []).forEach((f) => set.add(f));
     return [...set];
   }
@@ -593,58 +592,6 @@
     };
   }
 
-  // ---------------- ACERVO ----------------
-  // Fotos que a equipe sobe uma vez, por tema, para o Claude usar em qualquer post (data/acervo/<id>.json).
-  const TEMAS = { formatura: 'Formaturas e aspirantado', instrucao: 'Instrução e exercícios', pci: 'PCI e atividades externas', rotina: 'Rotina do CPOR/SP', eventos: 'Eventos, visitas e autoridades', instalacoes: 'Instalações e símbolos', outros: 'Outros' };
-  const ST_ACV = { novo: 'Claude vai ver', producao: 'Claude vendo', catalogado: 'No acervo' };
-  function telaAcervo() {
-    const lotes = [...S.acervo].sort((a, b) => String(b.criadoEm).localeCompare(String(a.criadoEm)));
-    const cont = (k) => lotes.filter((l) => l.tema === k).reduce((n, l) => n + (l.fotos || []).length, 0);
-    const vis = S.temaAcervo === 'todos' ? lotes : lotes.filter((l) => l.tema === S.temaAcervo);
-    $('#view').innerHTML = `
-      <div class="cabeca"><span class="rot">Acervo</span><h1>Fotos para usar nos posts</h1><p>Suba as fotos uma vez, separadas por tema, e conte rapidamente o que são. O Claude usa essas fotos em posts informativos e gerais (como entrar, história, rotina, armas). Em post de evento, só entram fotos daquele mesmo evento.</p></div>
-      <form class="form cartao" id="fAcv">
-        <div class="grade2">
-          <label class="campo"><span>O que são</span><input type="text" name="titulo" required placeholder="Ex.: Formatura de 2025, entrega das espadas"></label>
-          <label class="campo"><span>Tema</span><select name="tema">${Object.entries(TEMAS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
-        </div>
-        <label class="campo" id="cOutro" hidden><span>Do que se trata</span><input type="text" name="temaOutro" placeholder="Ex.: Desfile de 7 de setembro, Banda de música"></label>
-        <label class="campo"><span>Detalhes <em>(opcional: quando, onde, quem aparece, de qual OM)</em></span><textarea name="descricao" rows="2"></textarea></label>
-        <div class="campo"><span>Fotos</span><div id="selAcv"></div></div>
-        <label class="check"><input type="checkbox" name="usar" checked><span><b>Usar nos rascunhos sem foto</b><br><span class="dica">O Claude coloca estas fotos nos posts que combinam com elas, nunca em evento diferente do das fotos.</span></span></label>
-        <div class="acoes"><button class="bt pri" id="bAcv">Salvar no acervo</button><span class="dica" id="acvMsg"></span></div>
-      </form>
-      <label class="campo filtro-acv"><span>Mostrar</span><select id="selTema">${[['todos', `Todos · ${lotes.reduce((n, l) => n + (l.fotos || []).length, 0)} fotos`], ...Object.entries(TEMAS).map(([k, n]) => [k, `${n} · ${cont(k)}`])].map(([k, n]) => `<option value="${k}" ${S.temaAcervo === k ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
-      ${vis.length ? `<div class="lista">${vis.map((l) => `<div class="item">
-        <div class="item-topo"><h3>${esc(l.titulo)}</h3><span class="st st-${l.status === 'catalogado' ? 'feito' : l.status}">${ST_ACV[l.status] || l.status}</span></div>
-        <div class="meta"><span>${TEMAS[l.tema] || esc(l.tema)}${l.temaOutro ? `: ${esc(l.temaOutro)}` : ''}</span><span>${(l.fotos || []).length} foto(s)</span><span>enviado ${fmtHora(l.criadoEm)}</span></div>
-        ${l.descricao ? `<p>${esc(l.descricao)}</p>` : ''}
-        ${l.respostaClaude ? `<p><b>Claude:</b> ${esc(l.respostaClaude)}</p>` : ''}
-        <div class="acervo-fotos">${(l.fotos || []).map((f) => `<a href="${esc(src(f))}" target="_blank" title="Abrir"><img src="${esc(src(f))}" loading="lazy" alt=""></a>`).join('')}</div>
-        <div><button class="bt mini perigo" data-apagar-acv="${esc(l.id)}">Tirar do acervo</button></div>
-      </div>`).join('')}</div>` : `<div class="vazio">${lotes.length ? 'Nada neste tema ainda.' : 'O acervo ainda está vazio. Suba as primeiras fotos acima.'}</div>`}`;
-    const sel = seletor($('#selAcv'), 'image/*', 'Adicionar fotos');
-    $('#selTema').onchange = (e) => { S.temaAcervo = e.target.value; telaAcervo(); };
-    const fA = $('#fAcv');
-    fA.tema.onchange = () => { const o = fA.tema.value === 'outros'; $('#cOutro').hidden = !o; fA.temaOutro.required = o; if (o) fA.temaOutro.focus(); };
-    $$('[data-apagar-acv]').forEach((b) => confirmar(b, 'Confirmar', async () => { await api.apagar('acervo', b.dataset.apagarAcv); S.acervo = S.acervo.filter((x) => x.id !== b.dataset.apagarAcv); telaAcervo(); }));
-    $('#fAcv').onsubmit = async (ev) => {
-      ev.preventDefault();
-      const fd = new FormData(ev.target), b = $('#bAcv'), msg = $('#acvMsg');
-      if (!sel.files.length) return toast('Escolha as fotos.');
-      b.disabled = true;
-      try {
-        const id = novoId(fd.get('titulo')), tema = fd.get('tema');
-        msg.textContent = 'Enviando fotos…';
-        const fotos = await enviarArquivos(sel.files, `uploads/acervo/${tema}/${id}`, sel.progresso);
-        msg.textContent = 'Salvando…';
-        await salvarItem('acervo', { id, titulo: fd.get('titulo').trim(), tema, ...(tema === 'outros' ? { temaOutro: (fd.get('temaOutro') || '').trim() } : {}), descricao: fd.get('descricao').trim(), fotos, usarNosRascunhos: !!fd.get('usar'), status: 'novo' }, `acervo: ${fd.get('titulo')}`);
-        S.arquivos = null; S.temaAcervo = tema;
-        toast('Fotos no acervo! O Claude já foi avisado.', 4500); telaAcervo();
-      } catch (e) { msg.textContent = 'Erro: ' + e.message; b.disabled = false; }
-    };
-  }
-
   // ---------------- CALENDÁRIO ----------------
   function telaCalendario() {
     if (!S.mes) { const d = new Date(); S.mes = new Date(d.getFullYear(), d.getMonth(), 1); }
@@ -798,15 +745,15 @@
     S.versao = v;
     const antes = { posts: S.posts, pedidos: S.pedidos, eventos: S.eventos, pauta: S.pauta, ensinamentos: S.ensinamentos };
     try {
-      const [posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo] = await Promise.all(COLS.map(api.listar));
-      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao, acervo }); S.erro = null;
+      const [posts, pedidos, eventos, pauta, ensinamentos, padrao] = await Promise.all(COLS.map(api.listar));
+      Object.assign(S, { posts, pedidos, eventos, pauta, ensinamentos, padrao }); S.erro = null;
     } catch { return; }
     const msgs = novidades(antes);
     if (msgs.length) toast(msgs.slice(0, 3).join(' · '), 6000);
     const tela = (location.hash || '#feed').slice(1);
     // não redesenha formulários que podem estar sendo preenchidos
     const digitando = $$('#view textarea, #view input[type=text]').some((x) => x.value.trim()) || /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '');
-    if (!S.editando && (['feed', 'pedidos', ''].includes(tela) || (['pauta', 'padrao', 'acervo'].includes(tela) && !digitando))) rota();
+    if (!S.editando && (['feed', 'pedidos', ''].includes(tela) || (['pauta', 'padrao'].includes(tela) && !digitando))) rota();
     if (S.aberto && !S.editando) {
       const p = S.posts.find((x) => x.id === S.aberto.id);
       if (p && p.atualizadoEm !== S.aberto.atualizadoEm) { S.aberto = clone(p); desenharModal(); }

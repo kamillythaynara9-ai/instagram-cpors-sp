@@ -231,11 +231,3 @@ textarea{resize:vertical;min-height:80px}
 .passos{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px}
 .passos li::marker{color:var(--ouro2);font-weight:800}
 .passo{display:flex;flex-direction:column;gap:4px}
-
-/* acervo */
-.acervo-fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px}
-.acervo-fotos a{display:block;aspect-ratio:1;border-radius:4px;overflow:hidden;background:var(--bg2)}
-.acervo-fotos img{width:100%;height:100%;object-fit:cover;display:block}
-#fAcv{margin-bottom:6px}
-
-.filtro-acv{max-width:360px;margin:16px 0 12px}
