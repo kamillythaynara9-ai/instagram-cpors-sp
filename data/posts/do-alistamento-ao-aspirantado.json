@@ -16,40 +16,46 @@
       "selo": "Como entrar",
       "sobretitulo": "O caminho até o CPOR/SP",
       "titulo": "Do alistamento",
-      "destaque": "ao Aspirantado"
+      "destaque": "ao Aspirantado",
+      "fundo": "meio"
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "01 · Alistamento",
-      "texto": "Aos 18 anos. Quem faz faculdade manifesta interesse no CPOR e passa pela seleção."
+      "texto": "Aos 18 anos. Quem faz faculdade manifesta interesse no CPOR e passa pela seleção.",
+      "fundo": "listras"
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "02 · Incorporação",
-      "texto": "Em fevereiro. As duas primeiras semanas são de adaptação, em regime integral."
+      "texto": "Em fevereiro. As duas primeiras semanas são de adaptação, em regime integral.",
+      "fundo": "listras"
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "03 · Período Básico",
-      "texto": "Cerca de 4 meses de formação básica do combatente, igual para todos."
+      "texto": "Cerca de 4 meses de formação básica do combatente, igual para todos.",
+      "fundo": "listras"
     },
     {
       "modelo": "foto",
       "selo": "Como entrar",
       "titulo": "04 · Qualificação",
-      "texto": "Cerca de 5 a 6 meses na sua arma, quadro ou serviço, com exercícios no terreno."
+      "texto": "Cerca de 5 a 6 meses na sua arma, quadro ou serviço, com exercícios no terreno.",
+      "fundo": "listras"
     },
     {
       "modelo": "fechamento",
       "titulo": "05 · Aspirantado",
       "texto": "No fim do ano, a formatura: os alunos se tornam Aspirantes a Oficial da Reserva.",
-      "sobretitulo": "Salve e mande para quem vai se alistar"
+      "sobretitulo": "Salve e mande para quem vai se alistar",
+      "fundo": "luz"
     }
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T02:01:29.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

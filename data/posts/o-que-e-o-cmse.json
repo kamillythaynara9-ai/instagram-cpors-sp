@@ -17,7 +17,8 @@
       "sobretitulo": "Você sabia?",
       "titulo": "O que é o",
       "destaque": "CMSE",
-      "texto": "O Comando Militar do Sudeste e o CPOR/SP."
+      "texto": "O Comando Militar do Sudeste e o CPOR/SP.",
+      "fundo": "grade"
     },
     {
       "modelo": "info",
@@ -29,16 +30,18 @@
         "Sede na cidade de São Paulo",
         "Reúne as organizações militares do Exército no estado",
         "O CPOR/SP é uma delas"
-      ]
+      ],
+      "fundo": "listras"
     },
     {
       "modelo": "fechamento",
       "titulo": "Escola de\nLíderes",
       "texto": "Formando oficiais da reserva para o Exército em São Paulo.",
-      "sobretitulo": "@cporsp_exercito"
+      "sobretitulo": "@cporsp_exercito",
+      "fundo": "luz"
     }
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T15:30:00.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

@@ -15,6 +15,33 @@
     storyColagem: { nome: 'Story colagem (até 3 fotos)', story: true, campos: ['selo', 'titulo', 'destaque', 'texto', 'foto', 'foto2', 'foto3'] },
     storyTexto:   { nome: 'Story só texto',      story: true, campos: ['selo', 'sobretitulo', 'titulo', 'destaque', 'texto', 'foto'] },
   };
+  // Fundos: variam o visual sem mudar a marca (brasão, selo, fontes e cores ficam iguais).
+  // Ficam atrás da foto, então só aparecem em slides sem foto ou com foto apagada.
+  const FUNDOS = {
+    '': 'Padrão (cordão dourado)',
+    brasao: 'Brasão gigante apagado',
+    faixas: 'Faixas douradas na diagonal',
+    listras: 'Listras finas douradas',
+    topo: 'Curvas de nível (carta topográfica)',
+    luz: 'Luz de cima',
+    moldura: 'Moldura dourada',
+    grade: 'Quadriculado de carta',
+    meio: 'Metade verde, metade escura',
+  };
+  const fundoDe = (s) => {
+    const f = s.fundo || '';
+    const v = {
+      brasao: `<img class="fd-brasao" src="/assets/brasao.png" alt="">`,
+      faixas: `<div class="fd-faixa" style="top:-20px;right:-430px"></div><div class="fd-faixa fina" style="top:150px;right:-470px"></div><div class="fd-faixa fina" style="top:-120px;right:-330px;opacity:.4"></div>`,
+      listras: `<div class="fd-listras"></div>`,
+      topo: `<div class="fd-topo"></div>`,
+      luz: `<div class="fd-luz"></div>`,
+      moldura: `<div class="fd-moldura"></div>`,
+      grade: `<div class="fd-grade"></div>`,
+      meio: `<div class="fd-meio"></div>`,
+    }[f];
+    return v ? `<div class="fd">${v}</div>` : '';
+  };
   const ehStory = (s) => !!(MODELOS[s?.modelo] || {}).story;
 
   const CAMPOS = {
@@ -171,13 +198,25 @@
 
   function render(s, i = 0, t = 1) {
     const m = R[s.modelo] ? s.modelo : 'foto';
-    return `<div class="sl sl-m-${m}${ehStory(s) ? ' sl-story' : ''}">${R[m](s || {}, i, t)}</div>`;
+    return `<div class="sl sl-m-${m}${ehStory(s) ? ' sl-story' : ''}${s && !s.foto ? ' sem-foto' : ''}${s && s.fundo ? ' com-fundo' : ''}">${fundoDe(s || {})}${R[m](s || {}, i, t)}</div>`;
   }
 
   const css = `
   .sl{width:${W}px;height:${H}px;position:relative;overflow:hidden;background:#0d110b;font-family:Montserrat,Arial,sans-serif;color:#E6E0D0;text-align:left;line-height:1.2}
   .sl *{box-sizing:border-box}
   .sl.sl-story{height:${HS}px}
+  .fd{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .sem-foto .sl-cobre{display:none}
+  .com-fundo .sl-cordao{display:none}
+  .fd-brasao{position:absolute;width:1250px;height:1250px;left:auto;right:-420px;bottom:-300px;border-radius:50%;opacity:.13;filter:grayscale(.5) contrast(1.1);transform:rotate(-12deg);max-width:none}
+  .fd-faixa{position:absolute;width:900px;height:120px;transform:rotate(-38deg);background:linear-gradient(90deg,#7A5C1E,#E2BF67 40%,#F4DB92 50%,#C8A24B 65%,#7A5C1E);opacity:.55;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .fd-faixa.fina{height:18px;opacity:.7}
+  .fd-listras{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(200,162,75,.16) 0 2px,transparent 2px 26px);-webkit-mask-image:radial-gradient(ellipse at 85% 10%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 85% 10%,#000 0%,transparent 70%)}
+  .fd-topo{position:absolute;inset:-200px;background:repeating-radial-gradient(ellipse 60% 45% at 75% 30%,transparent 0 34px,rgba(200,162,75,.26) 35px 37px),repeating-radial-gradient(ellipse 40% 55% at 15% 85%,transparent 0 30px,rgba(200,162,75,.18) 31px 33px);opacity:.9}
+  .fd-luz{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(241,213,138,.30) 0%,rgba(96,112,58,.30) 40%,transparent 75%),linear-gradient(180deg,transparent 60%,rgba(0,0,0,.5))}
+  .fd-moldura{position:absolute;inset:44px;border:2px solid rgba(200,162,75,.55);box-shadow:inset 0 0 0 10px rgba(13,17,11,0),inset 0 0 0 12px rgba(200,162,75,.25)}
+  .fd-grade{position:absolute;inset:0;background-image:linear-gradient(rgba(200,162,75,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(200,162,75,.15) 1px,transparent 1px);background-size:90px 90px;-webkit-mask-image:linear-gradient(160deg,#000 0%,transparent 75%);mask-image:linear-gradient(160deg,#000 0%,transparent 75%)}
+  .fd-meio{position:absolute;inset:0;background:linear-gradient(168deg,#3a472d 0%,#243019 27.6%,#C8A24B 27.7%,#F1D58A 27.95%,#9C7426 28.2%,#0d110b 28.3%,#0d110b 100%)}
   .sl-story .sl-selo{top:250px}
   .sl-story .sl-brasao{top:236px}
   .sl-quadro{position:absolute;border:10px solid #E6E0D0;box-shadow:0 0 0 2px #C8A24B,0 24px 60px rgba(0,0,0,.7);background:#0d110b;overflow:hidden}
@@ -217,5 +256,5 @@
   st.textContent = css;
   document.head.appendChild(st);
 
-  window.Modelos = { MODELOS, CAMPOS, render, W, H, HS, ehStory, altura: (s) => (ehStory(s) ? HS : H), usarFonte(fn) { srcDe = fn; } };
+  window.Modelos = { MODELOS, CAMPOS, FUNDOS, render, W, H, HS, ehStory, altura: (s) => (ehStory(s) ? HS : H), usarFonte(fn) { srcDe = fn; } };
 })();

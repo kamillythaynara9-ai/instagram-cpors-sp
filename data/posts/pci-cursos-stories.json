@@ -15,12 +15,14 @@
     {
       "modelo": "storyColagem",
       "selo": "PCI · Cursos",
-      "titulo": "Além da\nsala de aula",
+      "titulo": "6 OMs",
       "foto": "media/pci-cursos-2026/01-obuseiro.jpg",
       "posicao": "40% 50%",
       "foto2": "media/pci-cursos-2026/02-pe-escudos.jpg",
       "foto3": "media/pci-cursos-2026/07-simulador-1.jpg",
-      "posicao3": "80% 50%"
+      "posicao3": "80% 50%",
+      "destaque": "3 estados",
+      "texto": "Os PCIs dos nossos Alunos"
     },
     {
       "modelo": "story",
@@ -42,5 +44,5 @@
   ],
   "ajustes": [],
   "criadoEm": "2026-10-14T13:20:00.000Z",
-  "atualizadoEm": "2026-10-14T13:20:00.000Z"
+  "atualizadoEm": "2026-10-14T14:10:00.000Z"
 }

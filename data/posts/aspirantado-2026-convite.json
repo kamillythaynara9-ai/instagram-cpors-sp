@@ -17,7 +17,8 @@
         "Data: Sábado, 10/10 · 18h",
         "Local: CPOR/SP"
       ],
-      "texto": "Declaração dos novos Aspirantes a Oficial da Reserva, com a presença de familiares e autoridades militares."
+      "texto": "Declaração dos novos Aspirantes a Oficial da Reserva, com a presença de familiares e autoridades militares.",
+      "fundo": "moldura"
     }
   ],
   "origem": {
@@ -41,5 +42,5 @@
     }
   ],
   "criadoEm": "2026-10-08T22:23:46.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

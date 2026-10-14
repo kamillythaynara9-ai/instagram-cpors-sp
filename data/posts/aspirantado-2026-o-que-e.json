@@ -17,7 +17,8 @@
         "Formatura que encerra o curso de formação de oficiais da reserva",
         "Os alunos passam a ser Aspirantes a Oficial da Reserva, os R2",
         "Hoje, sábado, 10/10, às 18h, no CPOR/SP"
-      ]
+      ],
+      "fundo": "luz"
     },
     {
       "modelo": "numero",
@@ -25,7 +26,8 @@
       "sobretitulo": "A formação",
       "destaque": "10",
       "titulo": "meses de curso",
-      "texto": "De fevereiro ao fim do ano, os alunos conciliam a instrução militar com a faculdade."
+      "texto": "De fevereiro ao fim do ano, os alunos conciliam a instrução militar com a faculdade.",
+      "fundo": "meio"
     },
     {
       "modelo": "info",
@@ -38,7 +40,8 @@
         "Entrega das espadas",
         "Canção do Exército",
         "Medalha Correia Lima aos primeiros colocados"
-      ]
+      ],
+      "fundo": "luz"
     },
     {
       "modelo": "numero",
@@ -46,7 +49,8 @@
       "sobretitulo": "Tradição",
       "destaque": "1931",
       "titulo": "a primeira formatura",
-      "texto": "77 oficiais formados na primeira turma do CPOR/SP. Desde então, quase 20 mil."
+      "texto": "77 oficiais formados na primeira turma do CPOR/SP. Desde então, quase 20 mil.",
+      "fundo": "meio"
     },
     {
       "modelo": "fechamento",
@@ -60,5 +64,5 @@
   },
   "ajustes": [],
   "criadoEm": "2026-10-08T22:23:46.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

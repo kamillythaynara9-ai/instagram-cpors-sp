@@ -9,7 +9,7 @@
         "Não criar posts de \"dia de algo\" por conta própria; datas só quando vocês marcam no calendário.",
         "Eventos rendem mais de um post: aviso antes, post do dia e cobertura depois.",
         "Sem vídeos por enquanto: o trabalho é post de feed e story.",
-        "Story é separado do feed (escolhido no topo do pedido): imagem vertical, simples, sem legenda; só a imagem e talvez algum texto, ou uma ou mais fotos compostas de forma criativa.",
+        "Story é separado do feed (escolhido no topo do pedido): imagem vertical, simples, sem legenda; só a imagem e talvez algum texto, ou uma ou mais fotos compostas de forma criativa. A pauta semanal traz 1 ou 2 ideias de story.",
         "Da pauta, vocês escolheram história do CPOR/SP (FEB) e \"como entrar\": são os temas que funcionam e puxam as próximas pautas. Ideia sem resposta continua em aberto, não conta como descartada.",
         "Visita de autoridade: aviso antes, trajetória da pessoa, homenagem e post do dia, cobertura e agradecimento depois; sempre prestigiar o visitante."
       ]
@@ -17,13 +17,15 @@
     {
       "titulo": "Design",
       "itens": [
+        "Sem cara de copia e cola: brasão no canto superior direito, selo, fontes e cores ficam; fundo, composição e destaque mudam de um post para outro (fundos variados nos slides sem foto).",
         "Fundo verde-oliva quase preto, fontes Montserrat e Oswald.",
         "Brasão no canto superior direito, selo dourado e rodapé \"CPOR/SP · ESCOLA DE LÍDERES\".",
         "Títulos nunca em branco puro: prata ou dourado metalizado, textura leve e sombra suave.",
         "Texto de apoio em off-white quente (#E6E0D0).",
         "Nada de símbolos militares desenhados à mão: só fotos reais ou o brasão.",
         "Fotos internas do carrossel com legenda fina e pino (estilo dos posts de PCI): aprovado e postado. Cobertura = capa + uma foto por slide, com pouco texto: básico, mas criativo.",
-        "Pôster sem foto fica fraco: usar foto real de fundo, bem visível (mesmo que de outra atividade do CPOR/SP). Exceção: capa de carrossel pode ser sem foto quando a ideia é criativa (ex.: número grande em destaque)."
+        "Pôster sem foto fica fraco: usar foto real de fundo, bem visível (mesmo que de outra atividade do CPOR/SP). Exceção: capa de carrossel pode ser sem foto quando a ideia é criativa (ex.: número grande em destaque).",
+        "Story em colagem de 3 fotos com moldura: aprovado (\"ficou muito bom\"). O texto da tela ainda pode melhorar: frase curta e concreta, não genérica."
       ]
     },
     {
@@ -66,6 +68,6 @@
       ]
     }
   ],
-  "atualizadoEm": "2026-10-14T13:40:00.000Z",
+  "atualizadoEm": "2026-10-14T14:10:00.000Z",
   "criadoEm": "2026-10-08T23:23:45.000Z"
 }

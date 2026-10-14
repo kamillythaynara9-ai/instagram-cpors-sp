@@ -17,16 +17,18 @@
       "sobretitulo": "Desde 1931",
       "titulo": "Quem já comandou",
       "destaque": "o CPOR/SP",
-      "texto": "Precisamos da lista e das fotos da galeria de comandantes."
+      "texto": "Precisamos da lista e das fotos da galeria de comandantes.",
+      "fundo": "brasao"
     },
     {
       "modelo": "fechamento",
       "titulo": "Escola de\nLíderes",
       "texto": "Uma história de comandantes e de oficiais formados.",
-      "sobretitulo": "@cporsp_exercito"
+      "sobretitulo": "@cporsp_exercito",
+      "fundo": "moldura"
     }
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T15:30:00.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

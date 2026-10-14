@@ -17,7 +17,8 @@
       "sobretitulo": "Comandante Militar do Sudeste",
       "titulo": "General",
       "destaque": "Carmona",
-      "texto": "De comandante do CPOR/SP ao comando do Exército em São Paulo."
+      "texto": "De comandante do CPOR/SP ao comando do Exército em São Paulo.",
+      "fundo": "topo"
     },
     {
       "modelo": "info",
@@ -30,7 +31,8 @@
         "Ingressou na AMAN em 1985",
         "Aspirante a Oficial de Artilharia em 1988",
         "Cursos da EsAO e da ECEME, e Estado-Maior na Venezuela e no Peru"
-      ]
+      ],
+      "fundo": "grade"
     },
     {
       "modelo": "info",
@@ -43,7 +45,8 @@
         "Comandou o 20º GAC L e o CPOR/SP",
         "Comandou a 18ª Bda Inf Fron (Corumbá)",
         "Foi Comandante Militar do Planalto"
-      ]
+      ],
+      "fundo": "grade"
     },
     {
       "modelo": "info",
@@ -55,16 +58,18 @@
         "General de Exército desde novembro de 2025",
         "Comanda o Exército no estado de São Paulo",
         "O CPOR/SP é uma das organizações do CMSE"
-      ]
+      ],
+      "fundo": "grade"
     },
     {
       "modelo": "fechamento",
       "titulo": "Seja bem-vindo,\nGeneral!",
       "texto": "O CPOR/SP recebe com honra o seu antigo comandante.",
-      "sobretitulo": "@cporsp_exercito"
+      "sobretitulo": "@cporsp_exercito",
+      "fundo": "luz"
     }
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T15:30:00.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

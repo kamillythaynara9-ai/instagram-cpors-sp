@@ -4,7 +4,7 @@
   "titulo": "Semana de 19 a 24/10",
   "resumo": "Seguindo o que vocês escolheram (história e como entrar), com temas novos: patrono, mitos, vida de R2, insígnias e o quartel.",
   "criadoEm": "2026-10-12T10:50:00.000Z",
-  "atualizadoEm": "2026-10-12T10:50:00.000Z",
+  "atualizadoEm": "2026-10-14T14:10:00.000Z",
   "ideias": [
     {
       "id": "mitos-e-verdades-cpor",
@@ -70,6 +70,27 @@
       "ideia": "Pôster com foto de fundo e três números grandes: 1931 (primeira formatura), 77 oficiais na primeira turma, quase 20 mil formados.",
       "porque": "Pôster curto e forte, com fatos que já estão no padrão.",
       "confirmar": "O número atual de formados, se tiverem o dado exato.",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-um-dia-no-cpor",
+      "titulo": "Um dia no CPOR/SP em 4 stories",
+      "formato": "story",
+      "tema": "Rotina do CPOR/SP",
+      "dia": "2026-10-21",
+      "ideia": "Sequência de 4 telas com colagem de fotos da manhã de instrução: chegada e formatura, instrução, educação física e encerramento do expediente, cada tela com o horário em destaque.",
+      "porque": "Story pede bastidor rápido e visual; a colagem de 3 fotos foi aprovada.",
+      "confirmar": "Fotos de um dia comum e os horários reais da rotina.",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-chamada-pci",
+      "titulo": "Story: chamada para o carrossel dos PCIs",
+      "formato": "story",
+      "tema": "PCI",
+      "dia": "2026-10-20",
+      "ideia": "Uma tela com colagem de 3 fotos dos PCIs e a chamada \"6 OMs em 3 estados: veja no feed\", para levar o público ao carrossel.",
+      "porque": "Aproveita as fotos já enviadas e dá mais alcance ao post do feed.",
       "status": "sugerida"
     }
   ]

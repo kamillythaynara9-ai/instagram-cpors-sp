@@ -17,7 +17,8 @@
       "sobretitulo": "Conhecimento que ultrapassa\na sala de aula",
       "destaque": "6",
       "titulo": "Organizações\nMilitares",
-      "texto": "5 cursos · 5 cidades · 3 estados"
+      "texto": "5 cursos · 5 cidades · 3 estados",
+      "fundo": "topo"
     },
     {
       "modelo": "foto",
@@ -78,5 +79,5 @@
   ],
   "ajustes": [],
   "criadoEm": "2026-10-14T12:40:00.000Z",
-  "atualizadoEm": "2026-10-14T12:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

@@ -17,34 +17,39 @@
       "sobretitulo": "14 de outubro",
       "titulo": "Visita do",
       "destaque": "General Carmona",
-      "texto": "O Comandante Militar do Sudeste de volta ao CPOR/SP."
+      "texto": "O Comandante Militar do Sudeste de volta ao CPOR/SP.",
+      "fundo": "faixas"
     },
     {
       "modelo": "foto",
       "selo": "Cobertura",
       "titulo": "Formatura",
-      "texto": "A tropa do CPOR/SP em forma para receber o Comandante Militar do Sudeste."
+      "texto": "A tropa do CPOR/SP em forma para receber o Comandante Militar do Sudeste.",
+      "fundo": "grade"
     },
     {
       "modelo": "foto",
       "selo": "Cobertura",
       "titulo": "Desfile",
-      "texto": "Os alunos desfilaram em continência ao General."
+      "texto": "Os alunos desfilaram em continência ao General.",
+      "fundo": "grade"
     },
     {
       "modelo": "foto",
       "selo": "Cobertura",
       "titulo": "Visita às instalações",
-      "texto": "O General percorreu as dependências da Escola que já comandou."
+      "texto": "O General percorreu as dependências da Escola que já comandou.",
+      "fundo": "grade"
     },
     {
       "modelo": "fechamento",
       "titulo": "Obrigado,\nGeneral!",
       "texto": "Uma honra receber o antigo comandante na Escola de Líderes.",
-      "sobretitulo": "@cporsp_exercito"
+      "sobretitulo": "@cporsp_exercito",
+      "fundo": "luz"
     }
   ],
   "ajustes": [],
   "criadoEm": "2026-10-09T15:30:00.000Z",
-  "atualizadoEm": "2026-10-14T13:40:00.000Z"
+  "atualizadoEm": "2026-10-14T14:00:00.000Z"
 }

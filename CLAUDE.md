@@ -21,7 +21,8 @@ O site lê tudo direto do GitHub: basta fazer commit e push em `main`.
 ## Pauta semanal (segunda, 8h)
 
 A rotina de segunda gera `data/pauta/semana-AAAA-MM-DD.json` (data = a segunda-feira):
-`{ id, semana, titulo: "Semana de 12 a 17/10", resumo, ideias: [{ id, titulo, formato: carrossel|poster, tema, dia, ideia, porque, confirmar?, status: "sugerida" }] }`.
+`{ id, semana, titulo: "Semana de 12 a 17/10", resumo, ideias: [{ id, titulo, formato: carrossel|poster|story, tema, dia, ideia, porque, confirmar?, status: "sugerida" }] }`.
+- Inclua sempre 1 ou 2 ideias de **story** (`"formato": "story"`): coisas rápidas e visuais (colagem de fotos, bastidor, contagem, enquete em arte, chamada para o post do feed). "Quero esse post" de uma ideia story vira pedido com `"destino": "story"`.
 - 4 a 6 ideias **diferentes da rotina**: informativos, rotina do CPOR/SP, história, armas, como entrar, curiosidades. Nada de eventos do calendário (já viram posts) e nada de "dia de algo" que não esteja no calendário.
 - Antes, revise a semana anterior: ideias com `"quero"` (viraram pedido) e `"nao"` (com `motivo`), ensinamentos e as edições manuais que a equipe fez nos posts (`git log --since="8 days ago" --author-date-order -p -- data/posts` nos commits `[site]`). Atualize o padrão com isso e use para escolher as novas ideias.
 - Não repita ideias já sugeridas; varie os temas. Fato que não está confirmado vai em `confirmar`.
@@ -76,7 +77,7 @@ Use `"status": "rascunho"` para o que foi pedido e `"status": "ideia"` para suge
 | `storyTexto` | story só texto (foto opcional bem apagada no fundo) | selo, sobretitulo, titulo, destaque, texto, foto |
 | `fechamento` | último slide com brasão | titulo (grito/agradecimento), texto, sobretitulo (padrão @cporsp_exercito), foto |
 
-Campos opcionais em qualquer slide: `posicao` (object-position da foto, ex. `"50% 20%"`), `rodape` (texto do canto inferior direito; vazio = numeração).
+Campos opcionais em qualquer slide: `fundo` (ver regras de design), `posicao` (object-position da foto, ex. `"50% 20%"`), `rodape` (texto do canto inferior direito; vazio = numeração).
 Use `\n` para quebrar linha em títulos. Para criar um modelo novo, adicione em `MODELOS` e `R` em `public/modelos.js` (isso gera deploy).
 
 ## Regras de design e conteúdo (da Thaynara)
@@ -84,6 +85,7 @@ Use `\n` para quebrar linha em títulos. Para criar um modelo novo, adicione em 
 - Foco: carrosséis e pôsteres **informativos**. Não criar posts de "dia de algo" por iniciativa própria; datas só quando ela marcar no calendário.
 - Nada de símbolos militares desenhados à mão (SVG): use fotos reais ou o brasão do CPOR/SP.
 - Títulos nunca em branco puro: prata ou dourado metalizado com textura leve e sombra suave (classes `metal` e `ouro`). Texto de apoio em off-white quente (#E6E0D0).
+- **Não repetir o mesmo visual** (pedido da Thaynara, 14/10): a marca fica fixa (brasão no canto superior direito, selo dourado, fontes, cores, rodapé), mas fundo, composição e destaque variam de post para post. Slides sem foto usam o campo `fundo` (`brasao`, `faixas`, `listras`, `topo`, `luz`, `moldura`, `grade`, `meio`; vazio = cordão dourado padrão): escolha um diferente dos posts vizinhos no feed e mantenha a coerência dentro do mesmo carrossel.
 - Manter a identidade: brasão no canto superior direito, selo dourado, rodapé "CPOR/SP · ESCOLA DE LÍDERES", fundo verde-oliva quase preto, Montserrat + Oswald.
 - Evento: pense em mais de um post (aviso antes, post do dia, cobertura depois). Data comemorativa: algumas opções de arte para o dia.
 - Legenda (voz do CPOR/SP):

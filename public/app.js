@@ -271,6 +271,7 @@
           const v = c === 'itens' ? valItens : (s[c] || '');
           return `<label class="campo"><span>${Modelos.CAMPOS[c]}</span>${multi ? `<textarea data-c="${c}" rows="${c === 'texto' || c === 'itens' ? 4 : 2}">${esc(v)}</textarea>` : `<input type="text" data-c="${c}" value="${esc(v)}">`}</label>`;
         }).join('')}
+        <label class="campo"><span>Fundo <em>(aparece quando o slide não tem foto)</em></span><select id="eFundo">${Object.entries(Modelos.FUNDOS).map(([k, v]) => `<option value="${k}" ${(s.fundo || '') === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
         <label class="campo"><span>Texto do canto inferior direito <em>(vazio = numeração automática)</em></span><input type="text" data-c="rodape" value="${esc(s.rodape || '')}"></label>
         ${campos.filter((c) => /^foto/.test(c)).map((fc) => { const pc = fc.replace('foto', 'posicao'); return `
         <div class="campo" data-fc="${fc}"><span>${Modelos.CAMPOS[fc]}</span>
@@ -291,6 +292,7 @@
       if (k === 'itens') s.itens = el.value.split('\n'); else s[k] = el.value;
       viva();
     }));
+    $('#eFundo').onchange = (e) => { if (e.target.value) s.fundo = e.target.value; else delete s.fundo; viva(); };
     $('#eModelo').onchange = (e) => { s.modelo = e.target.value; desenharModal(); };
     $$('.slides-mini button', c).forEach((b) => (b.onclick = () => { S.idx = +b.dataset.i; desenharModal(); }));
     $$('[data-fc]', c).forEach((bloco) => {
@@ -485,7 +487,7 @@
       const d = it.dia ? new Date(it.dia + 'T12:00') : null;
       return `<div class="item ideia-${it.status || 'sugerida'}">
         <div class="item-topo"><h3>${esc(it.titulo)}</h3><span class="st st-${it.status === 'quero' ? 'feito' : it.status === 'nao' ? 'postado' : 'novo'}">${ST_IDEIA[it.status || 'sugerida']}</span></div>
-        <div class="meta">${d ? `<span>${DIAS[d.getDay()]}, ${fmtCurta(it.dia)}</span>` : ''}${it.formato ? `<span>${FORMATOS[it.formato] || esc(it.formato)}</span>` : ''}${it.tema ? `<span>${esc(it.tema)}</span>` : ''}</div>
+        <div class="meta">${d ? `<span>${DIAS[d.getDay()]}, ${fmtCurta(it.dia)}</span>` : ''}${it.formato ? `<span>${it.formato === 'story' ? 'Story' : FORMATOS[it.formato] || esc(it.formato)}</span>` : ''}${it.tema ? `<span>${esc(it.tema)}</span>` : ''}</div>
         <p>${esc(it.ideia)}</p>
         ${it.porque ? `<p class="dica"><b>Por quê:</b> ${esc(it.porque)}</p>` : ''}
         ${it.confirmar ? `<p class="dica"><b>Preciso que você confirme:</b> ${esc(it.confirmar)}</p>` : ''}
@@ -503,7 +505,7 @@
       const [w, it] = achar(b.dataset.quero); if (!it) return; b.disabled = true;
       try {
         const id = novoId(it.titulo);
-        await salvarItem('pedidos', { id, titulo: it.titulo, descricao: `${it.ideia}${it.porque ? `\n\nPor quê: ${it.porque}` : ''}`, formato: it.formato || 'claude', quantidade: 1, data: it.dia || null, fotos: [], videos: [], links: '', legenda: '', obs: `Veio da pauta (${w.titulo}).`, maisIdeias: false, status: 'novo', origemPauta: `${w.id}:${it.id}` }, `pedido da pauta: ${it.titulo}`);
+        await salvarItem('pedidos', { id, ...(it.formato === 'story' ? { destino: 'story' } : {}), titulo: it.titulo, descricao: `${it.ideia}${it.porque ? `\n\nPor quê: ${it.porque}` : ''}`, formato: it.formato === 'story' ? 'claude' : it.formato || 'claude', quantidade: 1, data: it.dia || null, fotos: [], videos: [], links: '', legenda: '', obs: `Veio da pauta (${w.titulo}).`, maisIdeias: false, status: 'novo', origemPauta: `${w.id}:${it.id}` }, `pedido da pauta: ${it.titulo}`);
         const nw = clone(w); Object.assign(nw.ideias.find((x) => x.id === it.id), { status: 'quero', pedidoId: id });
         await salvarItem('pauta', nw, `pauta: quero ${it.titulo}`);
         toast('Virou pedido! O Claude já foi avisado.', 4500); telaPauta();
