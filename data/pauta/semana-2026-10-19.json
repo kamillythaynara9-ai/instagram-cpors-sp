@@ -4,7 +4,7 @@
   "titulo": "Semana de 19 a 24/10",
   "resumo": "Seguindo o que vocês escolheram (história e como entrar), com temas novos: patrono, mitos, vida de R2, insígnias e o quartel.",
   "criadoEm": "2026-10-12T10:50:00.000Z",
-  "atualizadoEm": "2026-10-14T14:10:00.000Z",
+  "atualizadoEm": "2026-10-20T17:01:48.691Z",
   "ideias": [
     {
       "id": "mitos-e-verdades-cpor",
@@ -37,7 +37,8 @@
       "ideia": "O caminho do R2 depois de formado: estágio em OM, promoção a 2º Tenente, convocação, e a vida civil com a formação de líder. Um slide por etapa com foto real.",
       "porque": "Fecha a história que o post \"Do alistamento ao Aspirantado\" começou.",
       "confirmar": "Como funciona hoje o estágio de instrução e o tempo até 2º Tenente.",
-      "status": "sugerida"
+      "status": "quero",
+      "pedidoId": "e-depois-do-aspirantado-mvgxki1y"
     },
     {
       "id": "insignias-do-aluno",
