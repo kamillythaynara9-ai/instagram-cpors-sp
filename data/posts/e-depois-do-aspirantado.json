@@ -1,0 +1,62 @@
+{
+  "id": "e-depois-do-aspirantado",
+  "titulo": "E depois do Aspirantado?",
+  "tipo": "carrossel",
+  "status": "rascunho",
+  "ordem": 18,
+  "data": "2026-10-21",
+  "origem": {
+    "tipo": "pedido",
+    "id": "e-depois-do-aspirantado-mvgxki1y"
+  },
+  "legenda": "🎖️ E depois do Aspirantado?\n\nA formatura no CPOR/SP não é o fim do caminho: o Aspirante a Oficial da Reserva (R2) pode servir numa Organização Militar, ser promovido a 2º Tenente e levar a formação de líder para a vida civil.\nNeste carrossel, as etapas depois da formatura.\n\nSalve este post e mande para quem está no CFOR.\n\nCPOR/SP - Escola de Líderes\n#CPORSP #ExércitoBrasileiro #OficialDaReserva #R2 #Aspirante",
+  "slides": [
+    {
+      "modelo": "capa",
+      "selo": "Carreira R2",
+      "sobretitulo": "Depois da formatura",
+      "titulo": "E depois do",
+      "destaque": "Aspirantado?",
+      "texto": "O caminho do oficial R2, etapa por etapa.",
+      "fundo": "faixas"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Carreira R2",
+      "titulo": "01 · Aspirante a Oficial",
+      "texto": "Na formatura, o aluno recebe o posto de Aspirante a Oficial da Reserva (R2).",
+      "fundo": "moldura"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Carreira R2",
+      "titulo": "02 · Estágio em OM",
+      "texto": "Parte dos Aspirantes é convocada para servir numa Organização Militar, já à frente de tropa.",
+      "fundo": "moldura"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Carreira R2",
+      "titulo": "03 · 2º Tenente",
+      "texto": "Cumpridos o estágio e os requisitos, vem a promoção a Segundo-Tenente da Reserva.",
+      "fundo": "moldura"
+    },
+    {
+      "modelo": "foto",
+      "selo": "Carreira R2",
+      "titulo": "04 · Oficial temporário",
+      "texto": "Quem é convocado pode seguir servindo por alguns anos, conforme a necessidade do Exército.",
+      "fundo": "moldura"
+    },
+    {
+      "modelo": "fechamento",
+      "titulo": "05 · Na vida civil",
+      "texto": "A formação de líder segue na faculdade e no trabalho: disciplina, decisão e responsabilidade.",
+      "sobretitulo": "Salve e mande para quem está no CFOR",
+      "fundo": "brasao"
+    }
+  ],
+  "ajustes": [],
+  "criadoEm": "2026-10-20T17:10:09.049334+00:00",
+  "atualizadoEm": "2026-10-20T17:10:09.049334+00:00"
+}
