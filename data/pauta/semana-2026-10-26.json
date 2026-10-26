@@ -1,0 +1,74 @@
+{
+  "id": "semana-2026-10-26",
+  "semana": "2026-10-26",
+  "titulo": "Semana de 26 a 31/10",
+  "resumo": "Mais \"como entrar\" (o tema que vocês escolheram duas vezes), o ano do aluno, o lema e o brasão. As ideias da semana passada sem resposta continuam valendo.",
+  "criadoEm": "2026-10-26T10:46:52.283626+00:00",
+  "atualizadoEm": "2026-10-26T10:46:52.283626+00:00",
+  "ideias": [
+    {
+      "id": "cpor-npor-aman",
+      "titulo": "CPOR, NPOR ou AMAN: qual a diferença?",
+      "formato": "carrossel",
+      "tema": "Como entrar",
+      "dia": "2026-10-26",
+      "ideia": "Um slide para cada caminho: CPOR e NPOR formam oficiais da reserva (R2) em cerca de 10 meses, servindo ao mesmo tempo que estudam; a AMAN forma oficiais de carreira em 5 anos (com a EsPCEx). Fecha com \"o CPOR/SP é para quem quer liderar sem deixar a vida civil\".",
+      "porque": "\"Como entrar\" foi a escolha de vocês duas semanas seguidas; esta é a dúvida que vem antes do alistamento.",
+      "confirmar": "Se querem citar o NPOR e a AMAN e os tempos oficiais de cada curso.",
+      "status": "sugerida"
+    },
+    {
+      "id": "o-ano-do-aluno",
+      "titulo": "O ano do aluno, de fevereiro a dezembro",
+      "formato": "carrossel",
+      "tema": "Rotina do CPOR/SP",
+      "dia": "2026-10-27",
+      "ideia": "Linha do tempo do CFOR mês a mês: apresentação, período básico, escolha da arma, instrução da arma, PCI nas OMs, exercício de campo e Aspirantado. Uma foto real por fase, com o mês em destaque.",
+      "porque": "Junta num post só o que já mostramos separado (PCI, Aspirantado) e mostra o ano inteiro para quem vai entrar.",
+      "confirmar": "Os nomes e meses de cada fase do curso e fotos de cada uma.",
+      "status": "sugerida"
+    },
+    {
+      "id": "por-que-escola-de-lideres",
+      "titulo": "Por que \"Escola de Líderes\"?",
+      "formato": "carrossel",
+      "tema": "História",
+      "dia": "2026-10-28",
+      "ideia": "O que o lema quer dizer na prática: comandar um pelotão aos 18 ou 19 anos, decidir sob pressão, cuidar da tropa. Fecha com o que o ex-aluno leva para a faculdade e o trabalho.",
+      "porque": "O lema está em todo rodapé, mas nunca foi explicado; liga a história da escola com a vida do aluno.",
+      "confirmar": "Uma frase oficial sobre o lema ou o depoimento curto de um ex-aluno.",
+      "status": "sugerida"
+    },
+    {
+      "id": "brasao-explicado",
+      "titulo": "O brasão do CPOR/SP explicado",
+      "formato": "poster",
+      "tema": "Curiosidades",
+      "dia": "2026-10-29",
+      "ideia": "Pôster com o brasão grande ao centro e linhas finas apontando cada elemento, com o significado ao lado. Sem foto: o próprio brasão é a imagem.",
+      "porque": "Curiosidade visual com o único símbolo que podemos usar, e o público vê o brasão em todo post sem saber o que ele diz.",
+      "confirmar": "A descrição heráldica oficial do brasão (o que significa cada cor e figura).",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-enquete-arma",
+      "titulo": "Story: qual arma você escolheria?",
+      "formato": "story",
+      "tema": "Armas",
+      "dia": "2026-10-30",
+      "ideia": "Uma tela com as 7 armas, quadro e serviço em lista e espaço para a enquete do Instagram por cima (Infantaria, Artilharia, Cavalaria…). Fundo com foto apagada da formatura.",
+      "porque": "Story rápido que puxa conversa com quem pensa em entrar, sem precisar de foto nova.",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-chamada-depois-aspirantado",
+      "titulo": "Story: chamada para \"E depois do Aspirantado?\"",
+      "formato": "story",
+      "tema": "Como entrar",
+      "dia": "2026-10-27",
+      "ideia": "Uma tela no visual do carrossel, com \"Post novo no feed\" e a pergunta \"E depois do Aspirantado?\" em destaque, para levar ao post.",
+      "porque": "Dá mais alcance ao carrossel que vocês escolheram na semana passada.",
+      "status": "sugerida"
+    }
+  ]
+}
