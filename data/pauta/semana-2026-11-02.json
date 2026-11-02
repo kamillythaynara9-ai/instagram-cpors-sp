@@ -1,0 +1,74 @@
+{
+  "id": "semana-2026-11-02",
+  "semana": "2026-11-02",
+  "titulo": "Semana de 2 a 7/11",
+  "resumo": "As dúvidas de quem quer entrar (de novo na linha \"como entrar\"), a hierarquia do Exército, a linha do tempo do CPOR/SP e o juramento do Aspirante. As ideias das semanas passadas sem resposta continuam valendo.",
+  "ideias": [
+    {
+      "id": "duvidas-de-quem-quer-entrar",
+      "titulo": "5 dúvidas de quem quer entrar no CPOR/SP",
+      "formato": "carrossel",
+      "tema": "Como entrar",
+      "dia": "2026-11-03",
+      "ideia": "Uma pergunta por slide, com resposta curta: Atrapalha a faculdade? (expediente pela manhã). Quanto tempo dura? (cerca de 10 meses, de fevereiro ao fim do ano). Escolho a arma? Recebo durante o curso? E depois, sou obrigado a seguir carreira? Capa com foto de alunos em forma.",
+      "porque": "\"Como entrar\" é o tema que vocês mais escolheram; aqui ele vem no formato pergunta e resposta, que é diferente dos carrosséis em linha do tempo que já saíram.",
+      "confirmar": "Como é feita a escolha da arma, se o aluno recebe durante o curso e os requisitos de 2027.",
+      "status": "sugerida"
+    },
+    {
+      "id": "hierarquia-do-exercito",
+      "titulo": "Do Soldado ao General: onde fica o Aspirante?",
+      "formato": "carrossel",
+      "tema": "Informativo",
+      "dia": "2026-11-04",
+      "ideia": "Os postos e graduações em ordem, em texto (praças, Aspirante, oficiais subalternos, intermediários, superiores e generais), com destaque dourado para o Aspirante a Oficial e o 2º Tenente R2. Sem desenhar insígnias: só texto e fotos reais de alunos.",
+      "porque": "Muita gente de fora não sabe o que é um Aspirante; o post é útil e explica o lugar do CPOR/SP na carreira.",
+      "confirmar": "Se querem mostrar a hierarquia completa ou só até o posto de Capitão.",
+      "status": "sugerida"
+    },
+    {
+      "id": "linha-do-tempo-cpor",
+      "titulo": "CPOR/SP: de 1931 até hoje",
+      "formato": "carrossel",
+      "tema": "História",
+      "dia": "2026-11-05",
+      "ideia": "Linha do tempo com 4 ou 5 marcos: 1931, a primeira formatura com 77 oficiais; a participação de ex-alunos na FEB; mudanças de sede; e hoje, quase 20 mil oficiais formados. Cada slide com uma data grande e uma foto antiga ou atual.",
+      "porque": "A história do CPOR/SP (FEB) foi uma das escolhas de vocês; a linha do tempo junta os fatos num só post.",
+      "confirmar": "Os marcos e datas que vocês querem citar (sede, FEB) e se há fotos antigas para mandar.",
+      "status": "sugerida"
+    },
+    {
+      "id": "juramento-do-aspirante",
+      "titulo": "O juramento do Aspirante",
+      "formato": "poster",
+      "tema": "Curiosidades",
+      "dia": "2026-11-06",
+      "ideia": "Pôster com foto real da formatura de 10/10 bem visível ao fundo e o texto do compromisso prestado na formatura em destaque prata, com uma frase curta explicando o que ele significa.",
+      "porque": "Fecha o ciclo do Aspirantado com um post que não é cobertura: explica o momento mais simbólico da formatura.",
+      "confirmar": "O texto exato do juramento usado na formatura e se pode usar foto do Aspirantado 2026.",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-caixinha-duvidas",
+      "titulo": "Story: mande sua dúvida sobre o CPOR",
+      "formato": "story",
+      "tema": "Como entrar",
+      "dia": "2026-11-02",
+      "ideia": "Uma tela com foto apagada de alunos e o texto \"Qual sua dúvida sobre o CPOR/SP?\", com espaço para a caixinha de perguntas do Instagram. As respostas ajudam a montar o carrossel de dúvidas da terça.",
+      "porque": "Story rápido, sem foto nova, que puxa conversa e alimenta o post do feed.",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-voce-sabia-1931",
+      "titulo": "Story: você sabia? 77 oficiais em 1931",
+      "formato": "story",
+      "tema": "História",
+      "dia": "2026-11-05",
+      "ideia": "Tela só texto: \"Você sabia?\" e o número 77 em dourado grande, com \"oficiais na primeira formatura do CPOR/SP, em 1931\". Fecha com \"Post novo no feed\" chamando para a linha do tempo.",
+      "porque": "Chamada visual e curta para o carrossel de história, no formato número grande que funciona bem em story.",
+      "status": "sugerida"
+    }
+  ],
+  "criadoEm": "2026-11-02T10:46:59.391681+00:00",
+  "atualizadoEm": "2026-11-02T10:46:59.391681+00:00"
+}
