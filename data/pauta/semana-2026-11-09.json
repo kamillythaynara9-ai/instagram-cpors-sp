@@ -1,0 +1,71 @@
+{
+  "id": "semana-2026-11-09",
+  "semana": "2026-11-09",
+  "titulo": "Semana de 9 a 14/11",
+  "resumo": "Sem respostas na pauta passada, então esta semana muda de assunto: rotina de quartel explicada (ordem unida, TFM, uniformes) e uma curiosidade leve em pôster, com dois stories de chamada.",
+  "ideias": [
+    {
+      "id": "ordem-unida-comandos",
+      "titulo": "Ordem unida: o que cada comando quer dizer",
+      "formato": "carrossel",
+      "tema": "Rotina do CPOR/SP",
+      "dia": "2026-11-10",
+      "ideia": "Um comando por slide (Sentido, Descansar, Cobrir, Direita volver, Ordinário marche), com o que o aluno faz e por que existe. Capa com foto de alunos em forma; fechamento lembrando que a ordem unida treina disciplina e atenção do grupo.",
+      "porque": "É algo que todo aluno vive desde o primeiro dia e quem está de fora não entende; formato explicativo, diferente dos carrosséis de linha do tempo e de perguntas.",
+      "confirmar": "Quais comandos vocês querem destacar e se há foto de ordem unida no acervo deste ano.",
+      "status": "sugerida"
+    },
+    {
+      "id": "tfm-como-e",
+      "titulo": "TFM: como é o treino físico do aluno",
+      "formato": "carrossel",
+      "tema": "Rotina do CPOR/SP",
+      "dia": "2026-11-11",
+      "ideia": "O que é o Treinamento Físico Militar, quantas vezes por semana, o que tem (corrida, flexão, barra, abdominal) e como é o teste de avaliação. Último slide com dica para quem quer entrar se preparar.",
+      "porque": "Ajuda quem pensa em se inscrever e conversa com o tema \"Como entrar\", que é o que vocês mais escolheram, sem repetir os requisitos.",
+      "confirmar": "Frequência do TFM no CPOR/SP e quais exercícios entram no teste.",
+      "status": "sugerida"
+    },
+    {
+      "id": "uniformes-do-aluno",
+      "titulo": "Cada uniforme, uma ocasião",
+      "formato": "carrossel",
+      "tema": "Curiosidades",
+      "dia": "2026-11-12",
+      "ideia": "Foto de cada uniforme usado pelo aluno com o nome e quando se usa (instrução, formatura, TFM, solenidade). Fotos reais enviadas pela equipe, uma por slide.",
+      "porque": "Visual forte com fotos, varia dos carrosséis de texto e mostra o dia a dia sem ser cobertura de evento.",
+      "confirmar": "Nomes oficiais dos uniformes usados pelos alunos e fotos de cada um.",
+      "status": "sugerida"
+    },
+    {
+      "id": "alfabeto-fonetico",
+      "titulo": "Alfa, Bravo, Charlie: o alfabeto fonético",
+      "formato": "poster",
+      "tema": "Curiosidades",
+      "dia": "2026-11-13",
+      "ideia": "Pôster com as 26 letras e suas palavras (Alfa a Zulu) em grade, e uma linha explicando que é usado no rádio para não haver erro na comunicação.",
+      "porque": "Curiosidade leve e salvável, boa para compartilhar; pôster sem foto que permite um fundo diferente (grade).",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-soletre-seu-nome",
+      "titulo": "Soletre seu nome no alfabeto fonético",
+      "formato": "story",
+      "tema": "Curiosidades",
+      "dia": "2026-11-13",
+      "ideia": "Story só texto com um exemplo (C-P-O-R = Charlie, Papa, Oscar, Romeo) e o convite \"Soletre o seu nome e marque a gente\", chamando para o pôster do feed.",
+      "porque": "Gera interação e leva gente para o post do dia.",
+      "status": "sugerida"
+    },
+    {
+      "id": "story-isto-ou-aquilo",
+      "titulo": "Isto ou aquilo: rotina de aluno",
+      "formato": "story",
+      "tema": "Rotina do CPOR/SP",
+      "dia": "2026-11-10",
+      "ideia": "Arte em duas metades para enquete: \"Ordem unida ou TFM?\", \"Campo ou sala de aula?\". Fundo com foto bem apagada de alunos.",
+      "porque": "Story rápido de enquete, chama para o carrossel de ordem unida.",
+      "status": "sugerida"
+    }
+  ]
+}
